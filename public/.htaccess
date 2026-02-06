@@ -4,6 +4,10 @@
 # ===== Enable Rewrite Engine =====
 RewriteEngine On
 
+# ===== Proxy API requests to Node.js (Port 3000) =====
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteRule ^api/(.*)$ http://localhost:3000/api/$1 [P,L]
+
 # ===== Force HTTPS =====
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
