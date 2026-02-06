@@ -1,0 +1,39 @@
+# Robots.txt for NMIMS Online
+# https://nmimsonlineuniversity.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://nmimsonlineuniversity.com/sitemap.xml
+
+# Crawl-delay for responsible crawling
+Crawl-delay: 1
+
+# Disallow admin, API, and private areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /*.json$
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /

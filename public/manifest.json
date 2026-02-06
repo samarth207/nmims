@@ -1,0 +1,23 @@
+{
+    "name": "NMIMS Online - India's Leading University",
+    "short_name": "NMIMS Online",
+    "description": "UGC-approved online MBA, BBA, B.Com programs from India's NAAC A++ university",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#6C4DE6",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/images/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "categories": ["education", "business"]
+}

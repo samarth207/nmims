@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Online Programs - MBA, BBA, B.Com, PG Diploma | NMIMS Online</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explore all NMIMS Online programs - MBA, MBA (WX), BBA, B.Com, PG Diplomas. UGC-approved degrees from India's NAAC A++ university. Flexible online learning for working professionals.">
+    <meta name="keywords" content="NMIMS Programs, Online MBA, Online BBA, Online B.Com, PG Diploma, MBA WX, Executive MBA Online, NMIMS Courses, Online Degree Programs India">
+    <meta name="author" content="NMIMS Global Access School">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://nmimsonlineuniversity.com/all-programs">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nmimsonlineuniversity.com/all-programs">
+    <meta property="og:title" content="All Online Programs - MBA, BBA, B.Com | NMIMS Online">
+    <meta property="og:description" content="Explore all NMIMS Online programs. UGC-approved MBA, BBA, B.Com degrees from India's NAAC A++ university.">
+    <meta property="og:image" content="https://nmimsonlineuniversity.com/images/og-programs.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="All Online Programs - NMIMS Online">
+    <meta name="twitter:description" content="Explore all NMIMS Online programs. UGC-approved degrees from India's NAAC A++ university.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal-updates.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data - Course Catalog -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "NMIMS Online Programs",
+        "description": "Complete list of online degree programs offered by NMIMS",
+        "numberOfItems": 5,
+        "itemListElement": [
+            {
+                "@type": "Course",
+                "position": 1,
+                "name": "MBA (WX) - Executive MBA",
+                "description": "2-year Executive MBA program for working professionals",
+                "provider": {"@type": "Organization", "name": "NMIMS Online"},
+                "educationalCredentialAwarded": "Master of Business Administration"
+            },
+            {
+                "@type": "Course",
+                "position": 2,
+                "name": "MBA - Master of Business Administration",
+                "description": "2-year MBA program in online mode",
+                "provider": {"@type": "Organization", "name": "NMIMS Online"},
+                "educationalCredentialAwarded": "Master of Business Administration"
+            },
+            {
+                "@type": "Course",
+                "position": 3,
+                "name": "BBA - Bachelor of Business Administration",
+                "description": "3-year undergraduate business program",
+                "provider": {"@type": "Organization", "name": "NMIMS Online"},
+                "educationalCredentialAwarded": "Bachelor of Business Administration"
+            }
+        ]
+    }
+    </script>
+    <link rel="stylesheet" href="css/popup-form.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="css/brochure-popup.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="NMIMS Logo">
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item dropdown-parent">
+                        <a href="#" class="nav-link">Succeed <span class="dropdown-icon">▼</span></a>
+                        <div class="succeed-dropdown">
+                            <a href="#" class="dropdown-item">
+                                <span>Career Services</span>
+                                <span class="arrow-right">→</span>
+                            </a>
+                            <div class="succeed-submenu">
+                                <a href="#" class="submenu-item">Profile Development</a>
+                                <a href="#" class="submenu-item">Practice Interview</a>
+                                <a href="#" class="submenu-item">Job Portal</a>
+                                <a href="#" class="submenu-item">Coaching For Career Change</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">About <span class="dropdown-icon">▼</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Blog</a>
+                    </li>
+                </ul>
+
+                <div class="nav-buttons">
+                    <div class="find-program-wrapper">
+                        <button class="btn btn-primary" id="findProgramBtn">
+                            Find a Program
+                            <img src="images/icons/navarrow.svg" alt="arrow">
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-container dropdown-three-col">
+                        <!-- Column 1: Category Selection -->
+                        <div class="dropdown-left">
+                            <h3 class="dropdown-heading">Select programs best suits you.</h3>
+                            
+                            <div class="dropdown-options">
+                                <a href="undergraduate.html" class="dropdown-option" data-category="undergraduate">
+                                    <img src="images/undergraduates.png" alt="For Undergraduates">
+                                    <span>For Undergraduates</span>
+                                    <span class="arrow-right">➔</span>
+                                </a>
+                                
+                                <a href="young-professionals.html" class="dropdown-option" data-category="young-professionals">
+                                    <img src="images/young-professionals.png" alt="For Young Professionals">
+                                    <span>For Young Professionals</span>
+                                    <span class="arrow-right">➔</span>
+                                </a>
+                                
+                                <a href="mid-senior-professionals.html" class="dropdown-option" data-category="mid-senior">
+                                    <img src="images/mid-senior.png" alt="For Mid-Senior Professionals">
+                                    <span>For Mid-Senior Professionals</span>
+                                    <span class="arrow-right">➔</span>
+                                </a>
+                                
+                                <a href="all-programs.html" class="dropdown-option active" data-category="all-programs">
+                                    <img src="images/all-programs.png" alt="All Programs">
+                                    <span>All Programs</span>
+                                    <span class="arrow-right">➔</span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Column 2: Browse By Filters -->
+                        <div class="dropdown-middle">
+                            <p class="dropdown-category-label">All Programs</p>
+                            <h4 class="dropdown-section-title">Recommended Programs</h4>
+                            
+                            <div class="dropdown-browse">
+                                <h4 class="browse-title">OR BROWSE BY</h4>
+                                <div class="browse-filters">
+                                    <details class="filter-group" open>
+                                        <summary>Certification <span class="filter-arrow">›</span></summary>
+                                        <div class="filter-links">
+                                            <a href="#" class="enquire-link" data-program="Certificate Programs">Certificate Programs</a>
+                                            <a href="#" class="enquire-link" data-program="Diploma Programs">Diploma Programs</a>
+                                            <a href="undergraduate.html">Undergraduate Programs</a>
+                                        </div>
+                                    </details>
+                                    <details class="filter-group">
+                                        <summary>Specialisation <span class="filter-arrow">›</span></summary>
+                                        <div class="filter-links">
+                                            <a href="programs/mba-wx-marketing.html">Marketing</a>
+                                            <a href="programs/mba-wx-finance.html">Finance</a>
+                                            <a href="programs/mba-wx-operations.html">Operations</a>
+                                            <a href="programs/mba-wx-leadership.html">Leadership</a>
+                                            <a href="programs/mba-wx-digital-marketing.html">Digital Marketing</a>
+                                        </div>
+                                    </details>
+                                    <details class="filter-group">
+                                        <summary>Duration <span class="filter-arrow">›</span></summary>
+                                        <div class="filter-links">
+                                            <a href="#" class="enquire-link" data-program="Certificate Programs">6 Months</a>
+                                            <a href="#" class="enquire-link" data-program="Diploma Programs">12 Months</a>
+                                            <a href="young-professionals.html">24 Months</a>
+                                            <a href="undergraduate.html">36 Months</a>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Column 3: Program Cards -->
+                        <div class="dropdown-right">
+                            <p class="dropdown-category-label">All Programs</p>
+                            
+                            <div class="dropdown-programs-list">
+                                <a href="programs/mba-wx-hub.html" class="program-item">
+                                    <div class="program-info">
+                                        <h5>MBA (WX) - Executive MBA</h5>
+                                        <p>Duration: 2 years<br>Mode: Online</p>
+                                    </div>
+                                    <div class="program-icon">
+                                        <img src="images/mba-wx.png" alt="Program Icon">
+                                    </div>
+                                </a>
+                                
+                                <a href="programs/mba-online-hub.html" class="program-item">
+                                    <div class="program-info">
+                                        <h5>MBA</h5>
+                                        <p>Duration: 2 years<br>Mode: Online</p>
+                                    </div>
+                                    <div class="program-icon">
+                                        <img src="images/mba.png" alt="Program Icon">
+                                    </div>
+                                </a>
+                                
+                                <a href="programs/bachelors-hub.html" class="program-item">
+                                    <div class="program-info">
+                                        <h5>Bachelor Programs</h5>
+                                        <p>Duration: 3 years<br>Mode: Online</p>
+                                    </div>
+                                    <div class="program-icon">
+                                        <img src="images/bachelor.png" alt="Program Icon">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Explore Programs Hero Section -->
+    <section class="explore-hero-section">
+        <div class="container">
+            <div class="explore-hero-content">
+                <div class="explore-hero-left">
+                    <p class="explore-hero-tag">Find A Program</p>
+                    <h1 class="explore-hero-title">Explore. Choose. Excel.</h1>
+                    <p class="explore-hero-subtitle">Choose from a wide range of programs designed for your success.</p>
+                </div>
+                <div class="explore-hero-right">
+                    <div class="explore-hero-image">
+                        <img src="images/explore-programs-hero.png" alt="Explore Programs">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Filter Section -->
+    <section class="programs-filter-section">
+        <div class="container">
+            <div class="programs-filter-row">
+                <a href="all-programs.html" class="filter-tab active">
+                    <div class="filter-tab-icon">
+                        <img src="images/filter-all-programs.png" alt="All Programs">
+                    </div>
+                    <span class="filter-tab-text">All Programs</span>
+                    <span class="filter-tab-arrow">›</span>
+                </a>
+                <a href="undergraduate.html" class="filter-tab">
+                    <div class="filter-tab-icon">
+                        <img src="images/filter-undergraduates.png" alt="Undergraduates">
+                    </div>
+                    <span class="filter-tab-text">Undergraduates</span>
+                    <span class="filter-tab-arrow">›</span>
+                </a>
+                <a href="young-professionals.html" class="filter-tab">
+                    <div class="filter-tab-icon">
+                        <img src="images/filter-young-professionals.png" alt="Young Professionals">
+                    </div>
+                    <span class="filter-tab-text">Young Professionals</span>
+                    <span class="filter-tab-arrow">›</span>
+                </a>
+                <a href="mid-senior-professionals.html" class="filter-tab">
+                    <div class="filter-tab-icon">
+                        <img src="images/filter-mid-senior.png" alt="Mid-Senior Professionals">
+                    </div>
+                    <span class="filter-tab-text">Mid-Senior Professionals</span>
+                    <span class="filter-tab-arrow">›</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Content Section -->
+    <section class="programs-content-section">
+        <div class="container">
+            <div class="programs-content-wrapper">
+                <!-- Sidebar -->
+                <div class="programs-sidebar">
+                    <h6 class="sidebar-heading">Browse</h6>
+                    <a href="#" class="sidebar-link active" data-filter="all">Recommended Programs</a>
+                    
+                    <h6 class="sidebar-browse-heading">Or Browse By</h6>
+                    
+                    <!-- Certification -->
+                    <div class="sidebar-accordion">
+                        <div class="sidebar-accordion-header">
+                            <span>Certification</span>
+                            <span class="accordion-arrow">›</span>
+                        </div>
+                        <div class="sidebar-accordion-content">
+                            <a href="#" class="sidebar-sub-link" data-filter="certificate">Certificate Programs</a>
+                            <a href="#" class="sidebar-sub-link" data-filter="diploma">Diploma Programs</a>
+                            <a href="#" class="sidebar-sub-link" data-filter="undergraduate">Undergraduate Programs</a>
+                            <a href="#" class="sidebar-sub-link" data-filter="mba">MBA Programs</a>
+                            <a href="#" class="sidebar-sub-link" data-filter="mba-wx">MBA (WX) Programs</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Specialisation -->
+                    <div class="sidebar-accordion">
+                        <div class="sidebar-accordion-header">
+                            <span>Specialisation</span>
+                            <span class="accordion-arrow">›</span>
+                        </div>
+                        <div class="sidebar-accordion-content">
+                            <!-- Specialisations can be added here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Duration -->
+                    <div class="sidebar-accordion">
+                        <div class="sidebar-accordion-header">
+                            <span>Duration</span>
+                            <span class="accordion-arrow">›</span>
+                        </div>
+                        <div class="sidebar-accordion-content">
+                            <a href="#" class="sidebar-sub-link" data-filter="duration-6">6 Months</a>
+                            <a href="#" class="sidebar-sub-link" data-filter="duration-12">12 Months</a>
+                            <a href="#" class="sidebar-sub-link" data-filter="duration-24">2 Years</a>
+                            <a href="#" class="sidebar-sub-link" data-filter="duration-36">3 Years</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Programs Grid -->
+                <div class="programs-page-grid">
+                    <!-- MBA (WX) Card -->
+                    <a href="programs/mba-wx-hub.html" class="program-listing-card" data-certification="mba-wx" data-duration="24">
+                        <div class="program-listing-image purple-bg">
+                            <img src="images/program-mba-wx.png" alt="MBA (WX)">
+                        </div>
+                        <div class="program-listing-content">
+                            <h3 class="program-listing-title">MBA (WX)</h3>
+                            <div class="program-listing-meta">
+                                <div class="program-listing-info">
+                                    <span class="program-duration">2 Years</span>
+                                    <div class="program-separator"></div>
+                                    <span class="program-mode">Degree In Online Mode</span>
+                                </div>
+                                <span class="program-listing-arrow">›</span>
+                            </div>
+                            <p class="program-batch-date"><b>Batch Starts</b> : 2026-01-27</p>
+                        </div>
+                    </a>
+                    
+                    <!-- MBA Card -->
+                    <a href="programs/mba-online-hub.html" class="program-listing-card" data-certification="mba" data-duration="24">
+                        <div class="program-listing-image purple-bg">
+                            <img src="images/program-mba.png" alt="MBA">
+                        </div>
+                        <div class="program-listing-content">
+                            <h3 class="program-listing-title">MBA</h3>
+                            <div class="program-listing-meta">
+                                <div class="program-listing-info">
+                                    <span class="program-duration">2 Years</span>
+                                    <div class="program-separator"></div>
+                                    <span class="program-mode">Degree In Online Mode</span>
+                                </div>
+                                <span class="program-listing-arrow">›</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Bachelor Programs Card -->
+                    <a href="programs/bachelors-hub.html" class="program-listing-card" data-certification="undergraduate" data-duration="36">
+                        <div class="program-listing-image pink-bg">
+                            <img src="images/program-bachelor.png" alt="Bachelor Programs">
+                        </div>
+                        <div class="program-listing-content">
+                            <h3 class="program-listing-title">Bachelor Programs</h3>
+                            <div class="program-listing-meta">
+                                <div class="program-listing-info">
+                                    <span class="program-duration">3 Years</span>
+                                    <div class="program-separator"></div>
+                                    <span class="program-mode">Online Mode</span>
+                                </div>
+                                <span class="program-listing-arrow">›</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="section-divider"></div>
+
+    <!-- Key Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Key Testimonials</h2>
+            <p class="section-subtitle">Learn from the Alumni about their learning experience in NMIMS CDOE and how it has helped them in accelerating their careers.</p>
+            
+            <div class="testimonials-container">
+                <button class="testimonial-nav prev"></button>
+                
+                <div class="testimonials-slider">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">Thank you, NMIMS, for boosting my confidence.</p>
+                        <div class="testimonial-image-wrapper">
+                            <img src="images/testimonial-prachi.png" alt="Prachi Varshney">
+                            <button class="testimonial-play-btn"></button>
+                        </div>
+                        <h4 class="testimonial-name">Prachi Varshney</h4>
+                        <p class="testimonial-program">PG Diploma in Financial Management</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">I'm confident this course will support my career progression.</p>
+                        <div class="testimonial-image-wrapper">
+                            <img src="images/testimonial-kishore.png" alt="Kishore Gurmukhi">
+                            <button class="testimonial-play-btn"></button>
+                        </div>
+                        <h4 class="testimonial-name">Kishore Gurmukhi</h4>
+                        <p class="testimonial-program">PG Diploma in Financial Management</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card">
+                        <p class="testimonial-quote">I highly recommend NMIMS for online education.</p>
+                        <div class="testimonial-image-wrapper">
+                            <img src="images/testimonial-ravi.png" alt="Col Ravi">
+                            <button class="testimonial-play-btn"></button>
+                        </div>
+                        <h4 class="testimonial-name">Col Ravi</h4>
+                        <p class="testimonial-program">PG Diploma in Business Management</p>
+                    </div>
+                </div>
+                
+                <button class="testimonial-nav next"></button>
+            </div>
+            
+            <div class="testimonials-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+    <div class="section-divider"></div>
+
+    <!-- Awards & Recognition Section -->
+    <section class="awards-section">
+        <div class="container">
+            <h2 class="section-title">Awards & Recognition</h2>
+            <p class="section-subtitle">Shaping futures with unmatched quality and dedication.</p>
+            
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-image">
+                        <img src="images/award-1.png" alt="Education Innovation Award">
+                    </div>
+                    <p class="award-text">Education Innovation Awards, Entrepreneur India (January 2022)</p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-image">
+                        <img src="images/award-2.png" alt="Education Innovation Award">
+                    </div>
+                    <p class="award-text">Education Innovation Awards, Entrepreneur India (January 2022)</p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-image">
+                        <img src="images/award-3.png" alt="Education Innovation Award">
+                    </div>
+                    <p class="award-text">Education Innovation Awards, Entrepreneur India (January 2022)</p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-image">
+                        <img src="images/award-4.png" alt="Education Innovation Award">
+                    </div>
+                    <p class="award-text">Education Innovation Awards, Entrepreneur India (January 2022)</p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-image">
+                        <img src="images/award-5.png" alt="Education Innovation Award">
+                    </div>
+                    <p class="award-text">Education Innovation Awards, Entrepreneur India (January 2022)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Impact Section -->
+    <section class="career-impact-section">
+        <div class="career-impact-container">
+            <div class="career-impact-image">
+                <img src="images/career-impact-bg.png" alt="Career Impact">
+            </div>
+            <div class="career-impact-content">
+                <h2 class="section-title">Career Impact</h2>
+                <p class="section-subtitle">Career Services designed to guide, support and accelerate your professional journey.</p>
+                
+                <div class="career-stats-row">
+                    <div class="career-stat-card">
+                        <span class="career-stat-number">500+</span>
+                        <span class="career-stat-label">Hiring Partners</span>
+                    </div>
+                    <div class="career-stat-card">
+                        <span class="career-stat-number">82000+</span>
+                        <span class="career-stat-label">Alumni Across World</span>
+                    </div>
+                    <div class="career-stat-card">
+                        <span class="career-stat-number">8000+</span>
+                        <span class="career-stat-label">Firms Hired Our Alumni</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- NMIMS Branding Section -->
+    <section class="nmims-branding-section">
+        <div class="container">
+            <div class="nmims-branding-content">
+                <div class="nmims-logo-large">
+                    <img src="images/nmims-online-logo.png" alt="NMIMS Online">
+                </div>
+                <h4 class="nmims-tagline">Upskill. Upgrade. Uninterrupted.</h4>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-container">
+            <!-- Quick Links Section -->
+            <div class="footer-links-row">
+                <div class="container">
+                    <div class="footer-columns">
+                        <div class="footer-column">
+                            <h6 class="footer-title">Quick Links</h6>
+                            <ul class="footer-list">
+                                <li><a href="#">Student Portal</a></li>
+                                <li><a href="#">All Programs</a></li>
+                                <li><a href="#">Career services</a></li>
+                                <li><a href="#">For Students</a></li>
+                                <li><a href="#">Admission Process</a></li>
+                                <li><a href="#">Re-registration</a></li>
+                                <li><a href="#">Alumni</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h6 class="footer-title">NMIMS CDOE</h6>
+                            <ul class="footer-list">
+                                <li><a href="#">About NMIMS Online</a></li>
+                                <li><a href="#">Awards</a></li>
+                                <li><a href="#">Enterprise</a></li>
+                                <li><a href="#">Mandatory Disclosure</a></li>
+                                <li><a href="#">CIQA</a></li>
+                                <li><a href="#">Faculty</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Careers With Us</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h6 class="footer-title">Support</h6>
+                            <ul class="footer-list">
+                                <li><a href="#">Locate Us</a></li>
+                                <li><a href="#">Help & Support</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Public Notice</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Programs Section -->
+                    <div class="footer-programs">
+                        <h6 class="footer-title">Programs</h6>
+                        
+                        <div class="programs-accordion">
+                            <div class="program-accordion-item">
+                                <div class="program-accordion-header">
+                                    <span class="program-arrow">▲</span>
+                                    <div class="program-categories">
+                                        <div class="program-category">
+                                            <p><a href="programs/mba-online-hub.html">MBA Online</a></p>
+                                        </div>
+                                        <div class="program-category">
+                                            <p><a href="programs/mba-wx-hub.html">MBA WX</a></p>
+                                        </div>
+                                        <div class="program-category">
+                                            <p><a href="programs/bachelors-hub.html">Bachelors</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="program-accordion-item">
+                                <div class="program-accordion-header">
+                                    <span class="program-arrow">▲</span>
+                                    <div class="program-categories">
+                                        <div class="program-category">
+                                            <p><a href="#">Diploma programs</a></p>
+                                        </div>
+                                        <div class="program-category">
+                                            <p><a href="#">Certificate</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Media and Copyright -->
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="footer-bottom-content">
+                        <div class="footer-social">
+                            <ul class="social-links">
+                                <li><a href="#" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"></path></svg></a></li>
+                                <li><a href="#" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"></path></svg></a></li>
+                                <li><a href="#" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path></svg></a></li>
+                                <li><a href="#" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"></path></svg></a></li>
+                                <li><a href="#" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"></path></svg></a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-disclaimer">
+                            <p>Disclaimer: The names, logos and brands mentioned on the website are used for representation purpose only and are owned by the respective companies.</p>
+                            <p>© 2025 NMIMS. All Rights Reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Enquire Sidebar -->
+    <div class="enquire-sidebar" id="enquireSidebar">
+        <span>Enquire Now</span>
+        <span class="arrow">▲</span>
+    </div>
+    
+    <!-- Enquire Now Modal -->
+    <div class="modal-overlay" id="enquireModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <div class="modal-left">
+                <div class="modal-logo">
+                    <img src="images/formbanner/NMIMS-CDOE-bg.png" alt="NMIMS CDOE">
+                </div>
+                <h2 class="modal-title">Get In Touch</h2>
+                <p class="modal-subtitle">Got questions about your next big step? Let's start a conversation and uncover the possibilities together!</p>
+                <div class="modal-image">
+                    <img src="images/formbanner/enquire-now.png" alt="Enquire Now">
+                </div>
+            </div>
+            <div class="modal-right">
+                <form class="enquire-form">
+                    <div class="form-row">
+                        <input type="text" placeholder="First Name*" required>
+                        <input type="text" placeholder="Last Name*" required>
+                    </div>
+                    <input type="email" placeholder="Email ID*" required>
+                    <input type="tel" placeholder="Mobile No.*" maxlength="10" required>
+                    <select required>
+                        <option value="" disabled selected>Programme</option>
+                        <option>MBA Online</option>
+                        <option>MBA WX</option>
+                        <option>Bachelors Programs</option>
+                        <option>Certificate Programs</option>
+                        <option>Diploma Programs</option>
+                    </select>
+                    <div class="form-row">
+                        <select required>
+                            <option value="" disabled selected>City</option>
+                            <option value="Agra">Agra</option>
+                            <option value="Ahmedabad">Ahmedabad</option>
+                            <option value="Almora">Almora</option>
+                            <option value="Ambala Cantt">Ambala Cantt</option>
+                            <option value="Amravati">Amravati</option>
+                            <option value="Aurangabad">Aurangabad</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Bhopal">Bhopal</option>
+                            <option value="Bhubaneswar">Bhubaneswar</option>
+                            <option value="Bikaner">Bikaner</option>
+                            <option value="Bokaro">Bokaro</option>
+                            <option value="Calcutta">Calcutta</option>
+                            <option value="Chandigarh">Chandigarh</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Dehradun">Dehradun</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Faridabad">Faridabad</option>
+                            <option value="Gandhinagar">Gandhinagar</option>
+                            <option value="Ghaziabad">Ghaziabad</option>
+                            <option value="Guntur">Guntur</option>
+                            <option value="Gurgaon">Gurgaon</option>
+                            <option value="Guwahati">Guwahati</option>
+                            <option value="Gwalior">Gwalior</option>
+                            <option value="Haldwani">Haldwani</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Indore">Indore</option>
+                            <option value="Jabalpur">Jabalpur</option>
+                            <option value="Jaipur">Jaipur</option>
+                            <option value="Jamshedpur">Jamshedpur</option>
+                            <option value="Jodhpur">Jodhpur</option>
+                            <option value="Kanpur">Kanpur</option>
+                            <option value="Kashipur">Kashipur</option>
+                            <option value="Kochi">Kochi</option>
+                            <option value="Kolkata">Kolkata</option>
+                            <option value="Kozhikode">Kozhikode</option>
+                            <option value="Lucknow">Lucknow</option>
+                            <option value="Ludhiana">Ludhiana</option>
+                            <option value="Mohali">Mohali</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Nagpur">Nagpur</option>
+                            <option value="Nainital">Nainital</option>
+                            <option value="Nashik">Nashik</option>
+                            <option value="Navi Mumbai">Navi Mumbai</option>
+                            <option value="Noida">Noida</option>
+                            <option value="Patna">Patna</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Raipur">Raipur</option>
+                            <option value="Rajkot">Rajkot</option>
+                            <option value="Ranchi">Ranchi</option>
+                            <option value="Rishikesh">Rishikesh</option>
+                            <option value="Roorkee">Roorkee</option>
+                            <option value="Rudrapur">Rudrapur</option>
+                            <option value="Shirpur">Shirpur</option>
+                            <option value="Surat">Surat</option>
+                            <option value="Trivandrum">Trivandrum</option>
+                            <option value="Vadodara">Vadodara</option>
+                        </select>
+                        <select required>
+                            <option value="" disabled selected>I Will Enroll In</option>
+                            <option>1 to 3 Months</option>
+                            <option>4 to 6 Months</option>
+                            <option>7 to 12 Months</option>
+                            <option>Immediate</option>
+                        </select>
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" required>
+                        <span>I authorise NMIMS CDOE representative to contact me via phone and/or email. This will override registry on DND/NDNC.</span>
+                    </label>
+                    <button type="submit" class="submit-btn">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top">↑</button>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (mobileMenuToggle && navMenu) {
+            mobileMenuToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navMenu.classList.toggle('mobile-active');
+                document.body.classList.toggle('menu-open');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    mobileMenuToggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+            
+            navMenu.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenuToggle.classList.remove('active');
+                    navMenu.classList.remove('mobile-active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        }
+        
+        // Enquire Modal functionality
+        const enquireSidebar = document.getElementById('enquireSidebar');
+        const enquireModal = document.getElementById('enquireModal');
+        const modalClose = document.getElementById('modalClose');
+        
+        enquireSidebar.addEventListener('click', () => {
+            enquireModal.classList.add('active');
+        });
+        
+        modalClose.addEventListener('click', () => {
+            enquireModal.classList.remove('active');
+        });
+        
+        enquireModal.addEventListener('click', (e) => {
+            if (e.target === enquireModal) {
+                enquireModal.classList.remove('active');
+            }
+        });
+        
+        // Footer Accordion Toggle for Mobile
+        const footerColumns = document.querySelectorAll('.footer-column');
+        const footerPrograms = document.querySelector('.footer-programs');
+        
+        footerColumns.forEach(column => {
+            const title = column.querySelector('.footer-title');
+            if (title) {
+                title.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        footerColumns.forEach(col => {
+                            if (col !== column) {
+                                col.classList.remove('active');
+                            }
+                        });
+                        if (footerPrograms) {
+                            footerPrograms.classList.remove('active');
+                        }
+                        column.classList.toggle('active');
+                    }
+                });
+            }
+        });
+        
+        if (footerPrograms) {
+            const programsTitle = footerPrograms.querySelector('.footer-title');
+            if (programsTitle) {
+                programsTitle.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        footerColumns.forEach(col => {
+                            col.classList.remove('active');
+                        });
+                        footerPrograms.classList.toggle('active');
+                    }
+                });
+            }
+        }
+        
+        // Scroll to Top Button
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        if (scrollTopBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.style.opacity = '1';
+                    scrollTopBtn.style.visibility = 'visible';
+                } else {
+                    scrollTopBtn.style.opacity = '0';
+                    scrollTopBtn.style.visibility = 'hidden';
+                }
+            });
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.visibility = 'hidden';
+            scrollTopBtn.style.transition = 'opacity 0.3s, visibility 0.3s';
+        }
+    </script>
+    
+    <!-- Sidebar Filter Script -->
+    <script src="js/sidebar-filter.js"></script>
+    <script src="js/popup-form.js"></script>
+    <script src="js/form-handler.js"></script>
+    <script src="js/brochure-popup.js"></script>
+</body>
+</html>

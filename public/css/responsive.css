@@ -1,0 +1,4853 @@
+/* =====================================================
+   NMIMS WEBSITE - COMPREHENSIVE RESPONSIVE STYLES
+   Breakpoints: 1400px, 1200px, 992px, 768px, 576px, 480px
+   ===================================================== */
+
+/* =====================================================
+   MOBILE HAMBURGER MENU
+   ===================================================== */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1002;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: #333;
+    margin: 3px 0;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+    overflow: hidden;
+}
+
+@media (max-width: 992px) {
+    .mobile-menu-toggle {
+        display: flex;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1002;
+    }
+    
+    .nav-wrapper {
+        position: relative;
+    }
+    
+    .nav-logo {
+        margin-left: 10px;
+    }
+    
+    .nav-logo img {
+        height: 56px;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        padding: 80px 25px 30px;
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        gap: 0;
+        display: flex;
+    }
+    
+    .nav-menu.mobile-active {
+        right: 0;
+    }
+    
+    .nav-item {
+        border-bottom: 1px solid #eee;
+        width: 100%;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 15px 0;
+        font-size: 16px;
+    }
+    
+    .nav-buttons {
+        order: 4;
+        margin-top: 20px;
+    }
+    
+    .find-program-wrapper {
+        display: block;
+        position: absolute;
+        left: 150px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .find-program-wrapper .btn-primary {
+        padding: 8px 14px;
+        font-size: 11px;
+    }
+    
+    .find-program-wrapper .btn-primary img {
+        display: none;
+    }
+    
+    .succeed-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        margin-top: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .dropdown-parent.active .succeed-dropdown {
+        max-height: 300px;
+    }
+    
+    .nav-wrapper {
+        position: relative;
+    }
+}
+
+/* =====================================================
+   LARGE DESKTOPS (1400px and above)
+   ===================================================== */
+@media (min-width: 1401px) {
+    .container {
+        max-width: 1400px;
+    }
+}
+
+/* =====================================================
+   LAPTOPS / LARGE TABLETS (1200px - 1400px)
+   ===================================================== */
+@media (max-width: 1400px) {
+    .hero-section {
+        padding: 20px 60px 10px;
+    }
+    
+    .stats-section {
+        padding: 60px 80px;
+    }
+    
+    .footer-section {
+        padding: 0 100px;
+    }
+    
+    .hero-title {
+        font-size: 54px;
+    }
+    
+    .career-card {
+        min-width: calc(33.333% - 16px);
+    }
+}
+
+/* =====================================================
+   TABLETS LANDSCAPE / SMALL LAPTOPS (992px - 1200px)
+   ===================================================== */
+@media (max-width: 1200px) {
+    .hero-section {
+        padding: 20px 40px 10px;
+    }
+    
+    .hero-title {
+        font-size: 48px;
+    }
+    
+    .hero-content {
+        gap: 40px;
+    }
+    
+    .stats-section {
+        padding: 50px 40px;
+    }
+    
+    .footer-section {
+        padding: 0 60px;
+    }
+    
+    /* Dropdown adjustments */
+    .dropdown-container.dropdown-three-col {
+        grid-template-columns: 280px 250px 1fr;
+    }
+    
+    .dropdown-heading {
+        font-size: 20px;
+    }
+    
+    /* Career section */
+    .career-title {
+        font-size: 40px;
+    }
+    
+    .career-card {
+        min-width: calc(50% - 12px);
+    }
+    
+    /* Stats section */
+    .stats-heading {
+        font-size: 38px;
+    }
+    
+    .stats-subheading {
+        font-size: 24px;
+    }
+    
+    .stats-number .counter,
+    .stats-number .plus {
+        font-size: 64px;
+    }
+    
+    /* Excellence section */
+    .excellence-title {
+        font-size: 38px;
+    }
+    
+    /* Alumni section */
+    .alumni-title {
+        font-size: 38px;
+    }
+    
+    /* Highlighted programs */
+    .highlighted-title {
+        font-size: 38px;
+    }
+    
+    .highlighted-card.active {
+        width: 280px;
+    }
+    
+    .highlighted-card.inactive {
+        width: 220px;
+    }
+    
+    /* Supercharge section */
+    .supercharge-title {
+        font-size: 40px;
+    }
+    
+    /* Modal adjustments */
+    .modal-content {
+        grid-template-columns: 50% 50%;
+    }
+    
+    .modal-title {
+        font-size: 40px;
+    }
+}
+
+/* =====================================================
+   TABLETS PORTRAIT (768px - 992px)
+   ===================================================== */
+@media (max-width: 992px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        padding: 20px;
+        min-height: auto;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .hero-left {
+        padding-top: 20px;
+        order: 1;
+    }
+    
+    .hero-right {
+        order: 2;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .hero-image {
+        max-width: 80%;
+        height: auto;
+    }
+    
+    .hero-title {
+        font-size: 44px;
+        text-align: center;
+    }
+    
+    .hero-subtitle {
+        text-align: center;
+        font-size: 16px;
+    }
+    
+    .programs-section {
+        margin-top: 20px;
+    }
+    
+    .programs-title {
+        text-align: center;
+        font-size: 26px;
+    }
+    
+    .programs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .card-title {
+        font-size: 16px;
+        padding-right: 70px;
+    }
+    
+    .card-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .btn-explore {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+        padding: 40px 20px;
+    }
+    
+    .stats-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .stats-left {
+        text-align: center;
+    }
+    
+    .university-image {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .stats-right {
+        gap: 40px;
+    }
+    
+    .stats-heading {
+        font-size: 32px;
+        text-align: center;
+    }
+    
+    .stats-subheading {
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .stats-detail {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .stats-number {
+        justify-content: center;
+    }
+    
+    .stats-number .counter,
+    .stats-number .plus {
+        font-size: 56px;
+    }
+    
+    .stats-number p {
+        text-align: center;
+    }
+    
+    /* Career Section */
+    .career-section {
+        padding: 50px 0;
+    }
+    
+    .career-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+    
+    .carousel-container {
+        padding: 0 40px 50px;
+    }
+    
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+    
+    .career-card {
+        min-width: calc(50% - 12px);
+        padding: 20px;
+    }
+    
+    .card-heading {
+        font-size: 15px;
+    }
+    
+    /* Excellence Section */
+    .excellence-section {
+        padding: 50px 20px;
+    }
+    
+    .excellence-title {
+        font-size: 32px;
+    }
+    
+    .excellence-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .excellence-number .counter-excel,
+    .excellence-number .symbol {
+        font-size: 48px;
+    }
+    
+    .excellence-label {
+        font-size: 14px;
+    }
+    
+    /* Alumni Section */
+    .alumni-section {
+        padding: 50px 0;
+    }
+    
+    .alumni-title {
+        font-size: 32px;
+    }
+    
+    .alumni-carousel-container {
+        padding: 0 50px;
+    }
+    
+    .alumni-card {
+        min-width: calc(50% - 15px);
+    }
+    
+    /* Highlighted Programs */
+    .highlighted-section {
+        padding: 50px 0;
+    }
+    
+    .highlighted-title {
+        font-size: 32px;
+    }
+    
+    .highlighted-card.active {
+        width: 260px;
+    }
+    
+    .highlighted-card.inactive {
+        width: 180px;
+    }
+    
+    /* Supercharge Section */
+    .supercharge-section {
+        min-height: 500px;
+        padding: 40px 0 150px;
+    }
+    
+    .supercharge-title {
+        font-size: 36px;
+    }
+    
+    .supercharge-subtitle {
+        font-size: 15px;
+    }
+    
+    .supercharge-image-desktop,
+    .supercharge-image-mobile {
+        height: 350px;
+    }
+    
+    /* Footer */
+    .footer-section {
+        padding: 0 30px;
+    }
+    
+    .footer-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .program-categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .footer-disclaimer {
+        text-align: center;
+        padding-left: 0;
+    }
+    
+    /* Modal */
+    .modal-content {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-left {
+        padding: 30px;
+    }
+    
+    .modal-image {
+        display: none;
+    }
+    
+    .modal-title {
+        font-size: 36px;
+    }
+    
+    .modal-right {
+        padding: 20px 30px 30px;
+    }
+    
+    /* Dropdown Menu */
+    .dropdown-container.dropdown-three-col {
+        grid-template-columns: 1fr;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    .dropdown-left {
+        padding: 20px;
+    }
+    
+    .dropdown-middle {
+        padding: 20px;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .dropdown-right {
+        padding: 20px;
+    }
+    
+    .dropdown-heading {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    
+    .dropdown-option {
+        padding: 12px 15px;
+    }
+    
+    .dropdown-option img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* =====================================================
+   MOBILE LANDSCAPE / LARGE PHONES (576px - 768px)
+   ===================================================== */
+@media (max-width: 768px) {
+    /* Navigation */
+    .navbar {
+        padding: 10px 0;
+    }
+    
+    .nav-logo {
+        margin-left: 10px;
+    }
+    
+    .nav-logo img {
+        height: 56px;
+    }
+    
+    /* Do NOT use display:none — nav-menu uses position:fixed + right:-100% 
+       from the 992px breakpoint to slide in/out. display:none kills that. */
+    
+    .nav-buttons .btn {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+    
+    .btn-primary {
+        padding-right: 35px;
+    }
+    
+    .btn-primary img {
+        right: 12px;
+        width: 12px;
+        height: 12px;
+    }
+    
+    /* Hero Section */
+    .hero-section {
+        padding: 15px;
+        min-height: auto;
+    }
+    
+    .hero-title {
+        font-size: 36px;
+        line-height: 1;
+        margin-bottom: 15px;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .hero-right {
+        margin-top: 20px;
+    }
+    
+    .hero-image {
+        max-width: 100%;
+        border-radius: 15px;
+    }
+    
+    .programs-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .programs-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .program-card {
+        padding: 15px;
+        flex-direction: row;
+        align-items: center;
+    }
+    
+    .card-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .card-title {
+        font-size: 14px;
+        margin-bottom: 0;
+        padding-right: 0;
+        flex: 1;
+    }
+    
+    .card-image {
+        position: static;
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+    }
+    
+    .btn-explore {
+        padding: 8px 16px;
+        font-size: 11px;
+        width: auto;
+        white-space: nowrap;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+        padding: 30px 15px;
+    }
+    
+    .stats-heading {
+        font-size: 26px;
+    }
+    
+    .stats-subheading {
+        font-size: 18px;
+    }
+    
+    .stats-item:first-child .stats-logo,
+    .stats-item:last-child .stats-logo {
+        width: 120px;
+    }
+    
+    .stats-number .counter,
+    .stats-number .plus {
+        font-size: 44px;
+    }
+    
+    .stats-number p {
+        font-size: 14px;
+    }
+    
+    .university-image {
+        max-width: 300px;
+    }
+    
+    /* Career Section */
+    .career-section {
+        padding: 40px 0;
+    }
+    
+    .career-title {
+        font-size: 26px;
+        padding: 0 15px;
+    }
+    
+    .carousel-container {
+        padding: 0 15px 40px;
+    }
+    
+    .carousel-wrapper {
+        padding: 0;
+    }
+    
+    .career-card {
+        min-width: 100%;
+        padding: 15px;
+    }
+    
+    .card-header {
+        gap: 10px;
+    }
+    
+    .card-number {
+        font-size: 22px;
+    }
+    
+    .card-heading {
+        font-size: 14px;
+    }
+    
+    .card-image-container img {
+        max-height: 150px;
+    }
+    
+    .card-list ul {
+        font-size: 13px;
+    }
+    
+    .card-list li {
+        margin-bottom: 8px;
+    }
+    
+    .carousel-btn {
+        display: none;
+    }
+    
+    .carousel-dots {
+        margin-top: 15px;
+    }
+    
+    /* Excellence Section */
+    .excellence-section {
+        padding: 40px 15px;
+    }
+    
+    .excellence-title {
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+    
+    .excellence-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .excellence-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .excellence-icon {
+        margin-bottom: 10px;
+    }
+    
+    .excellence-icon img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .excellence-number .counter-excel,
+    .excellence-number .symbol {
+        font-size: 36px;
+    }
+    
+    .excellence-label {
+        font-size: 12px;
+    }
+    
+    /* Alumni Section */
+    .alumni-section {
+        padding: 40px 0;
+        overflow: hidden;
+    }
+    
+    .alumni-title {
+        font-size: 26px;
+    }
+    
+    .alumni-carousel-container {
+        padding: 0 15px;
+        overflow: hidden;
+    }
+    
+    .alumni-carousel-wrapper {
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    .alumni-carousel-track {
+        gap: 15px;
+        min-height: auto;
+    }
+    
+    .alumni-card {
+        width: 85vw;
+        max-width: 280px;
+        min-width: auto;
+    }
+    
+    .alumni-card.side-card {
+        display: none;
+    }
+    
+    .alumni-card.center-card {
+        transform: scale(1);
+    }
+    
+    .alumni-image {
+        height: 200px;
+    }
+    
+    .alumni-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    
+    .alumni-content {
+        padding: 20px;
+        min-height: 140px;
+    }
+    
+    .alumni-review {
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+    
+    .alumni-name {
+        font-size: 16px;
+    }
+    
+    .alumni-program {
+        font-size: 12px;
+    }
+    
+    .alumni-btn {
+        display: none;
+    }
+    
+    /* Programs Filter Section - Mobile */
+    .programs-filter-section {
+        padding: 15px 0;
+        margin-top: 60px;
+    }
+    
+    /* Explore Hero Section - Mobile Concise */
+    .explore-hero-section {
+        padding: 25px 0 15px 0;
+        min-height: auto;
+    }
+    
+    .explore-hero-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .explore-hero-left {
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .explore-hero-tag {
+        font-size: 13px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #6C4DE6;
+    }
+    
+    .explore-hero-title {
+        font-size: 26px;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+    
+    .explore-hero-subtitle {
+        font-size: 13px;
+        line-height: 1.4;
+        color: #666;
+    }
+    
+    .explore-hero-right {
+        justify-content: center;
+    }
+    
+    .explore-hero-image {
+        max-width: 100%;
+        width: 100%;
+        transform: translateY(0);
+        margin-top: 10px;
+    }
+    
+    .explore-hero-image img {
+        max-height: 180px;
+        object-fit: contain;
+    }
+    
+    .programs-filter-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        max-width: 100%;
+    }
+    
+    .filter-tab {
+        min-width: unset;
+        width: 100%;
+        padding: 8px 10px;
+        border-radius: 30px;
+        gap: 8px;
+    }
+    
+    .filter-tab-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .filter-tab-text {
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+    
+    .filter-tab-arrow {
+        font-size: 12px;
+        display: none;
+    }
+    
+    /* Programs Sidebar - Mobile */
+    .programs-content-section {
+        padding: 25px 0;
+    }
+    
+    .programs-content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .programs-sidebar {
+        padding: 0;
+        display: block;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 15px;
+        background: #fafafa;
+    }
+    
+    .sidebar-heading {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    
+    .sidebar-link {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .sidebar-browse-heading {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .sidebar-accordion-header {
+        padding: 10px 0;
+    }
+    
+    .sidebar-accordion-header span:first-child {
+        font-size: 14px;
+    }
+    
+    .sidebar-accordion-header .accordion-arrow {
+        font-size: 14px;
+    }
+    
+    .sidebar-sub-link {
+        font-size: 13px;
+        padding: 6px 0;
+    }
+    
+    /* Programs Grid - Mobile */
+    .programs-page-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .program-listing-card {
+        border-radius: 12px;
+    }
+    
+    .program-listing-image {
+        height: 120px;
+    }
+    
+    .program-listing-content {
+        padding: 12px 15px;
+    }
+    
+    .program-listing-title {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .program-duration,
+    .program-mode {
+        font-size: 11px;
+    }
+    
+    /* Highlighted Programs */
+    .highlighted-section {
+        padding: 40px 0;
+    }
+    
+    .highlighted-title {
+        font-size: 26px;
+    }
+    
+    .highlighted-carousel-container {
+        padding: 0 15px;
+    }
+    
+    .highlighted-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .highlighted-card {
+        width: 100% !important;
+        max-width: 300px;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .highlighted-card.inactive {
+        display: block;
+    }
+    
+    .highlighted-card.hidden {
+        display: none;
+    }
+    
+    .highlighted-btn {
+        display: none;
+    }
+    
+    /* Supercharge Section */
+    .supercharge-section {
+        min-height: 400px;
+        padding: 30px 0 120px;
+    }
+    
+    .supercharge-content {
+        margin-top: 20px;
+    }
+    
+    .supercharge-title {
+        font-size: 28px;
+    }
+    
+    .supercharge-subtitle {
+        font-size: 14px;
+    }
+    
+    .supercharge-image-desktop {
+        display: none;
+    }
+    
+    .supercharge-image-mobile {
+        display: block;
+        height: 280px;
+    }
+    
+    /* NMIMS Branding */
+    .nmims-branding-section {
+        padding: 50px 20px;
+    }
+    
+    .nmims-logo-large img {
+        max-width: 200px;
+    }
+    
+    .nmims-tagline {
+        font-size: 18px;
+    }
+    
+    /* Footer - Collapsible Mobile Accordion */
+    .footer-section {
+        padding: 0 15px;
+    }
+    
+    .footer-links-row {
+        padding: 20px 0;
+    }
+    
+    .footer-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin-bottom: 0;
+    }
+    
+    .footer-column {
+        padding: 0;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .footer-column:last-child {
+        border-bottom: none;
+    }
+    
+    /* Collapsible Footer Title */
+    .footer-title {
+        font-size: 16px;
+        margin-bottom: 0;
+        padding: 15px 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .footer-title::after {
+        content: '›';
+        font-size: 20px;
+        font-weight: 300;
+        color: #666;
+        transition: transform 0.3s ease;
+        transform: rotate(0deg);
+    }
+    
+    .footer-column.active .footer-title::after {
+        transform: rotate(90deg);
+    }
+    
+    /* Collapsible Footer List */
+    .footer-list {
+        margin-bottom: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0;
+    }
+    
+    .footer-column.active .footer-list {
+        max-height: 500px;
+        padding-bottom: 15px;
+    }
+    
+    .footer-list li {
+        margin-bottom: 10px;
+    }
+    
+    .footer-list li a {
+        font-size: 14px;
+        color: #666;
+    }
+    
+    /* Footer Programs Section - Collapsible */
+    .footer-programs {
+        padding: 0;
+        text-align: left;
+        margin-top: 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .footer-programs .footer-title {
+        padding: 15px 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .footer-programs .footer-title::after {
+        content: '›';
+        font-size: 20px;
+        font-weight: 300;
+        color: #666;
+        transition: transform 0.3s ease;
+        transform: rotate(0deg);
+    }
+    
+    .footer-programs.active .footer-title::after {
+        transform: rotate(90deg);
+    }
+    
+    .programs-accordion {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        margin-top: 0;
+    }
+    
+    .footer-programs.active .programs-accordion {
+        max-height: 500px;
+        padding-bottom: 15px;
+    }
+    
+    .program-accordion-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .program-accordion-item {
+        margin-bottom: 8px;
+    }
+    
+    .program-arrow {
+        display: none;
+    }
+    
+    .program-categories {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .program-category a {
+        font-size: 14px;
+        color: #666;
+    }
+    
+    .footer-bottom {
+        padding: 20px 0;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    
+    .footer-disclaimer {
+        padding-left: 0;
+        text-align: center;
+    }
+    
+    .footer-disclaimer p {
+        font-size: 11px;
+        line-height: 1.5;
+        color: #FF6344;
+    }
+    
+    .footer-disclaimer p:last-child {
+        color: #333;
+        margin-top: 10px;
+    }
+    
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        border-radius: 20px;
+    }
+    
+    .modal-left {
+        padding: 20px;
+    }
+    
+    .modal-logo img {
+        width: 150px;
+    }
+    
+    .modal-title {
+        font-size: 28px;
+    }
+    
+    .modal-subtitle {
+        font-size: 14px;
+    }
+    
+    .modal-right {
+        padding: 15px 20px 25px;
+    }
+    
+    .enquire-form {
+        padding: 20px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .enquire-form input,
+    .enquire-form select {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .checkbox-label {
+        font-size: 11px;
+    }
+    
+    .submit-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    /* Enquire Sidebar */
+    .enquire-sidebar {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+    
+    /* Dropdown Menu */
+    .dropdown-menu {
+        top: 65px;
+    }
+    
+    .dropdown-menu.show {
+        max-height: 85vh;
+    }
+    
+    .dropdown-heading {
+        font-size: 16px;
+    }
+    
+    .dropdown-option {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    
+    .dropdown-option img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .dropdown-option span:first-of-type {
+        font-size: 13px;
+    }
+    
+    .program-item {
+        padding: 15px;
+    }
+    
+    .program-info h5 {
+        font-size: 14px;
+    }
+    
+    .program-info p {
+        font-size: 12px;
+    }
+    
+    .program-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .program-icon img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* =====================================================
+   MOBILE PORTRAIT / SMALL PHONES (480px - 576px)
+   ===================================================== */
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 32px;
+    }
+    
+    .hero-subtitle {
+        font-size: 13px;
+    }
+    
+    .programs-title {
+        font-size: 20px;
+    }
+    
+    .card-title {
+        font-size: 13px;
+    }
+    
+    .btn-explore {
+        padding: 7px 12px;
+        font-size: 10px;
+    }
+    
+    /* Stats */
+    .stats-heading {
+        font-size: 22px;
+    }
+    
+    .stats-subheading {
+        font-size: 16px;
+    }
+    
+    .stats-number .counter,
+    .stats-number .plus {
+        font-size: 38px;
+    }
+    
+    .stats-number p {
+        font-size: 13px;
+    }
+    
+    /* Career */
+    .career-title {
+        font-size: 22px;
+    }
+    
+    .card-number {
+        font-size: 20px;
+    }
+    
+    .card-heading {
+        font-size: 13px;
+    }
+    
+    /* Excellence */
+    .excellence-title {
+        font-size: 22px;
+    }
+    
+    .excellence-number .counter-excel,
+    .excellence-number .symbol {
+        font-size: 32px;
+    }
+    
+    .excellence-label {
+        font-size: 11px;
+    }
+    
+    /* Alumni */
+    .alumni-title {
+        font-size: 22px;
+    }
+    
+    .alumni-review {
+        font-size: 13px;
+    }
+    
+    .alumni-image img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    /* Highlighted */
+    .highlighted-title {
+        font-size: 22px;
+    }
+    
+    /* Supercharge */
+    .supercharge-title {
+        font-size: 24px;
+    }
+    
+    .supercharge-subtitle {
+        font-size: 13px;
+    }
+    
+    /* Branding */
+    .nmims-logo-large img {
+        max-width: 160px;
+    }
+    
+    .nmims-tagline {
+        font-size: 16px;
+    }
+    
+    /* Modal */
+    .modal-title {
+        font-size: 24px;
+    }
+    
+    .modal-subtitle {
+        font-size: 13px;
+    }
+    
+    .enquire-form {
+        padding: 15px;
+    }
+}
+
+/* =====================================================
+   EXTRA SMALL PHONES (Below 480px)
+   ===================================================== */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 12px;
+    }
+    
+    /* Navigation */
+    .nav-logo img {
+        height: 56px;
+    }
+    
+    .nav-buttons .btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+    
+    /* Hero */
+    .hero-section {
+        padding: 12px;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .hero-subtitle {
+        font-size: 12px;
+    }
+    
+    .programs-title {
+        font-size: 18px;
+    }
+    
+    .program-card {
+        padding: 12px;
+    }
+    
+    .card-title {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+    
+    .card-image {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .btn-explore {
+        padding: 6px 10px;
+        font-size: 9px;
+    }
+    
+    /* Stats */
+    .stats-heading {
+        font-size: 20px;
+    }
+    
+    .stats-subheading {
+        font-size: 14px;
+    }
+    
+    .stats-number .counter,
+    .stats-number .plus {
+        font-size: 34px;
+    }
+    
+    .university-image {
+        max-width: 250px;
+    }
+    
+    /* Career */
+    .career-title {
+        font-size: 20px;
+    }
+    
+    .carousel-container {
+        padding: 0 10px 30px;
+    }
+    
+    .career-card {
+        padding: 12px;
+    }
+    
+    .card-number {
+        font-size: 18px;
+    }
+    
+    .card-heading {
+        font-size: 12px;
+    }
+    
+    .card-list ul {
+        font-size: 12px;
+        padding-left: 15px;
+    }
+    
+    /* Excellence */
+    .excellence-section {
+        padding: 30px 12px;
+    }
+    
+    .excellence-title {
+        font-size: 20px;
+    }
+    
+    .excellence-grid {
+        gap: 20px;
+    }
+    
+    .excellence-icon img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .excellence-number .counter-excel,
+    .excellence-number .symbol {
+        font-size: 28px;
+    }
+    
+    .excellence-label {
+        font-size: 10px;
+    }
+    
+    /* Alumni */
+    .alumni-title {
+        font-size: 20px;
+    }
+    
+    .alumni-card {
+        width: 90vw;
+        max-width: 260px;
+        min-width: auto;
+    }
+    
+    .alumni-image {
+        height: 180px;
+    }
+    
+    .alumni-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    
+    .alumni-content {
+        padding: 15px;
+        min-height: 130px;
+    }
+    
+    .alumni-review {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .alumni-name {
+        font-size: 14px;
+    }
+    
+    .alumni-program {
+        font-size: 11px;
+    }
+    
+    /* Programs Filter Section - Extra Small */
+    .programs-filter-section {
+        padding: 12px 0;
+        margin-top: 50px;
+    }
+    
+    /* Explore Hero Section - Extra Small Concise */
+    .explore-hero-section {
+        padding: 20px 0 12px 0;
+        min-height: auto;
+    }
+    
+    .explore-hero-tag {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    
+    .explore-hero-title {
+        font-size: 22px;
+        margin-bottom: 6px;
+    }
+    
+    .explore-hero-subtitle {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+    
+    .explore-hero-image {
+        margin-top: 8px;
+    }
+    
+    .explore-hero-image img {
+        max-height: 150px;
+    }
+    
+    .programs-filter-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .filter-tab {
+        padding: 6px 8px;
+        border-radius: 25px;
+        gap: 6px;
+    }
+    
+    .filter-tab-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .filter-tab-text {
+        font-size: 10px;
+    }
+    
+    /* Programs Sidebar - Extra Small */
+    .programs-content-section {
+        padding: 20px 0;
+    }
+    
+    .programs-sidebar {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .sidebar-heading {
+        font-size: 12px;
+    }
+    
+    .sidebar-link {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+    
+    .sidebar-browse-heading {
+        font-size: 11px;
+    }
+    
+    .sidebar-accordion-header span:first-child {
+        font-size: 13px;
+    }
+    
+    .sidebar-sub-link {
+        font-size: 12px;
+    }
+    
+    /* Programs Grid - Extra Small */
+    .program-listing-image {
+        height: 100px;
+    }
+    
+    .program-listing-content {
+        padding: 10px 12px;
+    }
+    
+    .program-listing-title {
+        font-size: 13px;
+    }
+    
+    .program-duration,
+    .program-mode {
+        font-size: 10px;
+    }
+    
+    /* Highlighted */
+    .highlighted-title {
+        font-size: 20px;
+    }
+    
+    .highlighted-card {
+        max-width: 260px;
+    }
+    
+    /* Supercharge */
+    .supercharge-section {
+        min-height: 350px;
+        padding: 25px 0 100px;
+    }
+    
+    .supercharge-title {
+        font-size: 22px;
+    }
+    
+    .supercharge-subtitle {
+        font-size: 12px;
+    }
+    
+    .supercharge-image-mobile {
+        height: 220px;
+    }
+    
+    /* Branding */
+    .nmims-branding-section {
+        padding: 40px 15px;
+    }
+    
+    .nmims-logo-large img {
+        max-width: 140px;
+    }
+    
+    .nmims-tagline {
+        font-size: 14px;
+    }
+    
+    /* Footer - Ultra Compact Mobile */
+    .footer-section {
+        padding: 0 10px;
+    }
+    
+    .footer-links-row {
+        padding: 10px 0 15px;
+    }
+    
+    .footer-title {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+    
+    .footer-list li a {
+        font-size: 12px;
+    }
+    
+    .footer-list li {
+        margin-bottom: 6px;
+    }
+    
+    .footer-programs {
+        margin-top: 0;
+    }
+    
+    .footer-programs .footer-title {
+        padding: 12px 0;
+    }
+    
+    .program-category a {
+        font-size: 12px;
+    }
+    
+    .footer-bottom {
+        padding: 15px 0;
+    }
+    
+    .footer-disclaimer p {
+        font-size: 10px;
+        line-height: 1.4;
+        margin: 5px 0;
+    }
+    
+    /* Modal */
+    .modal-content {
+        border-radius: 15px;
+    }
+    
+    .modal-left {
+        padding: 15px;
+    }
+    
+    .modal-logo img {
+        width: 120px;
+    }
+    
+    .modal-title {
+        font-size: 22px;
+    }
+    
+    .modal-subtitle {
+        font-size: 12px;
+    }
+    
+    .modal-close {
+        width: 32px;
+        height: 32px;
+        font-size: 20px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .modal-right {
+        padding: 10px 15px 20px;
+    }
+    
+    .enquire-form {
+        padding: 12px;
+        border-radius: 15px;
+    }
+    
+    .enquire-form input,
+    .enquire-form select {
+        padding: 10px;
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .checkbox-label {
+        font-size: 10px;
+    }
+    
+    .submit-btn {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    /* Dropdown */
+    .dropdown-menu {
+        top: 55px;
+    }
+    
+    .dropdown-left,
+    .dropdown-middle,
+    .dropdown-right {
+        padding: 15px;
+    }
+    
+    .dropdown-heading {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    
+    .dropdown-option {
+        padding: 8px 10px;
+    }
+    
+    .dropdown-option img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .dropdown-option span:first-of-type {
+        font-size: 12px;
+    }
+    
+    .program-item {
+        padding: 12px;
+    }
+    
+    .program-info h5 {
+        font-size: 13px;
+    }
+    
+    .program-info p {
+        font-size: 11px;
+    }
+    
+    .program-icon {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .program-icon img {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .enquire-sidebar {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+    
+    .enquire-sidebar .arrow {
+        font-size: 8px;
+    }
+}
+
+/* =====================================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ===================================================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects that don't work on touch */
+    .program-card:hover {
+        transform: none;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .dropdown-option:hover {
+        transform: none;
+    }
+    
+    .btn-explore:hover {
+        background: #6C4DE6;
+    }
+    
+    .btn-primary:hover {
+        background: #FF6344;
+    }
+    
+    /* Increase touch targets */
+    .nav-link {
+        padding: 10px 5px;
+    }
+    
+    .footer-list li a {
+        padding: 5px 0;
+        display: inline-block;
+    }
+    
+    .social-links li a {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Make carousel dots bigger for touch */
+    .carousel-dot,
+    .alumni-dot {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* =====================================================
+   LANDSCAPE ORIENTATION FIXES
+   ===================================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        min-height: auto;
+        padding: 15px;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .hero-title {
+        font-size: 28px;
+    }
+    
+    .hero-right {
+        order: 2;
+    }
+    
+    .hero-image {
+        max-height: 300px;
+        width: auto;
+    }
+    
+    .modal-content {
+        max-height: 100vh;
+    }
+    
+    .modal-left {
+        display: none;
+    }
+    
+    .modal-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =====================================================
+   PRINT STYLES
+   ===================================================== */
+@media print {
+    .navbar,
+    .enquire-sidebar,
+    .carousel-btn,
+    .alumni-btn,
+    .highlighted-btn,
+    .modal-overlay,
+    .footer-social,
+    .scroll-top {
+        display: none !important;
+    }
+    
+    .hero-section,
+    .stats-section,
+    .career-section,
+    .excellence-section,
+    .alumni-section,
+    .highlighted-section,
+    .supercharge-section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    body {
+        font-size: 12pt;
+    }
+    
+    .hero-title {
+        font-size: 24pt;
+    }
+}
+
+/* =====================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ===================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .carousel-track,
+    .alumni-carousel-track {
+        transition: none;
+    }
+}
+
+/* Focus visible styles for keyboard navigation */
+@media (any-hover: hover) {
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .dropdown-option:focus-visible,
+    a:focus-visible {
+        outline: 2px solid #6C4DE6;
+        outline-offset: 2px;
+    }
+}
+
+/* =====================================================
+   PROGRAM PAGES - RESPONSIVE ENHANCEMENTS
+   ===================================================== */
+
+/* ---- Tablets & Below (992px) ---- */
+@media (max-width: 992px) {
+    /* Program Hero Banner */
+    .program-hero-banner {
+        padding: 60px 20px 40px;
+    }
+    
+    .hero-content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .hero-left {
+        margin-left: 0;
+        max-width: 100%;
+    }
+    
+    .hero-right {
+        flex: none;
+        margin-right: 0;
+    }
+    
+    .hero-image {
+        min-width: auto;
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .program-usp-row {
+        justify-content: center;
+    }
+    
+    /* Program Overview Grid */
+    .program-overview-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    /* Curriculum Section */
+    .curriculum-item {
+        padding: 15px;
+    }
+    
+    .curriculum-header {
+        font-size: 16px;
+    }
+    
+    /* Faculty Section */
+    .faculty-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    /* Why NMIMS Stats */
+    .why-nmims-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .stat-item {
+        flex: 0 0 45%;
+        text-align: center;
+    }
+    
+    /* Testimonials */
+    .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Fee Structure */
+    .fee-structure-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Admission Steps */
+    .registration-steps {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Hub Pages */
+    .hub-hero-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hub-hero-content {
+        max-width: 100%;
+    }
+    
+    .hub-hero-image {
+        max-width: 400px;
+    }
+    
+    .program-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Hub Hero - More Compact */
+    .hub-hero {
+        padding: 50px 0 40px;
+    }
+    
+    .hub-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+    
+    .hub-hero-content {
+        margin-left: 0;
+        padding: 0 15px;
+    }
+    
+    .hub-usp-list {
+        margin-bottom: 20px;
+    }
+    
+    .hub-usp-item {
+        font-size: 14px;
+        padding: 6px 0;
+    }
+}
+
+/* ---- Mobile Landscape / Small Tablets (768px) ---- */
+@media (max-width: 768px) {
+    /* Program Hero */
+    .program-hero-banner {
+        padding: 50px 15px 35px;
+    }
+    
+    .hero-left .program-title,
+    .program-title {
+        font-size: 28px !important;
+    }
+    
+    .program-type {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+    
+    .usp-tag {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+    
+    .batch-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    /* Structure Section */
+    .structure-stats {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .structure-stat-item {
+        flex: 0 0 calc(50% - 10px);
+    }
+    
+    /* Faculty Grid */
+    .faculty-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .faculty-card {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    /* Admission Section */
+    .admission-tabs {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .admission-tab {
+        width: 100%;
+    }
+    
+    .registration-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .step-card {
+        padding: 20px 15px;
+    }
+    
+    /* Fee Box */
+    .fee-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    /* Hub Pages */
+    .program-cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    /* Compare Programs */
+    .compare-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    /* FAQ Section */
+    .faq-question {
+        font-size: 15px;
+        padding: 15px;
+    }
+    
+    .faq-answer {
+        font-size: 14px;
+        padding: 0 15px 15px;
+    }
+    
+    /* Program Hero Section (MBA WX pages) - Compact Mobile */
+    .program-hero {
+        padding: 20px 0 0 !important;
+        min-height: auto !important;
+    }
+    
+    .program-hero-wrapper {
+        flex-direction: column;
+        gap: 0 !important;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .program-hero-content {
+        order: 1;
+        width: 100%;
+        padding: 0 15px;
+        margin-bottom: 0 !important;
+    }
+    
+    .program-hero-image {
+        order: 2;
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: translateY(0px);
+    }
+    
+    .program-hero-image img {
+        width: 100% !important;
+        max-width: 350px !important;
+        height: auto !important;
+        object-fit: contain;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block;
+    }
+    
+    .program-badge {
+        font-size: 10px;
+        padding: 5px 12px;
+        margin-bottom: 8px;
+    }
+    
+    .program-title {
+        font-size: 22px !important;
+        line-height: 1.2;
+        margin: 0 0 10px 0 !important;
+    }
+    
+    .batch-info {
+        margin-bottom: 12px;
+    }
+    
+    .btn-download-brochure {
+        padding: 10px 20px;
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .program-features {
+        gap: 8px;
+    }
+    
+    .feature-item {
+        font-size: 11px;
+        padding: 8px;
+    }
+    
+    .hub-hero-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+    }
+    
+    .hub-hero-content {
+        margin-left: 0;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+    
+    .hub-title {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+    
+    .hub-usp-list {
+        margin-bottom: 20px;
+    }
+    
+    .hub-usp-item {
+        font-size: 13px;
+        padding: 5px 0;
+        gap: 8px;
+        justify-content: center;
+    }
+    
+    .usp-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+    
+    .hub-hero-image {
+        flex: 0 0 auto;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .hub-hero-image img {
+        max-height: 200px;
+        object-fit: contain;
+    }
+    
+    .program-badge {
+        font-size: 11px;
+        padding: 5px 12px;
+    }
+    
+    /* Why NMIMS CDOE Section - Compact Mobile */
+    .why-nmims-section-hub {
+        padding: 25px 0;
+    }
+    
+    .why-nmims-hub-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .why-title-hub h2 {
+        font-size: 22px;
+        line-height: 1.3;
+    }
+    
+    .why-title-hub h2 br {
+        display: none;
+    }
+    
+    .why-title-hub h2 .highlight {
+        text-decoration-thickness: 3px;
+        text-underline-offset: 5px;
+    }
+    
+    .why-stats-hub {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .stat-item-hub {
+        flex: 0 0 calc(33.33% - 10px);
+        align-items: center;
+        text-align: center;
+    }
+    
+    .stat-number-hub {
+        font-size: 11px;
+    }
+    
+    .stat-label-hub {
+        font-size: 11px;
+        max-width: 100px;
+        line-height: 1.3;
+    }
+    
+    /* Choose Your Program Section - Compact Mobile */
+    .choose-program-section {
+        padding: 30px 0;
+    }
+    
+    .choose-program-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .choose-program-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 10px;
+        line-height: 1.5;
+    }
+    
+    .hub-programs-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 0 10px;
+    }
+    
+    .hub-program-card {
+        border-radius: 10px;
+    }
+    
+    .hub-program-image {
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .hub-program-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    .hub-program-content {
+        padding: 12px;
+        gap: 6px;
+    }
+    
+    .hub-program-mode {
+        font-size: 10px;
+    }
+    
+    .hub-program-content h3 {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+    
+    .hub-program-arrow {
+        font-size: 14px;
+    }
+    
+    /* Batch Profile Section - Compact Mobile */
+    .batch-profile-section {
+        padding: 35px 0;
+    }
+    
+    .batch-profile-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .batch-profile-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 10px;
+        line-height: 1.5;
+    }
+    
+    .batch-profile-wrapper {
+        flex-direction: column;
+        gap: 25px;
+        margin-top: 20px;
+    }
+    
+    .batch-profile-illustration {
+        flex: 0 0 auto;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    
+    .batch-stats-list {
+        gap: 15px;
+    }
+    
+    .batch-stat-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 15px 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        border-bottom: none;
+    }
+    
+    .batch-stat-content p {
+        font-size: 13px;
+        max-width: 100%;
+    }
+    
+    .batch-stat-number {
+        font-size: 36px;
+    }
+    
+    .batch-info-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .batch-info-item {
+        font-size: 13px;
+        padding: 15px;
+    }
+    
+    /* Note Section - Compact Mobile */
+    .note-section {
+        min-height: auto !important;
+        padding: 8px 0 !important;
+    }
+    
+    .note-section .container {
+        padding: 10px 8px !important;
+        margin: 0 6px !important;
+        border-radius: 6px !important;
+        max-width: 100% !important;
+    }
+    
+    .note-title {
+        font-size: 16px !important;
+        margin-bottom: 8px !important;
+        font-weight: 600;
+    }
+    
+    .note-content {
+        padding: 0 !important;
+    }
+    
+    .note-content h4 {
+        font-size: 11px !important;
+        margin-bottom: 6px !important;
+        font-weight: 600;
+    }
+    
+    .note-content ul {
+        margin-bottom: 8px !important;
+        padding: 0 !important;
+    }
+    
+    .note-content ul li {
+        font-size: 9px !important;
+        padding-left: 12px !important;
+        margin-bottom: 4px !important;
+        line-height: 1.2;
+    }
+    
+    .note-content p {
+        font-size: 9px !important;
+        line-height: 1.2;
+        margin-bottom: 4px !important;
+    }
+    
+    .note-subsection {
+        margin-bottom: 6px !important;
+        padding-top: 6px !important;
+        border-top: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .note-subsection:first-of-type {
+        border-top: none !important;
+        padding-top: 0 !important;
+    }
+    
+    .note-subsection h5 {
+        font-size: 10px !important;
+        margin-bottom: 4px !important;
+        font-weight: 600;
+    }
+    
+    .note-subsection p {
+        font-size: 9px !important;
+        line-height: 1.2;
+    }
+    
+    /* Key FAQs Section - Compact Mobile */
+    .faqs-section {
+        padding: 35px 0;
+    }
+    
+    .faqs-section .section-title {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+    
+    .faq-accordion {
+        padding: 0 10px;
+    }
+    
+    .faq-item {
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+    
+    .faq-question {
+        padding: 15px;
+        gap: 12px;
+    }
+    
+    .faq-number {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+    }
+    
+    .faq-question h4 {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .faq-icon {
+        font-size: 20px;
+    }
+    
+    .faq-answer p {
+        padding: 15px;
+        padding-left: 53px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+    
+    /* Key Highlights Section - Compact Mobile */
+    .key-highlights-section {
+        padding: 40px 0;
+    }
+    
+    .key-highlights-section .section-title {
+        font-size: 24px;
+    }
+    
+    .key-highlights-section .section-description {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+    
+    .highlights-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .highlight-card {
+        padding: 20px 15px;
+    }
+    
+    .highlight-icon img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .highlight-card h4 {
+        font-size: 13px;
+        margin: 10px 0 8px;
+    }
+    
+    .highlight-card p {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+    
+    /* Program Structure Section - Compact Mobile */
+    .program-structure-section {
+        padding: 35px 0;
+    }
+    
+    .program-structure-section .section-title {
+        font-size: 24px;
+    }
+    
+    .structure-stats {
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+    }
+    
+    .structure-stat {
+        flex: 0 0 calc(50% - 10px);
+        padding: 15px 10px;
+    }
+    
+    .structure-number,
+    .structure-text {
+        font-size: 28px;
+    }
+    
+    .structure-label {
+        font-size: 12px;
+    }
+    
+    /* =====================================================
+       BBA/BCOM PAGES - MOBILE COMPACT STYLES (768px)
+       ===================================================== */
+    
+    /* Hero Banner - Compact Mobile */
+    .program-hero-banner {
+        padding: 15px 0 12px !important;
+        min-height: auto !important;
+    }
+    
+    .hero-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 0;
+        align-items: center;
+    }
+    
+    .hero-left {
+        order: 1;
+        width: 100%;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .program-hero-banner .hero-right {
+        order: 2;
+        flex: 0 0 auto;
+        transform: translateY(-15px) scale(1.3);
+        width: 100% !important;
+        max-width: 420px !important;
+        min-width: 320px !important;
+        margin-top: -20px;
+        padding-top: 0;
+    }
+    
+    .program-hero-banner .hero-right .hero-image,
+    .program-hero-banner .hero-image,
+    .hero-image {
+        width: 100% !important;
+        max-width: 420px !important;
+        min-width: 320px !important;
+        height: auto !important;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+        padding: 0;
+        transform: scale(1.15) !important;
+    }
+    
+    .program-type {
+        font-size: 10px;
+        padding: 5px 12px;
+        margin-bottom: 0;
+        display: inline-block;
+    }
+    
+    .program-title {
+        font-size: 22px !important;
+        line-height: 1.1;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .hero-bottom-section {
+        margin-top: -15px;
+        text-align: center;
+    }
+    
+    .brochure-btn-wrapper {
+        margin-bottom: 4px;
+    }
+    
+    .btn-download-brochure {
+        padding: 10px 22px;
+        font-size: 12px;
+    }
+    
+    .program-usp-row {
+        justify-content: center;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+    
+    .usp-tag {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+    
+    /* Curriculum Accordion - Mobile Aligned */
+    .bcom-program-structure,
+    .program-structure-section {
+        padding: 30px 0 !important;
+    }
+    
+    .bcom-program-structure .section-title,
+    .program-structure-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .bcom-program-structure .section-description,
+    .program-structure-section .section-description {
+        font-size: 13px;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+    
+    .structure-stats {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 18px;
+    }
+    
+    .structure-stat {
+        flex: 0 0 calc(50% - 8px);
+        padding: 12px 8px;
+    }
+    
+    .structure-number {
+        font-size: 24px;
+    }
+    
+    .structure-label {
+        font-size: 11px;
+        margin-top: 4px;
+    }
+    
+    .structure-icon {
+        max-width: 28px;
+        max-height: 28px;
+        margin-bottom: 6px;
+    }
+    
+    .curriculum-accordion {
+        margin-top: 15px;
+        padding: 0;
+    }
+    
+    .curriculum-item {
+        margin-bottom: 6px;
+        border-radius: 6px;
+    }
+    
+    .curriculum-header {
+        padding: 12px 14px;
+    }
+    
+    .curriculum-header h4 {
+        font-size: 13px;
+        font-weight: 600;
+    }
+    
+    .accordion-icon {
+        font-size: 16px;
+    }
+    
+    .curriculum-content ul {
+        padding: 12px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .curriculum-content li {
+        font-size: 12px;
+        padding: 4px 0 4px 18px;
+        line-height: 1.4;
+    }
+    
+    .curriculum-content li strong {
+        display: block;
+        margin-bottom: 3px;
+        color: #333;
+    }
+    
+    /* Curriculum Accordion - Also style curriculum-item for BCom pages */
+    .bcom-program-structure .curriculum-content,
+    .program-structure-section .curriculum-content,
+    .curriculum-content {
+        padding: 0 !important;
+    }
+    
+    .bcom-program-structure .curriculum-content ul,
+    .program-structure-section .curriculum-content ul,
+    .curriculum-content ul {
+        padding: 10px 12px !important;
+        margin: 0 !important;
+    }
+    
+    .bcom-program-structure .curriculum-content li,
+    .program-structure-section .curriculum-content li,
+    .curriculum-content li {
+        padding-left: 18px !important;
+    }
+    
+    /* Semester Accordion (for bcom.css style) - Mobile */
+    .semester-item {
+        margin-bottom: 8px;
+        border-radius: 8px;
+    }
+    
+    .semester-header {
+        padding: 12px 15px;
+    }
+    
+    .semester-header h5 {
+        font-size: 13px;
+        font-weight: 600;
+    }
+    
+    .toggle-icon {
+        font-size: 16px;
+    }
+    
+    .bcom-program-structure .semester-content,
+    .program-structure-section .semester-content,
+    .semester-content {
+        padding: 0 !important;
+    }
+    
+    .bcom-program-structure .semester-content ul,
+    .program-structure-section .semester-content ul,
+    .semester-content ul {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 10px 12px !important;
+        margin: 0 !important;
+    }
+    
+    .bcom-program-structure .semester-content li,
+    .program-structure-section .semester-content li,
+    .semester-content li {
+        font-size: 12px;
+        padding-left: 18px !important;
+        line-height: 1.4;
+    }
+    
+    .semester-content li::before {
+        font-size: 12px;
+    }
+    
+    .download-curriculum {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+        margin-top: 25px;
+    }
+    
+    .download-curriculum img {
+        max-width: 180px;
+    }
+    
+    /* Career Services Section - Mobile Visible */
+    .career-services-section {
+        padding: 35px 0;
+        overflow: hidden;
+    }
+    
+    .career-services-section .section-title {
+        font-size: 24px;
+    }
+    
+    .career-services-section .section-description {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+    
+    .career-services-carousel-wrapper {
+        overflow: visible;
+        padding: 0 15px;
+    }
+    
+    .career-services-carousel {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100% !important;
+        transform: none !important;
+    }
+    
+    .career-services-carousel .career-service-card {
+        flex: none !important;
+        width: 100% !important;
+        margin-right: 0 !important;
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    .career-service-card .service-icon {
+        margin-bottom: 12px;
+        width: 80px;
+        height: 70px;
+    }
+    
+    .career-service-card .service-icon img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .career-service-card h4 {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+    
+    .career-service-card p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    .career-carousel-controls {
+        display: none;
+    }
+    
+    /* Registration Process - One Card Per View */
+    .registration-section {
+        padding: 35px 0;
+    }
+    
+    .registration-section .section-title {
+        font-size: 24px;
+    }
+    
+    .registration-section .section-subtitle {
+        font-size: 13px;
+        margin-bottom: 25px;
+    }
+    
+    .registration-slider-wrapper {
+        padding: 0 50px;
+    }
+    
+    .registration-slider {
+        display: block;
+    }
+    
+    .registration-card {
+        display: none !important;
+        padding: 25px 20px;
+        border-radius: 16px;
+        margin: 0;
+    }
+    
+    .registration-card.mobile-active {
+        display: block !important;
+    }
+    
+    .registration-card .card-title {
+        font-size: 18px;
+        min-height: auto;
+        margin-bottom: 15px;
+    }
+    
+    .registration-card .card-content {
+        font-size: 13px;
+    }
+    
+    .step-label {
+        font-size: 14px;
+    }
+    
+    .step-num {
+        font-size: 24px;
+    }
+    
+    .slider-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+    }
+    
+    .registration-dots {
+        margin-top: 20px;
+    }
+    
+    .reg-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* ---- Mobile Portrait (576px) ---- */
+@media (max-width: 576px) {
+    /* Program Hero */
+    .program-hero-banner {
+        padding: 40px 15px 30px;
+    }
+    
+    .hero-left .program-title,
+    .program-title {
+        font-size: 24px !important;
+        margin-bottom: 15px;
+    }
+    
+    .program-usp-row {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .brochure-btn-wrapper {
+        text-align: center;
+    }
+    
+    .btn-download-brochure {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    /* Section Titles */
+    .section-title,
+    .program-section-title {
+        font-size: 24px !important;
+    }
+    
+    /* Stats */
+    .stat-number {
+        font-size: 32px;
+    }
+    
+    .stat-label {
+        font-size: 13px;
+    }
+    
+    .structure-number {
+        font-size: 28px;
+    }
+    
+    /* Curriculum */
+    .curriculum-content {
+        padding: 15px;
+    }
+    
+    .semester-modules {
+        flex-direction: column;
+    }
+    
+    /* Career Roles */
+    .career-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .career-role-item {
+        padding: 15px;
+    }
+    
+    /* Experience Cards */
+    .experience-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Admission Content */
+    .admission-content {
+        padding: 20px 15px;
+    }
+    
+    /* Fee Details */
+    .fee-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---- Very Small Devices (480px) ---- */
+@media (max-width: 480px) {
+    /* Hero adjustments */
+    .program-hero-banner {
+        padding: 35px 10px 25px;
+    }
+    
+    .hero-left .program-title,
+    .program-title {
+        font-size: 22px !important;
+    }
+    
+    .usp-tag {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+    
+    /* Buttons */
+    .btn-download-brochure {
+        padding: 12px 20px;
+        font-size: 13px;
+    }
+    
+    /* Stats */
+    .stat-item {
+        flex: 0 0 100%;
+    }
+    
+    .stat-number {
+        font-size: 28px;
+    }
+    
+    /* Faculty */
+    .faculty-card {
+        max-width: 100%;
+    }
+    
+    .faculty-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Step Cards */
+    .step-number {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+    
+    /* Apply CTA */
+    .apply-cta-content {
+        padding: 30px 15px;
+    }
+    
+    .apply-cta-title {
+        font-size: 22px;
+    }
+    
+    /* =====================================================
+       PROGRAM PAGES - VERY SMALL MOBILE STYLES (480px)
+       ===================================================== */
+    
+    /* Hub Hero Section - Extra Compact */
+    .hub-hero {
+        padding: 30px 0 25px;
+    }
+    
+    .hub-title {
+        font-size: 24px;
+        margin-bottom: 12px;
+    }
+    
+    .hub-usp-item {
+        font-size: 12px;
+        padding: 4px 0;
+    }
+    
+    .usp-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 9px;
+    }
+    
+    .hub-hero-image {
+        max-width: 220px;
+    }
+    
+    .hub-hero-image img {
+        max-height: 160px;
+    }
+    
+    .program-badge {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+    
+    /* Why NMIMS CDOE Section - Extra Compact */
+    .why-nmims-section-hub {
+        padding: 20px 0;
+    }
+    
+    .why-title-hub h2 {
+        font-size: 18px;
+    }
+    
+    .stat-number-hub {
+        font-size: 24px;
+    }
+    
+    .stat-label-hub {
+        font-size: 10px;
+        max-width: 80px;
+    }
+    
+    /* Choose Your Program - Extra Compact */
+    .choose-program-section {
+        padding: 25px 0;
+    }
+    
+    .choose-program-section .section-title {
+        font-size: 20px;
+    }
+    
+    .choose-program-section .section-description {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .hub-programs-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .hub-program-image {
+        height: 90px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .hub-program-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    .hub-program-content {
+        padding: 10px;
+    }
+    
+    .hub-program-content h3 {
+        font-size: 13px;
+    }
+    
+    /* Batch Profile - Extra Compact */
+    .batch-profile-section {
+        padding: 25px 0;
+    }
+    
+    .batch-profile-section .section-title {
+        font-size: 20px;
+    }
+    
+    .batch-profile-section .section-description {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .batch-profile-illustration {
+        max-width: 200px;
+    }
+    
+    .batch-stat-item {
+        padding: 12px 8px;
+    }
+    
+    .batch-stat-content p {
+        font-size: 12px;
+    }
+    
+    .batch-stat-number {
+        font-size: 30px;
+    }
+    
+    /* Note Section - Extra Compact */
+    .note-section {
+        padding: 6px 0 !important;
+        min-height: auto !important;
+    }
+    
+    .note-section .container {
+        padding: 8px 6px !important;
+        margin: 0 5px !important;
+        max-width: 100% !important;
+    }
+    
+    .note-title {
+        font-size: 14px !important;
+        margin-bottom: 6px !important;
+        font-weight: 600;
+    }
+    
+    .note-content h4 {
+        font-size: 10px !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .note-content ul {
+        margin-bottom: 6px !important;
+        padding: 0 !important;
+    }
+    
+    .note-content ul li {
+        font-size: 8px !important;
+        padding-left: 10px !important;
+        margin-bottom: 3px !important;
+        line-height: 1.2;
+    }
+    
+    .note-subsection {
+        margin-bottom: 5px !important;
+        padding-top: 5px !important;
+    }
+    
+    .note-subsection h5 {
+        font-size: 9px !important;
+        margin-bottom: 3px !important;
+    }
+    
+    .note-subsection p {
+        font-size: 8px !important;
+        line-height: 1.2;
+    }
+    
+    /* Key FAQs - Extra Compact */
+    .faqs-section {
+        padding: 25px 0;
+    }
+    
+    .faqs-section .section-title {
+        font-size: 22px;
+    }
+    
+    .faq-question {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .faq-number {
+        width: 22px;
+        height: 22px;
+        font-size: 11px;
+    }
+    
+    .faq-question h4 {
+        font-size: 13px;
+    }
+    
+    .faq-icon {
+        font-size: 18px;
+    }
+    
+    .faq-answer p {
+        padding: 12px;
+        padding-left: 44px;
+        font-size: 12px;
+    }
+    
+    /* Key Highlights - Extra Compact */
+    .key-highlights-section {
+        padding: 30px 0;
+    }
+    
+    .key-highlights-section .section-title {
+        font-size: 20px;
+    }
+    
+    .key-highlights-section .section-description {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+    
+    .highlights-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .highlight-card {
+        padding: 15px 12px;
+    }
+    
+    .highlight-icon img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .highlight-card h4 {
+        font-size: 13px;
+        margin: 8px 0 6px;
+    }
+    
+    .highlight-card p {
+        font-size: 11px;
+    }
+    
+    /* Program Structure - Extra Compact */
+    .program-structure-section {
+        padding: 25px 0;
+    }
+    
+    .program-structure-section .section-title {
+        font-size: 20px;
+    }
+    
+    .structure-stat {
+        flex: 0 0 calc(50% - 8px);
+        padding: 12px 8px;
+    }
+    
+    .structure-number,
+    .structure-text {
+        font-size: 24px;
+    }
+    
+    .structure-label {
+        font-size: 11px;
+    }
+    
+    /* =====================================================
+       BBA/BCOM PAGES - VERY SMALL MOBILE STYLES (480px)
+       ===================================================== */
+    
+    /* Hero Banner - Extra Compact */
+    .hero-image {
+        max-width: 180px;
+        max-height: 150px;
+    }
+    
+    .program-type {
+        font-size: 10px;
+        padding: 5px 12px;
+    }
+    
+    .program-title {
+        font-size: 22px !important;
+    }
+    
+    .usp-tag {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+    
+    /* Curriculum Accordion - Extra Compact */
+    .curriculum-header {
+        padding: 12px;
+    }
+    
+    .curriculum-header h4 {
+        font-size: 13px;
+    }
+    
+    .curriculum-content ul {
+        padding: 12px;
+    }
+    
+    .curriculum-content li {
+        font-size: 12px;
+        padding-left: 18px;
+    }
+    
+    /* Career Services - Extra Compact */
+    .career-services-section {
+        padding: 25px 0;
+    }
+    
+    .career-services-section .section-title {
+        font-size: 20px;
+    }
+    
+    .career-service-card {
+        padding: 15px;
+    }
+    
+    .career-service-card .service-icon {
+        width: 70px;
+        height: 60px;
+    }
+    
+    .career-service-card .service-icon img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .career-service-card h4 {
+        font-size: 14px;
+    }
+    
+    .career-service-card p {
+        font-size: 11px;
+    }
+    
+    /* Registration Process - Extra Compact */
+    .registration-section {
+        padding: 25px 0;
+    }
+    
+    .registration-section .section-title {
+        font-size: 20px;
+    }
+    
+    .registration-slider-wrapper {
+        padding: 0 40px;
+    }
+    
+    .registration-card {
+        padding: 20px 15px;
+    }
+    
+    .registration-card .card-title {
+        font-size: 16px;
+    }
+    
+    .registration-card .card-content {
+        font-size: 12px;
+    }
+    
+    .step-label {
+        font-size: 13px;
+    }
+    
+    .step-num {
+        font-size: 20px;
+    }
+    
+    .slider-arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+    
+    /* Program Hero Section (MBA WX pages) - Mobile Compact */
+    .program-hero {
+        padding: 15px 0 0 !important;
+        min-height: auto !important;
+    }
+    
+    .program-hero-wrapper {
+        flex-direction: column;
+        gap: 0 !important;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .program-hero-content {
+        order: 1;
+        width: 100%;
+        padding: 0 12px;
+        margin-bottom: 0 !important;
+    }
+    
+    .program-hero-image {
+        order: 2;
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        max-width: 300px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: translateY(0px);
+    }
+    
+    .program-hero-image img {
+        width: 100% !important;
+        max-width: 300px !important;
+        height: auto !important;
+        object-fit: contain;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block;
+    }
+    
+    .program-badge {
+        font-size: 9px;
+        padding: 4px 10px;
+        margin-bottom: 6px;
+    }
+    
+    .program-title {
+        font-size: 18px !important;
+        line-height: 1.2;
+        margin: 0 0 8px 0 !important;
+    }
+    
+    .batch-info {
+        margin-bottom: 10px;
+        font-size: 11px;
+    }
+    
+    .btn-download-brochure {
+        padding: 9px 18px;
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+    
+    .program-features {
+        gap: 6px;
+    }
+    
+    .feature-item {
+        font-size: 10px;
+        padding: 6px;
+    }
+}
+
+/* =====================================================
+   HUB PAGES - ADDITIONAL RESPONSIVE STYLES
+   ===================================================== */
+
+@media (max-width: 992px) {
+    .hub-programs-section {
+        padding: 50px 20px;
+    }
+    
+    .hub-section-title {
+        font-size: 28px;
+    }
+    
+    .comparison-table-wrapper {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .hub-section-title {
+        font-size: 24px;
+    }
+    
+    .hub-programs-section {
+        padding: 40px 15px;
+    }
+    
+    .program-card-hub {
+        padding: 20px 15px;
+    }
+    
+    .program-card-title {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hub-section-title {
+        font-size: 22px;
+    }
+    
+    .hub-hero-wrapper {
+        padding: 30px 15px;
+    }
+    
+    .hub-hero-title {
+        font-size: 26px;
+    }
+}
+
+/* =====================================================
+   ADDITIONAL HUB PAGES MOBILE FIXES
+   ===================================================== */
+
+/* --- 768px Mobile Fixes for Hub Pages --- */
+@media (max-width: 768px) {
+    /* Why NMIMS CDOE Section - Fix spacing and text */
+    .why-nmims-section-hub {
+        padding: 30px 0;
+    }
+    
+    .why-nmims-hub-wrapper {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+    }
+    
+    .why-title-hub h2 {
+        font-size: 24px;
+        line-height: 1.4;
+        white-space: normal;
+        word-spacing: normal;
+    }
+    
+    /* Hide br tags and rely on inline flow with spaces */
+    .why-title-hub h2 br {
+        display: none;
+    }
+    
+    .why-title-hub h2 .highlight {
+        display: inline;
+        margin-left: 0.25em;
+    }
+    
+    .why-stats-hub {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .stat-item-hub {
+        flex: 0 0 calc(33.33% - 12px);
+        min-width: 90px;
+        text-align: center;
+    }
+    
+    .stat-number-hub {
+        font-size: 11px;
+    }
+    
+    .stat-label-hub {
+        font-size: 11px;
+        line-height: 1.3;
+    }
+    
+    /* Testimonials Section New - Mobile */
+    .testimonials-section-new {
+        padding: 35px 0;
+    }
+    
+    .testimonials-section-new .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .testimonials-section-new .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .testimonials-slider-wrapper {
+        flex-direction: column;
+        padding: 0 15px;
+    }
+    
+    .testimonials-grid {
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+    
+    .testimonial-card-new {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .testimonial-card-new[data-slide]:not([data-slide="0"]) {
+        display: none;
+    }
+    
+    .testimonial-quote-italic {
+        font-size: 16px;
+        min-height: auto;
+        margin-bottom: 15px;
+    }
+    
+    .testimonial-thumbnail {
+        height: 200px;
+        margin-bottom: 15px;
+    }
+    
+    .testimonial-thumbnail .play-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .testimonial-name-new {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    
+    .testimonial-program-new {
+        font-size: 13px;
+    }
+    
+    .testimonial-nav-btn {
+        display: none;
+    }
+    
+    .testimonial-dots {
+        margin-top: 25px;
+    }
+    
+    /* Batch Profile Section - Mobile */
+    .batch-profile-section {
+        padding: 35px 0;
+    }
+    
+    .batch-profile-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .batch-profile-section .section-description {
+        font-size: 13px;
+        margin-bottom: 20px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .batch-profile-wrapper {
+        flex-direction: column;
+        gap: 25px;
+        padding: 0 15px;
+    }
+    
+    .batch-profile-illustration {
+        flex: 0 0 auto;
+        max-width: 220px;
+        margin: 0 auto;
+    }
+    
+    .batch-profile-illustration img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .batch-stats-list {
+        gap: 12px;
+    }
+    
+    .batch-stat-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        border-bottom: none;
+    }
+    
+    .batch-stat-content p {
+        font-size: 12px;
+        max-width: 100%;
+        line-height: 1.4;
+    }
+    
+    .batch-stat-number {
+        font-size: 32px;
+    }
+    
+    /* Career Services Section - Mobile */
+    .career-services-section {
+        padding: 35px 0;
+    }
+    
+    .career-services-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .career-services-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .career-services-carousel-wrapper {
+        overflow: visible;
+        padding: 0 15px;
+    }
+    
+    .career-services-carousel {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100% !important;
+        transform: none !important;
+    }
+    
+    .career-services-carousel .career-service-card {
+        flex: none !important;
+        width: 100% !important;
+        margin-right: 0 !important;
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    .career-service-card {
+        padding: 20px;
+    }
+    
+    .career-service-card .service-icon {
+        margin-bottom: 12px;
+        width: 80px;
+        height: 70px;
+    }
+    
+    .career-service-card .service-icon img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .career-service-card h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    
+    .career-service-card p {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .career-carousel-controls {
+        display: none;
+    }
+    
+    /* FAQs Section - Mobile */
+    .faqs-section {
+        padding: 35px 0;
+    }
+    
+    .faqs-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .faqs-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .faq-item {
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+    
+    .faq-question {
+        padding: 15px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .faq-answer {
+        padding: 0 15px 15px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .hub-hero-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .hub-hero-content {
+        order: 1;
+        padding: 0 15px;
+    }
+    
+    .hub-hero-tag {
+        font-size: 11px;
+        padding: 6px 14px;
+        margin-bottom: 12px;
+    }
+    
+    .hub-hero-title {
+        font-size: 26px;
+        line-height: 1.2;
+        margin-bottom: 12px;
+    }
+    
+    .hub-hero-subtitle {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .hub-hero-image {
+        order: 2;
+        flex: 0 0 auto;
+        max-width: 220px;
+        margin: 0 auto;
+    }
+    
+    .hub-hero-image img {
+        max-height: 180px;
+        width: 100%;
+        object-fit: contain;
+    }
+    
+    /* Program Hero Banner - Mobile Compact */
+    .program-hero-banner {
+        padding: 12px 0 10px !important;
+    }
+    
+    .hero-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 0;
+        align-items: center;
+    }
+    
+    .hero-left {
+        order: 1;
+        margin-left: 0;
+        width: 100%;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    .program-hero-banner .hero-right {
+        order: 2;
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 340px;
+        min-width: 280px !important;
+        margin-top: -20px;
+        padding-top: 0;
+        transform: translateY(-15px) scale(1.25);
+    }
+    
+    .program-hero-banner .hero-right .hero-image,
+    .program-hero-banner .hero-image,
+    .hero-image {
+        width: 100% !important;
+        max-width: 340px !important;
+        min-width: 280px !important;
+        height: auto !important;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+        padding: 0;
+        transform: scale(1.1) !important;
+    }
+    
+    .program-type {
+        font-size: 9px;
+        padding: 4px 10px;
+        margin-bottom: 0;
+        display: inline-block;
+    }
+    
+    .program-title {
+        font-size: 18px !important;
+        line-height: 1.1;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .hero-bottom-section {
+        margin-top: -12px;
+        text-align: center;
+    }
+    
+    .brochure-btn-wrapper {
+        margin-bottom: 3px;
+    }
+    
+    .btn-download-brochure {
+        font-size: 11px;
+        padding: 9px 18px;
+    }
+    
+    .program-usp-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 3px;
+    }
+    
+    .usp-tag {
+        font-size: 9px;
+        padding: 5px 9px;
+    }
+    
+    /* Key Highlights - Mobile */
+    .key-highlights-section {
+        padding: 35px 0;
+    }
+    
+    .key-highlights-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .key-highlights-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .highlights-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 0 15px;
+    }
+    
+    .highlights-grid.five-cols {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .highlight-card {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .highlight-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+    
+    .highlight-card h4 {
+        font-size: 13px;
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+    
+    .highlight-card p {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+    
+    /* Program Structure Section - Mobile */
+    .program-structure-section {
+        padding: 35px 0;
+    }
+    
+    .program-structure-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .program-structure-section .section-description {
+        font-size: 13px;
+        margin-bottom: 20px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .structure-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 10px;
+        margin-bottom: 15px;
+    }
+    
+    .structure-stat {
+        flex: 0 0 calc(50% - 6px);
+        padding: 10px 8px;
+    }
+    
+    .structure-number {
+        font-size: 22px;
+    }
+    
+    .structure-label {
+        font-size: 10px;
+        margin-top: 3px;
+    }
+    
+    .structure-icon {
+        max-width: 24px;
+        max-height: 24px;
+        margin-bottom: 5px;
+    }
+    
+    /* Curriculum Accordion - Mobile */
+    .curriculum-section,
+    .bcom-program-structure,
+    .program-structure-section {
+        padding: 25px 0 !important;
+    }
+    
+    .bcom-program-structure .section-title,
+    .program-structure-section .section-title,
+    .curriculum-section .section-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+    
+    .bcom-program-structure .section-description,
+    .program-structure-section .section-description,
+    .curriculum-section .section-description {
+        font-size: 12px;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+    
+    .curriculum-accordion {
+        padding: 0;
+        margin-top: 12px;
+    }
+    
+    .curriculum-item {
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+    
+    .curriculum-header {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+    
+    .curriculum-header h4 {
+        font-size: 12px;
+    }
+    
+    .accordion-icon {
+        font-size: 14px;
+    }
+    
+    .curriculum-content {
+        padding: 10px 12px;
+    }
+    
+    .curriculum-content ul {
+        gap: 4px;
+    }
+    
+    .curriculum-content li {
+        font-size: 11px;
+        padding: 3px 0 3px 16px;
+        line-height: 1.3;
+    }
+    
+    .subject-item {
+        font-size: 11px;
+        padding: 6px 0;
+    }
+    
+    /* Curriculum Accordion - Fix padding for BCom pages */
+    .bcom-program-structure .curriculum-content,
+    .program-structure-section .curriculum-content,
+    .curriculum-content {
+        padding: 0 !important;
+    }
+    
+    .bcom-program-structure .curriculum-content ul,
+    .program-structure-section .curriculum-content ul,
+    .curriculum-content ul {
+        padding: 8px 10px !important;
+        margin: 0 !important;
+    }
+    
+    .bcom-program-structure .curriculum-content li,
+    .program-structure-section .curriculum-content li,
+    .curriculum-content li {
+        padding-left: 16px !important;
+    }
+    
+    /* Semester Accordion (for bcom.css style) - Mobile */
+    .semester-item {
+        margin-bottom: 6px;
+        border-radius: 6px;
+    }
+    
+    .semester-header {
+        padding: 10px 12px;
+    }
+    
+    .semester-header h5 {
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .toggle-icon {
+        font-size: 14px;
+    }
+    
+    .bcom-program-structure .semester-content,
+    .program-structure-section .semester-content,
+    .semester-content {
+        padding: 0 !important;
+    }
+    
+    .bcom-program-structure .semester-content ul,
+    .program-structure-section .semester-content ul,
+    .semester-content ul {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        padding: 8px 10px !important;
+        margin: 0 !important;
+    }
+    
+    .bcom-program-structure .semester-content li,
+    .program-structure-section .semester-content li,
+    .semester-content li {
+        font-size: 11px;
+        padding-left: 16px !important;
+        line-height: 1.3;
+    }
+    
+    .semester-content li::before {
+        font-size: 11px;
+    }
+    
+    .download-curriculum {
+        flex-direction: column;
+        padding: 15px;
+        gap: 12px;
+        margin-top: 20px;
+    }
+    
+    .download-curriculum img {
+        max-width: 150px;
+    }
+    
+    /* Faculty Section - Mobile */
+    .faculty-section {
+        padding: 35px 0;
+    }
+    
+    .faculty-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .faculty-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .faculty-slider {
+        padding: 0 15px;
+    }
+    
+    .faculty-card {
+        padding: 15px;
+    }
+    
+    .faculty-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .faculty-name {
+        font-size: 14px;
+    }
+    
+    .faculty-title {
+        font-size: 12px;
+    }
+    
+    /* Learning Experience Section - Mobile */
+    .learning-experience-section {
+        padding: 35px 0;
+    }
+    
+    .learning-experience-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .learning-experience-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .learning-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0 15px;
+    }
+    
+    .learning-card {
+        padding: 20px;
+    }
+    
+    .learning-icon {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 12px;
+    }
+    
+    .learning-card h4 {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    
+    .learning-card p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+    
+    /* Certificate Section - Mobile */
+    .certificate-section {
+        padding: 35px 0;
+    }
+    
+    .certificate-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .certificate-image {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+    
+    .certificate-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .certificate-features {
+        gap: 12px;
+    }
+    
+    .certificate-feature {
+        font-size: 13px;
+        padding: 12px;
+    }
+    
+    /* Admission Section - Mobile */
+    .admission-section {
+        padding: 35px 0;
+    }
+    
+    .admission-section .section-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .admission-tabs {
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0 15px;
+        margin-bottom: 20px;
+    }
+    
+    .admission-tab {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+    
+    .admission-content {
+        padding: 0 15px;
+    }
+    
+    .dates-table td {
+        font-size: 13px;
+        padding: 10px;
+    }
+    
+    /* Choose Program Section - Mobile */
+    .choose-program-section {
+        padding: 35px 0;
+    }
+    
+    .choose-program-section .section-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    .choose-program-section .section-description {
+        font-size: 13px;
+        margin-bottom: 25px;
+        padding: 0 15px;
+        line-height: 1.5;
+    }
+    
+    .hub-programs-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 0 15px;
+    }
+    
+    .hub-program-card {
+        border-radius: 10px;
+    }
+    
+    .hub-program-image {
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .hub-program-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .hub-program-content {
+        padding: 12px;
+        gap: 6px;
+    }
+    
+    .hub-program-mode {
+        font-size: 10px;
+    }
+    
+    .hub-program-content h3 {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+    
+    .hub-program-arrow {
+        font-size: 14px;
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* --- 480px Extra Small Mobile Fixes --- */
+@media (max-width: 480px) {
+    /* Why NMIMS CDOE - Extra Small */
+    .why-title-hub h2 {
+        font-size: 20px;
+    }
+    
+    .stat-item-hub {
+        flex: 0 0 calc(50% - 8px);
+    }
+    
+    .stat-number-hub {
+        font-size: 10px;
+    }
+    
+    .stat-label-hub {
+        font-size: 10px;
+    }
+    
+    /* Testimonials - Extra Small */
+    .testimonials-section-new .section-title {
+        font-size: 20px;
+    }
+    
+    .testimonial-quote-italic {
+        font-size: 14px;
+    }
+    
+    .testimonial-thumbnail {
+        height: 180px;
+    }
+    
+    .testimonial-name-new {
+        font-size: 16px;
+    }
+    
+    /* Batch Profile - Extra Small */
+    .batch-profile-section .section-title {
+        font-size: 20px;
+    }
+    
+    .batch-profile-illustration {
+        max-width: 180px;
+    }
+    
+    .batch-stat-number {
+        font-size: 28px;
+    }
+    
+    /* Career Services - Extra Small */
+    .career-services-section .section-title {
+        font-size: 20px;
+    }
+    
+    .career-service-card .service-icon {
+        width: 70px;
+        height: 60px;
+    }
+    
+    .career-service-card .service-icon img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .career-service-card h4 {
+        font-size: 14px;
+    }
+    
+    .career-service-card p {
+        font-size: 12px;
+    }
+    
+    /* FAQs - Extra Small */
+    .faqs-section .section-title {
+        font-size: 20px;
+    }
+    
+    .faq-question {
+        font-size: 13px;
+    }
+    
+    .faq-answer {
+        font-size: 12px;
+    }
+    
+    /* Hub Hero - Extra Small */
+    .hub-hero-title {
+        font-size: 22px;
+    }
+    
+    .hub-hero-subtitle {
+        font-size: 12px;
+    }
+    
+    .hub-hero-image {
+        max-width: 180px;
+    }
+    
+    /* Program Hero Banner - Extra Small */
+    .program-title {
+        font-size: 20px !important;
+    }
+    
+    .hero-image {
+        max-width: 160px;
+        max-height: 140px;
+    }
+    
+    /* Key Highlights - Extra Small */
+    .key-highlights-section .section-title {
+        font-size: 20px;
+    }
+    
+    .highlights-grid,
+    .highlights-grid.five-cols {
+        grid-template-columns: 1fr;
+    }
+    
+    .highlight-card h4 {
+        font-size: 14px;
+    }
+    
+    .highlight-card p {
+        font-size: 12px;
+    }
+    
+    /* Choose Program - Extra Small */
+    .hub-programs-grid {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+    
+    .hub-program-image {
+        height: 90px;
+    }
+    
+    .hub-program-content h3 {
+        font-size: 13px;
+    }
+}

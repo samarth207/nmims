@@ -1,0 +1,43 @@
+/* Modal Updates */
+.modal-content {
+    grid-template-columns: 35% 65% !important;
+}
+
+.modal-left {
+    padding: 30px 20px !important;
+    position: relative !important;
+}
+
+.modal-logo img {
+    width: 150px !important;
+    margin-bottom: 20px !important;
+}
+
+.modal-title {
+    font-size: 32px !important;
+    margin-bottom: 10px !important;
+}
+
+.modal-subtitle {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+    line-height: 1.5 !important;
+}
+
+.modal-image {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 60% !important;
+    overflow: hidden !important;
+    margin-top: 0 !important;
+}
+
+.modal-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: bottom !important;
+    max-width: none !important;
+}
