@@ -1,8 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
 
-# Environment variables
+# Environment variables (NEVER commit these)
 .env
 .env.local
 .env.production
