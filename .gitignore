@@ -1,8 +1,9 @@
 # Dependencies
 node_modules/
 
-# Environment variables (NEVER commit these)
-.env
+# Environment variables
+# .env is committed for Hostinger GitHub deployment (private repo)
+# .env is needed on the server and Hostinger doesn't inject env vars properly
 .env.local
 .env.production
 
