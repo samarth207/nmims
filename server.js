@@ -62,6 +62,55 @@ app.get('/health', (req, res) => {
     });
 });
 
+// DB diagnostic endpoint (check if database is connected)
+app.get('/api/db-status', async (req, res) => {
+    const db = getPool();
+    if (!db) {
+        return res.json({ 
+            connected: false, 
+            error: 'No pool created',
+            env: {
+                DB_HOST: process.env.DB_HOST || '(not set)',
+                DB_PORT: process.env.DB_PORT || '(not set)',
+                DB_USER: process.env.DB_USER || '(not set)',
+                DB_NAME: process.env.DB_NAME || '(not set)',
+                DB_PASSWORD_SET: process.env.DB_PASSWORD ? 'yes (' + process.env.DB_PASSWORD.length + ' chars)' : 'NO - MISSING!'
+            }
+        });
+    }
+    try {
+        const [rows] = await db.query('SELECT 1 as test');
+        const [tables] = await db.query('SHOW TABLES');
+        const [count] = await db.query('SELECT COUNT(*) as total FROM form_submissions').catch(() => [[{total: 'table not found'}]]);
+        res.json({ 
+            connected: true, 
+            test: rows[0],
+            tables: tables.map(t => Object.values(t)[0]),
+            submissions_count: count[0]?.total,
+            env: {
+                DB_HOST: process.env.DB_HOST,
+                DB_PORT: process.env.DB_PORT,
+                DB_USER: process.env.DB_USER,
+                DB_NAME: process.env.DB_NAME,
+                DB_PASSWORD_SET: 'yes (' + (process.env.DB_PASSWORD || '').length + ' chars)'
+            }
+        });
+    } catch (err) {
+        res.json({ 
+            connected: false, 
+            error: err.message,
+            code: err.code,
+            env: {
+                DB_HOST: process.env.DB_HOST || '(not set)',
+                DB_PORT: process.env.DB_PORT || '(not set)',
+                DB_USER: process.env.DB_USER || '(not set)',
+                DB_NAME: process.env.DB_NAME || '(not set)',
+                DB_PASSWORD_SET: process.env.DB_PASSWORD ? 'yes (' + process.env.DB_PASSWORD.length + ' chars)' : 'NO - MISSING!'
+            }
+        });
+    }
+});
+
 // ===== MySQL Connection Pool (lazy, safe) =====
 let pool = null;
 
