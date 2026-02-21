@@ -6,7 +6,11 @@ const mysql = require('mysql2/promise');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || '0.0.0.0';
+
+// Log startup info
+console.log('🚀 Starting NMIMS server...');
+console.log('📌 Environment:', process.env.NODE_ENV || 'development');
+console.log('📌 Port:', PORT);
 
 // Middleware
 app.use(cors());
@@ -15,6 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 // ===== MySQL Connection Pool =====
 const pool = mysql.createPool({
@@ -193,11 +202,27 @@ app.get('*', (req, res, next) => {
     });
 });
 
-// Start server
-app.listen(PORT, HOST, () => {
-    console.log(`🚀 Server running on http://${HOST}:${PORT}`);
-    initDatabase();
+// Start server (don't bind to specific host for Hostinger compatibility)
+const server = app.listen(PORT, () => {
+    console.log(`✅ Server successfully started on port ${PORT}`);
+    console.log(`📍 Access at: http://localhost:${PORT}`);
+    
+    // Initialize database after server starts (non-blocking)
+    initDatabase().catch(err => {
+        console.error('⚠️  Database init failed, but server is running:', err.message);
+    });
 }).on('error', (err) => {
-    console.error('❌ Server failed to start:', err.message);
+    console.error('❌ FATAL: Server failed to start!');
+    console.error('Error:', err.message);
+    console.error('Stack:', err.stack);
     process.exit(1);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+    console.log('🛑 SIGTERM received, shutting down gracefully...');
+    server.close(() => {
+        console.log('✅ Server closed');
+        process.exit(0);
+    });
 });
