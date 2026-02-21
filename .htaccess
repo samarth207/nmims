@@ -1,9 +1,0 @@
-# .htaccess is NOT needed for Hostinger Node.js applications
-# Hostinger's Node.js hosting uses its own reverse proxy
-# This file can be ignored or deleted for Node.js deployments
-
-# If you're using shared hosting with Apache, uncomment below:
-# RewriteEngine On
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
-# RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
