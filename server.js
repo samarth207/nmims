@@ -51,8 +51,8 @@ const PORT = process.env.PORT || 3000;
 
 // ===== Blog CMS Configuration =====
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME ;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ;
 const BLOGS_FILE = path.join(__dirname, 'blogs-data.json');
 const BLOG_IMAGES_DIR = path.join(__dirname, 'public', 'images', 'blog');
 
