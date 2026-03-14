@@ -717,8 +717,9 @@ body {
     border-color: var(--border);
     background: #fafafa;
     position: sticky;
-    top: 120px;
+    top: 132px;
     z-index: 50;
+    flex-wrap: wrap;
 }
 
 .editor-wrapper .ql-container {
