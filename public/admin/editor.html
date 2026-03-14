@@ -402,6 +402,22 @@
             setTimeout(() => t.remove(), 3000);
         }
 
+        // ===== CUSTOM RAW-HTML BLOT (for tables, CTAs etc.) =====
+        const BlockEmbed = Quill.import('blots/block/embed');
+        class RawHTMLBlot extends BlockEmbed {
+            static create(value) {
+                const node = super.create();
+                node.innerHTML = value;
+                node.setAttribute('contenteditable', 'false');
+                return node;
+            }
+            static value(node) { return node.innerHTML; }
+        }
+        RawHTMLBlot.blotName = 'rawhtml';
+        RawHTMLBlot.tagName = 'div';
+        RawHTMLBlot.className = 'ql-raw-html';
+        Quill.register(RawHTMLBlot);
+
         // ===== QUILL EDITOR =====
         const quill = new Quill('#editor', {
             modules: {
@@ -518,9 +534,10 @@
             }
             tableHtml += '</table>';
 
-            // Bypass Quill entirely — append to innerHTML
-            const currentContent = quill.root.innerHTML;
-            quill.root.innerHTML = currentContent + tableHtml + '<p><br></p>';
+            // Insert as a raw embed blot so Quill doesn't strip the HTML
+            const range = quill.getSelection(true);
+            quill.insertEmbed(range.index, 'rawhtml', tableHtml, Quill.sources.USER);
+            quill.setSelection(range.index + 1, Quill.sources.SILENT);
         });
 
         // ===== CTA HANDLER =====
@@ -546,9 +563,10 @@
                 <a href="#" class="cta-apply-btn" onclick="event.preventDefault();var m=document.getElementById('enquireModal')||document.getElementById('autoPopupOverlay');if(m){m.classList.add('active');m.style.display='flex';}" style="display:inline-block;background:#fff;color:#6C4DE6;padding:14px 36px;border-radius:30px;font-weight:700;font-size:16px;text-decoration:none;">${escapeHtml(btnText)}</a>
             </div>`;
 
-            // Bypass Quill entirely — append to innerHTML
-            const currentContent = quill.root.innerHTML;
-            quill.root.innerHTML = currentContent + ctaHtml + '<p><br></p>';
+            // Insert as a raw embed blot so Quill doesn't strip the HTML
+            const range = quill.getSelection(true);
+            quill.insertEmbed(range.index, 'rawhtml', ctaHtml, Quill.sources.USER);
+            quill.setSelection(range.index + 1, Quill.sources.SILENT);
         });
 
         // ===== IMAGE UPLOAD =====
@@ -774,7 +792,17 @@
                 featureImage: featureImageUrl,
                 featureImageAlt: document.getElementById('featureImageAlt').value.trim(),
                 featureImageTitle: document.getElementById('featureImageTitle').value.trim(),
-                content: quill.root.innerHTML,
+                content: (function() {
+                    // Unwrap ql-raw-html embed wrappers so published HTML is clean
+                    const tmp = document.createElement('div');
+                    tmp.innerHTML = quill.root.innerHTML;
+                    tmp.querySelectorAll('div.ql-raw-html').forEach(el => {
+                        el.removeAttribute('contenteditable');
+                        el.classList.remove('ql-raw-html');
+                        if (el.classList.length === 0) el.removeAttribute('class');
+                    });
+                    return tmp.innerHTML;
+                })(),
                 faqs: getFaqs(),
                 authorName: document.getElementById('authorName').value.trim(),
                 authorBio: document.getElementById('authorBio').value.trim(),
