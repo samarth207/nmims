@@ -619,7 +619,11 @@
                 <h2>All Recommended Reads</h2>
             </div>
             
-            <div class="blog-posts-grid">
+            <!-- CMS Blogs (loaded dynamically) -->
+            <div class="blog-posts-grid" id="cmsBlogGrid"></div>
+
+            <!-- Static / Fallback Blog Cards -->
+            <div class="blog-posts-grid" id="staticBlogGrid">
                 <!-- Blog Card 1 -->
                 <a href="blog/mba-hr-management.html" class="blog-card">
                     <div class="blog-card-image">
@@ -1156,6 +1160,42 @@
             }
         }
     </script>
+
+    <!-- Dynamic CMS Blog Loader -->
+    <script>
+    (async function loadCMSBlogs() {
+        try {
+            const res = await fetch('/api/blogs');
+            const data = await res.json();
+            if (!data.success || !data.data || data.data.length === 0) return;
+
+            const grid = document.getElementById('cmsBlogGrid');
+            const escH = (t) => { const d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML; };
+
+            grid.innerHTML = data.data.map(blog => {
+                const cat = (blog.categories && blog.categories[0]) || '';
+                const imgHtml = blog.featureImage 
+                    ? `<img src="${escH(blog.featureImage)}" alt="${escH(blog.featureImageAlt || blog.title)}">`
+                    : `<div style="height:100%;background:#E8E5FF;display:flex;align-items:center;justify-content:center;font-size:40px;">📝</div>`;
+                return `<a href="blog/${escH(blog.slug)}" class="blog-card">
+                    <div class="blog-card-image">${imgHtml}</div>
+                    <div class="blog-card-content">
+                        ${cat ? `<span class="blog-card-category">${escH(cat)}</span>` : ''}
+                        <h3>${escH(blog.title)}</h3>
+                        <p>${escH(blog.excerpt)}</p>
+                        <div class="blog-card-meta">
+                            <span>${escH(blog.authorName || '')} · ${escH(blog.publishDate || '')}</span>
+                            <span class="read-more-link">Read More →</span>
+                        </div>
+                    </div>
+                </a>`;
+            }).join('');
+        } catch (e) {
+            // CMS blogs failed to load — static cards remain visible as fallback
+        }
+    })();
+    </script>
+
     <script src="js/popup-form.js"></script>
     <script src="js/form-handler.js"></script>
     <script src="js/brochure-popup.js"></script>

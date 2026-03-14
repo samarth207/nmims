@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Editor - NMIMS Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="left">
+            <div class="logo"><img src="/images/logo.png" alt="NMIMS"></div>
+            <nav class="nav-links">
+                <a href="/admin/dashboard.html">Blog Posts</a>
+                <a href="/admin/editor.html" class="active">Editor</a>
+            </nav>
+        </div>
+        <div class="right">
+            <button class="btn-logout" id="logoutBtn">Logout</button>
+        </div>
+    </header>
+
+    <!-- Editor Top Bar -->
+    <div class="editor-topbar">
+        <div class="left">
+            <a href="/admin/dashboard.html" class="back-btn">← Back to Posts</a>
+            <span class="status-text" id="autoSaveStatus"></span>
+        </div>
+        <div class="right">
+            <button class="btn-save-draft" id="saveDraftBtn">Save Draft</button>
+            <button class="btn-publish" id="publishBtn">Publish</button>
+        </div>
+    </div>
+
+    <!-- Editor Layout -->
+    <div class="editor-layout">
+        <!-- Main Content Area -->
+        <div class="editor-main">
+
+            <!-- Blog Title -->
+            <div class="field-group">
+                <div class="field">
+                    <label>Blog Title (H1) <span class="char-count" id="titleCount">0/70</span></label>
+                    <input type="text" id="blogTitle" maxlength="70" placeholder="Enter blog title...">
+                </div>
+                <div class="field" style="margin-top:12px;">
+                    <label>URL Slug</label>
+                    <div class="slug-field">
+                        <span class="prefix">/blog/</span>
+                        <input type="text" id="urlSlug" placeholder="auto-generated-from-title">
+                    </div>
+                    <span class="help-text">Auto-generated from title. Use lowercase letters, numbers, and hyphens only.</span>
+                </div>
+            </div>
+
+            <!-- Short Description / Excerpt -->
+            <div class="field-group">
+                <div class="field">
+                    <label>Short Description / Excerpt <span class="required">*</span> <span class="char-count" id="excerptCount">0/250</span></label>
+                    <textarea id="blogExcerpt" maxlength="250" rows="3" placeholder="Write a brief summary of the blog post..."></textarea>
+                </div>
+            </div>
+
+            <!-- Feature Image -->
+            <div class="field-group">
+                <h3>Feature Image</h3>
+                <div class="image-upload-area" id="featureImageArea">
+                    <input type="file" id="featureImageInput" accept="image/jpeg,image/jpg,image/png,image/webp">
+                    <button class="remove-image-btn" type="button" id="removeFeatureImage">×</button>
+                    <img class="preview-img" id="featureImagePreview" alt="">
+                    <div class="upload-icon">🖼️</div>
+                    <div class="upload-text">Click or drag to upload feature image</div>
+                    <div class="upload-hint">JPG / WebP · Recommended: 1200×628px · Max 5MB</div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Image Alt Text <span class="required">*</span></label>
+                        <input type="text" id="featureImageAlt" placeholder="Describe the image for accessibility">
+                    </div>
+                    <div class="field">
+                        <label>Image Title <span style="color:var(--text-muted)">(Optional)</span></label>
+                        <input type="text" id="featureImageTitle" placeholder="Image title attribute">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Content Editor -->
+            <div class="field-group">
+                <h3>Blog Content</h3>
+                <div class="editor-wrapper">
+                    <div id="toolbar">
+                        <span class="ql-formats">
+                            <select class="ql-header">
+                                <option value="">Paragraph</option>
+                                <option value="2">Heading 2</option>
+                                <option value="3">Heading 3</option>
+                                <option value="4">Heading 4</option>
+                            </select>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-bold"></button>
+                            <button class="ql-italic"></button>
+                            <button class="ql-underline"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-list" value="ordered"></button>
+                            <button class="ql-list" value="bullet"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-link"></button>
+                            <button class="ql-image" title="Insert Image"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-blockquote"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button class="ql-clean"></button>
+                        </span>
+                        <span class="ql-formats">
+                            <button type="button" class="ql-table-btn" id="insertTableBtn" title="Insert Table">📊 Table</button>
+                        </span>
+                    </div>
+                    <div id="editor"></div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="field-group">
+                <h3>FAQ Section</h3>
+                <p style="font-size:13px; color:var(--text-muted); margin-bottom:16px;">Add frequently asked questions. These will include FAQ Schema markup for SEO.</p>
+                <div id="faqContainer"></div>
+                <button type="button" class="btn-add-faq" id="addFaqBtn">+ Add FAQ</button>
+            </div>
+
+            <!-- Author Section -->
+            <div class="field-group">
+                <h3>Author</h3>
+                <div class="field-row">
+                    <div class="field">
+                        <label>Author Name <span class="required">*</span></label>
+                        <input type="text" id="authorName" placeholder="Author full name">
+                    </div>
+                    <div class="field">
+                        <label>Author Page URL <span style="color:var(--text-muted)">(Optional)</span></label>
+                        <input type="text" id="authorPage" placeholder="https://...">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Author Bio <span style="color:var(--text-muted)">(Optional)</span></label>
+                    <textarea id="authorBio" rows="2" placeholder="Brief author biography..."></textarea>
+                </div>
+                <div class="field">
+                    <label>Author Image <span style="color:var(--text-muted)">(Optional)</span></label>
+                    <div class="author-image-upload" id="authorImageArea">
+                        <input type="file" id="authorImageInput" accept="image/*">
+                        <img id="authorImagePreview" style="display:none" alt="">
+                        <span id="authorImagePlaceholder">👤</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="editor-sidebar">
+
+            <!-- Publish Settings -->
+            <div class="sidebar-card">
+                <h3>Publish Settings</h3>
+                <div class="field">
+                    <label>Status</label>
+                    <select id="publishStatus">
+                        <option value="draft">Draft</option>
+                        <option value="pending">Pending Review</option>
+                        <option value="published">Published</option>
+                        <option value="scheduled">Scheduled</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Publish Date</label>
+                    <input type="date" id="publishDate">
+                </div>
+                <div class="field">
+                    <label>Publish Time</label>
+                    <input type="time" id="publishTime">
+                </div>
+                <div class="field" style="margin-bottom:0;">
+                    <span class="help-text" id="lastUpdatedText"></span>
+                </div>
+            </div>
+
+            <!-- SEO Meta Data -->
+            <div class="sidebar-card">
+                <h3>SEO Meta Data</h3>
+                <div class="field">
+                    <label>Meta Title <span class="char-count" id="metaTitleCount">0/60</span></label>
+                    <input type="text" id="metaTitle" maxlength="60" placeholder="SEO title (defaults to blog title)">
+                </div>
+                <div class="field">
+                    <label>Meta Description <span class="char-count" id="metaDescCount">0/250</span></label>
+                    <textarea id="metaDescription" maxlength="250" rows="3" placeholder="SEO description (200-250 chars recommended)"></textarea>
+                </div>
+                <div class="field">
+                    <label>Focus Keyword <span class="required">*</span></label>
+                    <input type="text" id="focusKeyword" placeholder="Main keyword for this post">
+                </div>
+                <div class="field">
+                    <label>Primary Keyword</label>
+                    <input type="text" id="primaryKeyword" placeholder="Primary SEO keyword">
+                </div>
+
+                <!-- Google Preview -->
+                <div class="seo-preview">
+                    <div class="preview-label">Google Search Preview</div>
+                    <div class="preview-title" id="seoPreviewTitle">Blog Title Here</div>
+                    <div class="preview-url" id="seoPreviewUrl">nmimsonlineuniversity.com/blog/your-slug</div>
+                    <div class="preview-desc" id="seoPreviewDesc">Meta description will appear here...</div>
+                </div>
+            </div>
+
+            <!-- Categories & Tags -->
+            <div class="sidebar-card">
+                <h3>Categories & Tags</h3>
+                <div class="field">
+                    <label>Categories <span class="required">*</span></label>
+                    <div class="categories-list" id="categoriesList">
+                        <input type="checkbox" class="category-checkbox" id="cat-mba" value="MBA">
+                        <label class="category-label" for="cat-mba">MBA</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-emba" value="Executive MBA">
+                        <label class="category-label" for="cat-emba">Executive MBA</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-career" value="Career Development">
+                        <label class="category-label" for="cat-career">Career Development</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-hr" value="Human Resources">
+                        <label class="category-label" for="cat-hr">Human Resources</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-marketing" value="Marketing">
+                        <label class="category-label" for="cat-marketing">Marketing</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-finance" value="Finance">
+                        <label class="category-label" for="cat-finance">Finance</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-leadership" value="Leadership">
+                        <label class="category-label" for="cat-leadership">Leadership</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-digital" value="Digital Marketing">
+                        <label class="category-label" for="cat-digital">Digital Marketing</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-operations" value="Operations">
+                        <label class="category-label" for="cat-operations">Operations</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-data" value="Data Science">
+                        <label class="category-label" for="cat-data">Data Science</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-business" value="Business Management">
+                        <label class="category-label" for="cat-business">Business Management</label>
+
+                        <input type="checkbox" class="category-checkbox" id="cat-banking" value="Banking & Finance">
+                        <label class="category-label" for="cat-banking">Banking & Finance</label>
+                    </div>
+                </div>
+                <div class="field" style="margin-bottom:0;">
+                    <label>Tags <span style="color:var(--text-muted)">(Press Enter to add)</span></label>
+                    <div class="tags-container" id="tagsContainer">
+                        <input type="text" id="tagInput" placeholder="Add tag...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Insert Modal (for content images) -->
+    <div class="modal-overlay" id="imageModal">
+        <div class="modal-box">
+            <h3>Insert Image</h3>
+            <div class="field">
+                <label>Upload Image</label>
+                <input type="file" id="contentImageInput" accept="image/*" style="padding:8px;">
+            </div>
+            <div class="field">
+                <label>Image Alt Text <span class="required">*</span></label>
+                <input type="text" id="contentImageAlt" placeholder="Describe the image (required for SEO)">
+            </div>
+            <div class="field">
+                <label>Image Title <span style="color:var(--text-muted)">(Optional)</span></label>
+                <input type="text" id="contentImageTitle" placeholder="Image title attribute">
+            </div>
+            <div class="field">
+                <label>Caption <span style="color:var(--text-muted)">(Optional)</span></label>
+                <input type="text" id="contentImageCaption" placeholder="Image caption">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="imageModalCancel">Cancel</button>
+                <button class="btn-insert" id="imageModalInsert">Insert Image</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Insert Modal -->
+    <div class="modal-overlay" id="tableModal">
+        <div class="modal-box">
+            <h3>Insert Table</h3>
+            <div class="table-size-grid">
+                <div class="field">
+                    <label>Rows</label>
+                    <input type="number" id="tableRows" value="3" min="1" max="20">
+                </div>
+                <div class="field">
+                    <label>Columns</label>
+                    <input type="number" id="tableCols" value="3" min="1" max="10">
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="tableModalCancel">Cancel</button>
+                <button class="btn-insert" id="tableModalInsert">Insert Table</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link Modal (for external link with target option) -->
+    <div class="modal-overlay" id="linkModal">
+        <div class="modal-box">
+            <h3>Insert Link</h3>
+            <div class="field">
+                <label>URL</label>
+                <input type="url" id="linkUrl" placeholder="https://...">
+            </div>
+            <div class="field">
+                <label>Link Text</label>
+                <input type="text" id="linkText" placeholder="Display text">
+            </div>
+            <div class="field" style="margin-bottom:0;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="linkNewTab" style="width:auto;">
+                    Open in new tab (external link)
+                </label>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="linkModalCancel">Cancel</button>
+                <button class="btn-insert" id="linkModalInsert">Insert Link</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Quill.js -->
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+
+    <script>
+        // ===== AUTH =====
+        const API_BASE = '/api/admin';
+        function getToken() { return localStorage.getItem('admin_token'); }
+        function requireAuth() { if (!getToken()) window.location.href = '/admin/login.html'; }
+        function authHeaders() { return { 'Authorization': 'Bearer ' + getToken() }; }
+        function authJsonHeaders() { return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() }; }
+        requireAuth();
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('admin_token');
+            window.location.href = '/admin/login.html';
+        });
+
+        // ===== TOAST =====
+        function showToast(msg, type = 'info') {
+            const c = document.getElementById('toastContainer');
+            const t = document.createElement('div');
+            t.className = 'toast ' + type;
+            t.textContent = msg;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
+        }
+
+        // ===== QUILL EDITOR =====
+        const quill = new Quill('#editor', {
+            modules: {
+                toolbar: {
+                    container: '#toolbar',
+                    handlers: {
+                        image: imageHandler,
+                        link: linkHandler
+                    }
+                }
+            },
+            placeholder: 'Start writing your blog content...',
+            theme: 'snow'
+        });
+
+        // ===== IMAGE HANDLER =====
+        let imageRange = null;
+        function imageHandler() {
+            imageRange = quill.getSelection();
+            document.getElementById('contentImageInput').value = '';
+            document.getElementById('contentImageAlt').value = '';
+            document.getElementById('contentImageTitle').value = '';
+            document.getElementById('contentImageCaption').value = '';
+            document.getElementById('imageModal').classList.add('active');
+        }
+
+        document.getElementById('imageModalCancel').addEventListener('click', () => {
+            document.getElementById('imageModal').classList.remove('active');
+        });
+
+        document.getElementById('imageModalInsert').addEventListener('click', async () => {
+            const fileInput = document.getElementById('contentImageInput');
+            const alt = document.getElementById('contentImageAlt').value.trim();
+            const title = document.getElementById('contentImageTitle').value.trim();
+            const caption = document.getElementById('contentImageCaption').value.trim();
+
+            if (!fileInput.files[0]) { showToast('Please select an image', 'error'); return; }
+            if (!alt) { showToast('Alt text is required for SEO', 'error'); return; }
+
+            const url = await uploadImage(fileInput.files[0]);
+            if (!url) return;
+
+            document.getElementById('imageModal').classList.remove('active');
+
+            // Build HTML with alt, title, caption
+            let imgHtml = `<img src="${url}" alt="${escapeAttr(alt)}"`;
+            if (title) imgHtml += ` title="${escapeAttr(title)}"`;
+            imgHtml += ` style="max-width:100%;border-radius:8px;">`;
+            if (caption) imgHtml += `<p><em>${escapeHtml(caption)}</em></p>`;
+
+            const idx = imageRange ? imageRange.index : quill.getLength();
+            quill.clipboard.dangerouslyPasteHTML(idx, imgHtml);
+        });
+
+        // ===== LINK HANDLER =====
+        let linkRange = null;
+        function linkHandler() {
+            linkRange = quill.getSelection();
+            const selectedText = linkRange ? quill.getText(linkRange.index, linkRange.length) : '';
+            document.getElementById('linkUrl').value = '';
+            document.getElementById('linkText').value = selectedText;
+            document.getElementById('linkNewTab').checked = false;
+            document.getElementById('linkModal').classList.add('active');
+        }
+
+        document.getElementById('linkModalCancel').addEventListener('click', () => {
+            document.getElementById('linkModal').classList.remove('active');
+        });
+
+        document.getElementById('linkModalInsert').addEventListener('click', () => {
+            const url = document.getElementById('linkUrl').value.trim();
+            const text = document.getElementById('linkText').value.trim() || url;
+            const newTab = document.getElementById('linkNewTab').checked;
+
+            if (!url) { showToast('Please enter a URL', 'error'); return; }
+
+            document.getElementById('linkModal').classList.remove('active');
+
+            const target = newTab ? ' target="_blank" rel="noopener noreferrer"' : '';
+            const linkHtml = `<a href="${escapeAttr(url)}"${target}>${escapeHtml(text)}</a>`;
+
+            if (linkRange && linkRange.length > 0) {
+                quill.deleteText(linkRange.index, linkRange.length);
+            }
+            const idx = linkRange ? linkRange.index : quill.getLength();
+            quill.clipboard.dangerouslyPasteHTML(idx, linkHtml);
+        });
+
+        // ===== TABLE HANDLER =====
+        document.getElementById('insertTableBtn').addEventListener('click', () => {
+            document.getElementById('tableRows').value = 3;
+            document.getElementById('tableCols').value = 3;
+            document.getElementById('tableModal').classList.add('active');
+        });
+
+        document.getElementById('tableModalCancel').addEventListener('click', () => {
+            document.getElementById('tableModal').classList.remove('active');
+        });
+
+        document.getElementById('tableModalInsert').addEventListener('click', () => {
+            const rows = parseInt(document.getElementById('tableRows').value) || 3;
+            const cols = parseInt(document.getElementById('tableCols').value) || 3;
+
+            let html = '<table style="width:100%;border-collapse:collapse;margin:20px 0;">';
+            // Header row
+            html += '<thead><tr>';
+            for (let c = 0; c < cols; c++) html += '<th style="border:1px solid #ddd;padding:10px;background:#f5f5f5;">Header ' + (c+1) + '</th>';
+            html += '</tr></thead><tbody>';
+            for (let r = 1; r < rows; r++) {
+                html += '<tr>';
+                for (let c = 0; c < cols; c++) html += '<td style="border:1px solid #ddd;padding:10px;"> </td>';
+                html += '</tr>';
+            }
+            html += '</tbody></table><p><br></p>';
+
+            document.getElementById('tableModal').classList.remove('active');
+            const range = quill.getSelection();
+            const idx = range ? range.index : quill.getLength();
+            quill.clipboard.dangerouslyPasteHTML(idx, html);
+        });
+
+        // ===== IMAGE UPLOAD =====
+        async function uploadImage(file) {
+            const formData = new FormData();
+            formData.append('image', file);
+            try {
+                const res = await fetch(API_BASE + '/upload-image', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + getToken() },
+                    body: formData
+                });
+                if (res.status === 401 || res.status === 403) {
+                    localStorage.removeItem('admin_token');
+                    window.location.href = '/admin/login.html';
+                    return null;
+                }
+                const data = await res.json();
+                if (data.success) return data.url;
+                showToast(data.message || 'Upload failed', 'error');
+                return null;
+            } catch (err) {
+                showToast('Image upload failed', 'error');
+                return null;
+            }
+        }
+
+        // ===== FEATURE IMAGE =====
+        const featureImageInput = document.getElementById('featureImageInput');
+        const featureImageArea = document.getElementById('featureImageArea');
+        const featureImagePreview = document.getElementById('featureImagePreview');
+        let featureImageUrl = '';
+
+        featureImageInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            // Show local preview immediately
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                featureImagePreview.src = ev.target.result;
+                featureImageArea.classList.add('has-image');
+            };
+            reader.readAsDataURL(file);
+
+            // Upload
+            const url = await uploadImage(file);
+            if (url) {
+                featureImageUrl = url;
+                featureImagePreview.src = url;
+                showToast('Feature image uploaded', 'success');
+            }
+        });
+
+        document.getElementById('removeFeatureImage').addEventListener('click', (e) => {
+            e.stopPropagation();
+            featureImageUrl = '';
+            featureImagePreview.src = '';
+            featureImageArea.classList.remove('has-image');
+            featureImageInput.value = '';
+        });
+
+        // ===== AUTHOR IMAGE =====
+        const authorImageInput = document.getElementById('authorImageInput');
+        const authorImagePreview = document.getElementById('authorImagePreview');
+        const authorImagePlaceholder = document.getElementById('authorImagePlaceholder');
+        let authorImageUrl = '';
+
+        authorImageInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const url = await uploadImage(file);
+            if (url) {
+                authorImageUrl = url;
+                authorImagePreview.src = url;
+                authorImagePreview.style.display = 'block';
+                authorImagePlaceholder.style.display = 'none';
+            }
+        });
+
+        // ===== CHAR COUNTERS =====
+        function setupCharCounter(inputId, counterId, max) {
+            const input = document.getElementById(inputId);
+            const counter = document.getElementById(counterId);
+            function update() {
+                const len = input.value.length;
+                counter.textContent = len + '/' + max;
+                counter.className = 'char-count' + (len > max * 0.9 ? ' warning' : '') + (len >= max ? ' danger' : '');
+            }
+            input.addEventListener('input', update);
+            update();
+        }
+
+        setupCharCounter('blogTitle', 'titleCount', 70);
+        setupCharCounter('blogExcerpt', 'excerptCount', 250);
+        setupCharCounter('metaTitle', 'metaTitleCount', 60);
+        setupCharCounter('metaDescription', 'metaDescCount', 250);
+
+        // ===== AUTO SLUG =====
+        const titleInput = document.getElementById('blogTitle');
+        const slugInput = document.getElementById('urlSlug');
+        let slugManuallyEdited = false;
+
+        slugInput.addEventListener('input', () => { slugManuallyEdited = true; });
+
+        titleInput.addEventListener('input', () => {
+            if (!slugManuallyEdited) {
+                slugInput.value = generateSlug(titleInput.value);
+            }
+            // Update SEO preview
+            updateSEOPreview();
+        });
+
+        function generateSlug(text) {
+            return text.toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '')
+                .substring(0, 80);
+        }
+
+        // ===== SEO PREVIEW =====
+        function updateSEOPreview() {
+            const title = document.getElementById('metaTitle').value || document.getElementById('blogTitle').value || 'Blog Title Here';
+            const slug = slugInput.value || 'your-slug';
+            const desc = document.getElementById('metaDescription').value || document.getElementById('blogExcerpt').value || 'Meta description will appear here...';
+
+            document.getElementById('seoPreviewTitle').textContent = title;
+            document.getElementById('seoPreviewUrl').textContent = 'nmimsonlineuniversity.com/blog/' + slug;
+            document.getElementById('seoPreviewDesc').textContent = desc;
+        }
+
+        document.getElementById('metaTitle').addEventListener('input', updateSEOPreview);
+        document.getElementById('metaDescription').addEventListener('input', updateSEOPreview);
+        slugInput.addEventListener('input', updateSEOPreview);
+        document.getElementById('blogExcerpt').addEventListener('input', updateSEOPreview);
+
+        // ===== FAQ SECTION =====
+        let faqCount = 0;
+        function addFaq(question = '', answer = '') {
+            faqCount++;
+            const container = document.getElementById('faqContainer');
+            const div = document.createElement('div');
+            div.className = 'faq-item';
+            div.innerHTML = `
+                <div class="faq-number">FAQ #${faqCount}</div>
+                <button type="button" class="faq-remove" onclick="this.parentElement.remove()">×</button>
+                <input type="text" class="faq-question" placeholder="Question" value="${escapeAttr(question)}">
+                <textarea class="faq-answer" placeholder="Answer" rows="2">${escapeHtml(answer)}</textarea>
+            `;
+            container.appendChild(div);
+        }
+
+        document.getElementById('addFaqBtn').addEventListener('click', () => addFaq());
+
+        function getFaqs() {
+            const items = document.querySelectorAll('.faq-item');
+            const faqs = [];
+            items.forEach(item => {
+                const q = item.querySelector('.faq-question').value.trim();
+                const a = item.querySelector('.faq-answer').value.trim();
+                if (q && a) faqs.push({ question: q, answer: a });
+            });
+            return faqs;
+        }
+
+        // ===== TAGS =====
+        const tagInput = document.getElementById('tagInput');
+        const tagsContainer = document.getElementById('tagsContainer');
+        let tags = [];
+
+        tagInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const val = tagInput.value.trim();
+                if (val && !tags.includes(val)) {
+                    tags.push(val);
+                    renderTags();
+                }
+                tagInput.value = '';
+            }
+        });
+
+        tagsContainer.addEventListener('click', () => tagInput.focus());
+
+        function renderTags() {
+            tagsContainer.querySelectorAll('.tag-item').forEach(el => el.remove());
+            tags.forEach((tag, i) => {
+                const span = document.createElement('span');
+                span.className = 'tag-item';
+                span.innerHTML = `${escapeHtml(tag)} <span class="tag-remove" data-index="${i}">×</span>`;
+                tagsContainer.insertBefore(span, tagInput);
+            });
+        }
+
+        tagsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tag-remove')) {
+                const idx = parseInt(e.target.dataset.index);
+                tags.splice(idx, 1);
+                renderTags();
+            }
+        });
+
+        // ===== GET CATEGORIES =====
+        function getSelectedCategories() {
+            const checked = document.querySelectorAll('.category-checkbox:checked');
+            return Array.from(checked).map(cb => cb.value);
+        }
+
+        function setSelectedCategories(cats) {
+            document.querySelectorAll('.category-checkbox').forEach(cb => {
+                cb.checked = (cats || []).includes(cb.value);
+            });
+        }
+
+        // ===== COLLECT BLOG DATA =====
+        function collectBlogData(statusOverride) {
+            return {
+                title: document.getElementById('blogTitle').value.trim(),
+                slug: slugInput.value.trim(),
+                excerpt: document.getElementById('blogExcerpt').value.trim(),
+                featureImage: featureImageUrl,
+                featureImageAlt: document.getElementById('featureImageAlt').value.trim(),
+                featureImageTitle: document.getElementById('featureImageTitle').value.trim(),
+                content: quill.root.innerHTML,
+                faqs: getFaqs(),
+                authorName: document.getElementById('authorName').value.trim(),
+                authorBio: document.getElementById('authorBio').value.trim(),
+                authorImage: authorImageUrl,
+                authorPage: document.getElementById('authorPage').value.trim(),
+                metaTitle: document.getElementById('metaTitle').value.trim(),
+                metaDescription: document.getElementById('metaDescription').value.trim(),
+                focusKeyword: document.getElementById('focusKeyword').value.trim(),
+                primaryKeyword: document.getElementById('primaryKeyword').value.trim(),
+                categories: getSelectedCategories(),
+                tags: tags,
+                status: statusOverride || document.getElementById('publishStatus').value,
+                publishDate: document.getElementById('publishDate').value,
+                publishTime: document.getElementById('publishTime').value
+            };
+        }
+
+        // ===== VALIDATE =====
+        function validateBlog(data, isPublish) {
+            const errors = [];
+            if (!data.title) errors.push('Blog title is required');
+            if (!data.slug) errors.push('URL slug is required');
+            if (!data.excerpt) errors.push('Short description is required');
+            if (isPublish) {
+                if (!data.featureImage) errors.push('Feature image is required for publishing');
+                if (!data.featureImageAlt) errors.push('Feature image alt text is required');
+                if (!data.focusKeyword) errors.push('Focus keyword is required');
+                if (data.categories.length === 0) errors.push('At least one category is required');
+                if (!data.authorName) errors.push('Author name is required');
+                const contentText = quill.getText().trim();
+                if (contentText.length < 50) errors.push('Blog content is too short');
+            }
+            return errors;
+        }
+
+        // ===== SAVE / PUBLISH =====
+        let currentBlogId = null;
+
+        async function saveBlog(statusOverride) {
+            const isPublish = statusOverride === 'published';
+            const data = collectBlogData(statusOverride);
+            const errors = validateBlog(data, isPublish);
+
+            if (errors.length > 0) {
+                errors.forEach(e => showToast(e, 'error'));
+                return;
+            }
+
+            const saveDraftBtn = document.getElementById('saveDraftBtn');
+            const publishBtn = document.getElementById('publishBtn');
+            saveDraftBtn.disabled = true;
+            publishBtn.disabled = true;
+
+            try {
+                const method = currentBlogId ? 'PUT' : 'POST';
+                const url = currentBlogId 
+                    ? API_BASE + '/blogs/' + currentBlogId 
+                    : API_BASE + '/blogs';
+
+                const res = await fetch(url, {
+                    method,
+                    headers: authJsonHeaders(),
+                    body: JSON.stringify(data)
+                });
+
+                if (res.status === 401 || res.status === 403) {
+                    localStorage.removeItem('admin_token');
+                    window.location.href = '/admin/login.html';
+                    return;
+                }
+
+                const result = await res.json();
+                if (result.success) {
+                    currentBlogId = result.data.id;
+                    // Update URL with id param for future saves
+                    const newUrl = new URL(window.location);
+                    newUrl.searchParams.set('id', currentBlogId);
+                    window.history.replaceState({}, '', newUrl);
+                    
+                    showToast(isPublish ? 'Blog published successfully!' : 'Draft saved!', 'success');
+                    document.getElementById('lastUpdatedText').textContent = 'Last saved: ' + new Date().toLocaleString();
+                } else {
+                    showToast(result.message || 'Save failed', 'error');
+                }
+            } catch (err) {
+                showToast('Failed to save blog', 'error');
+            }
+
+            saveDraftBtn.disabled = false;
+            publishBtn.disabled = false;
+        }
+
+        document.getElementById('saveDraftBtn').addEventListener('click', () => {
+            saveBlog(document.getElementById('publishStatus').value);
+        });
+
+        document.getElementById('publishBtn').addEventListener('click', () => {
+            document.getElementById('publishStatus').value = 'published';
+            saveBlog('published');
+        });
+
+        // ===== LOAD BLOG FOR EDITING =====
+        async function loadBlog(id) {
+            try {
+                const res = await fetch(API_BASE + '/blogs/' + id, { headers: authJsonHeaders() });
+                if (res.status === 401 || res.status === 403) {
+                    localStorage.removeItem('admin_token');
+                    window.location.href = '/admin/login.html';
+                    return;
+                }
+                const data = await res.json();
+                if (!data.success || !data.data) {
+                    showToast('Blog not found', 'error');
+                    return;
+                }
+
+                const blog = data.data;
+                currentBlogId = blog.id;
+
+                document.getElementById('blogTitle').value = blog.title || '';
+                slugInput.value = blog.slug || '';
+                slugManuallyEdited = true;
+                document.getElementById('blogExcerpt').value = blog.excerpt || '';
+                
+                if (blog.featureImage) {
+                    featureImageUrl = blog.featureImage;
+                    featureImagePreview.src = blog.featureImage;
+                    featureImageArea.classList.add('has-image');
+                }
+                document.getElementById('featureImageAlt').value = blog.featureImageAlt || '';
+                document.getElementById('featureImageTitle').value = blog.featureImageTitle || '';
+
+                quill.root.innerHTML = blog.content || '';
+
+                (blog.faqs || []).forEach(faq => addFaq(faq.question, faq.answer));
+
+                document.getElementById('authorName').value = blog.authorName || '';
+                document.getElementById('authorBio').value = blog.authorBio || '';
+                document.getElementById('authorPage').value = blog.authorPage || '';
+                if (blog.authorImage) {
+                    authorImageUrl = blog.authorImage;
+                    authorImagePreview.src = blog.authorImage;
+                    authorImagePreview.style.display = 'block';
+                    authorImagePlaceholder.style.display = 'none';
+                }
+
+                document.getElementById('metaTitle').value = blog.metaTitle || '';
+                document.getElementById('metaDescription').value = blog.metaDescription || '';
+                document.getElementById('focusKeyword').value = blog.focusKeyword || '';
+                document.getElementById('primaryKeyword').value = blog.primaryKeyword || '';
+
+                setSelectedCategories(blog.categories);
+                tags = blog.tags || [];
+                renderTags();
+
+                document.getElementById('publishStatus').value = blog.status || 'draft';
+                document.getElementById('publishDate').value = blog.publishDate || '';
+                document.getElementById('publishTime').value = blog.publishTime || '';
+
+                if (blog.updatedAt) {
+                    document.getElementById('lastUpdatedText').textContent = 'Last updated: ' + new Date(blog.updatedAt).toLocaleString();
+                }
+
+                // Trigger char counters and preview
+                ['blogTitle', 'blogExcerpt', 'metaTitle', 'metaDescription'].forEach(id => {
+                    document.getElementById(id).dispatchEvent(new Event('input'));
+                });
+                updateSEOPreview();
+
+            } catch (err) {
+                showToast('Failed to load blog', 'error');
+            }
+        }
+
+        // ===== HELPERS =====
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text || '';
+            return div.innerHTML;
+        }
+
+        function escapeAttr(text) {
+            return (text || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        // ===== INIT =====
+        const params = new URLSearchParams(window.location.search);
+        const editId = params.get('id');
+        if (editId) {
+            loadBlog(editId);
+        } else {
+            // Set default date/time to now
+            const now = new Date();
+            document.getElementById('publishDate').value = now.toISOString().split('T')[0];
+            document.getElementById('publishTime').value = now.toTimeString().slice(0, 5);
+        }
+
+        updateSEOPreview();
+    </script>
+</body>
+</html>
