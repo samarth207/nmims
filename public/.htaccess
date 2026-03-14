@@ -1,0 +1,68 @@
+# ================================================================
+# NMIMS CDOE — Public Directory .htaccess
+# Applied when Apache serves /public/ static files directly
+# ================================================================
+
+Options -Indexes
+ServerSignature Off
+
+# ================================================================
+# BLOCK SENSITIVE DATA FILES IN PUBLIC/
+# (blog-listing.json IS public; blogs-data.json is at root — safe)
+# ================================================================
+
+# Block direct access to manifest source (served via Express)
+<FilesMatch "^(manifest\.json)$">
+    # Allow — manifest.json is intentionally public for PWA
+</FilesMatch>
+
+# ================================================================
+# SECURITY HEADERS FOR STATIC ASSETS
+# ================================================================
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Allow blog images to be embedded on the same site
+    <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+
+    # Long cache for CSS + JS
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Fonts — cross-origin access (required by some browsers)
+    <FilesMatch "\.(ttf|otf|eot|woff|woff2)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # HTML — do not cache
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache, must-revalidate"
+        Header set Pragma "no-cache"
+    </FilesMatch>
+</IfModule>
+
+# ================================================================
+# GZIP COMPRESSION
+# ================================================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css
+    AddOutputFilterByType DEFLATE application/javascript text/javascript
+    AddOutputFilterByType DEFLATE application/json image/svg+xml
+    AddOutputFilterByType DEFLATE font/woff font/woff2
+</IfModule>
+
+# ================================================================
+# BLOCK ADMIN SECTION FROM DIRECT FILE BROWSING
+# (JWT auth is handled by Express, but block Apache-level access
+#  to admin .html if Apache tries to serve them as static files)
+# ================================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Allow — admin files are protected by JS JWT check, not Apache auth
+    # This section is intentionally left open to support SPA routing
+</IfModule>
