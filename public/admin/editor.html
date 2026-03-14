@@ -518,28 +518,9 @@
             }
             tableHtml += '</table>';
 
-            // Bypass Quill clipboard — insert directly into DOM
-            const wrapper = document.createElement('div');
-            wrapper.innerHTML = tableHtml;
-            const tableEl = wrapper.firstChild;
-
-            const range = quill.getSelection();
-            if (range) {
-                const [leaf] = quill.getLeaf(range.index);
-                const refNode = leaf && leaf.domNode ? leaf.domNode.closest('p, h1, h2, h3, h4, h5, h6, li, div, blockquote') || leaf.domNode.parentNode : null;
-                if (refNode && refNode.parentNode === quill.root) {
-                    refNode.parentNode.insertBefore(tableEl, refNode.nextSibling);
-                } else {
-                    quill.root.appendChild(tableEl);
-                }
-            } else {
-                quill.root.appendChild(tableEl);
-            }
-            // Add empty paragraph after for continued typing
-            const p = document.createElement('p');
-            p.innerHTML = '<br>';
-            tableEl.parentNode.insertBefore(p, tableEl.nextSibling);
-            quill.update();
+            // Bypass Quill entirely — append to innerHTML
+            const currentContent = quill.root.innerHTML;
+            quill.root.innerHTML = currentContent + tableHtml + '<p><br></p>';
         });
 
         // ===== CTA HANDLER =====
@@ -565,28 +546,9 @@
                 <a href="#" class="cta-apply-btn" onclick="event.preventDefault();var m=document.getElementById('enquireModal')||document.getElementById('autoPopupOverlay');if(m){m.classList.add('active');m.style.display='flex';}" style="display:inline-block;background:#fff;color:#6C4DE6;padding:14px 36px;border-radius:30px;font-weight:700;font-size:16px;text-decoration:none;">${escapeHtml(btnText)}</a>
             </div>`;
 
-            // Bypass Quill clipboard — insert directly into DOM
-            const wrapper = document.createElement('div');
-            wrapper.innerHTML = ctaHtml;
-            const ctaEl = wrapper.firstChild;
-
-            const range = quill.getSelection();
-            if (range) {
-                const [leaf] = quill.getLeaf(range.index);
-                const refNode = leaf && leaf.domNode ? leaf.domNode.closest('p, h1, h2, h3, h4, h5, h6, li, div, blockquote') || leaf.domNode.parentNode : null;
-                if (refNode && refNode.parentNode === quill.root) {
-                    refNode.parentNode.insertBefore(ctaEl, refNode.nextSibling);
-                } else {
-                    quill.root.appendChild(ctaEl);
-                }
-            } else {
-                quill.root.appendChild(ctaEl);
-            }
-            // Add empty paragraph after for continued typing
-            const p = document.createElement('p');
-            p.innerHTML = '<br>';
-            ctaEl.parentNode.insertBefore(p, ctaEl.nextSibling);
-            quill.update();
+            // Bypass Quill entirely — append to innerHTML
+            const currentContent = quill.root.innerHTML;
+            quill.root.innerHTML = currentContent + ctaHtml + '<p><br></p>';
         });
 
         // ===== IMAGE UPLOAD =====
