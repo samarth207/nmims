@@ -51,16 +51,8 @@ const PORT = process.env.PORT || 3000;
 
 // ===== Blog CMS Configuration =====
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
-function cleanEnvVar(val) {
-    if (!val) return undefined;
-    let v = val.trim().replace(/^['"]|['"]$/g, '');
-    try { v = decodeURIComponent(v); } catch (e) { /* not encoded, use as-is */ }
-    return v;
-}
-const ADMIN_USERNAME = cleanEnvVar(process.env.ADMIN_USERNAME);
-const ADMIN_PASSWORD = cleanEnvVar(process.env.ADMIN_PASSWORD);
-console.log('[ENV CHECK] ADMIN_USERNAME:', ADMIN_USERNAME ? `"${ADMIN_USERNAME}" (len:${ADMIN_USERNAME.length})` : 'NOT SET');
-console.log('[ENV CHECK] ADMIN_PASSWORD:', ADMIN_PASSWORD ? `set (len:${ADMIN_PASSWORD.length}, first char:"${ADMIN_PASSWORD[0]}", last char:"${ADMIN_PASSWORD[ADMIN_PASSWORD.length-1]}")` : 'NOT SET');
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const BLOGS_FILE = path.join(__dirname, 'blogs-data.json');
 const BLOG_IMAGES_DIR = path.join(__dirname, 'public', 'images', 'blog');
 
@@ -388,20 +380,6 @@ app.get('/api/submissions', async (req, res) => {
 // ===================================================
 // ===== BLOG CMS API ROUTES =====
 // ===================================================
-
-// ----- TEMP DEBUG: Remove after diagnosing -----
-app.get('/api/debug-env', (req, res) => {
-    res.json({
-        ADMIN_USERNAME_set: !!ADMIN_USERNAME,
-        ADMIN_USERNAME_length: ADMIN_USERNAME ? ADMIN_USERNAME.length : 0,
-        ADMIN_PASSWORD_set: !!ADMIN_PASSWORD,
-        ADMIN_PASSWORD_length: ADMIN_PASSWORD ? ADMIN_PASSWORD.length : 0,
-        ADMIN_PASSWORD_first_char: ADMIN_PASSWORD ? ADMIN_PASSWORD[0] : null,
-        ADMIN_PASSWORD_last_char: ADMIN_PASSWORD ? ADMIN_PASSWORD[ADMIN_PASSWORD.length - 1] : null,
-        NODE_ENV: process.env.NODE_ENV,
-        dotenv_loaded: dotenvLoaded
-    });
-});
 
 // ----- Admin Login -----
 app.post('/api/admin/login', (req, res) => {

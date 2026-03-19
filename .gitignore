@@ -6,7 +6,7 @@ node_modules/
 # .env is needed on the server and Hostinger doesn't inject env vars properly
 .env.local
 .env.production
-
+.env
 # Form submissions fallback
 form-submissions.json
 
