@@ -383,6 +383,20 @@ app.get('/api/submissions', async (req, res) => {
 // ===== BLOG CMS API ROUTES =====
 // ===================================================
 
+// ----- TEMP DEBUG: Remove after diagnosing -----
+app.get('/api/debug-env', (req, res) => {
+    res.json({
+        ADMIN_USERNAME_set: !!ADMIN_USERNAME,
+        ADMIN_USERNAME_length: ADMIN_USERNAME ? ADMIN_USERNAME.length : 0,
+        ADMIN_PASSWORD_set: !!ADMIN_PASSWORD,
+        ADMIN_PASSWORD_length: ADMIN_PASSWORD ? ADMIN_PASSWORD.length : 0,
+        ADMIN_PASSWORD_first_char: ADMIN_PASSWORD ? ADMIN_PASSWORD[0] : null,
+        ADMIN_PASSWORD_last_char: ADMIN_PASSWORD ? ADMIN_PASSWORD[ADMIN_PASSWORD.length - 1] : null,
+        NODE_ENV: process.env.NODE_ENV,
+        dotenv_loaded: dotenvLoaded
+    });
+});
+
 // ----- Admin Login -----
 app.post('/api/admin/login', (req, res) => {
     const { username, password } = req.body;
