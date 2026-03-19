@@ -46,6 +46,13 @@ try {
     console.error('multer not available:', e.message);
 }
 
+let MongoClient;
+try {
+    MongoClient = require('mongodb').MongoClient;
+} catch (e) {
+    console.error('mongodb module not available:', e.message);
+}
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -53,6 +60,7 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+const MONGODB_URI = process.env.MONGODB_URI;
 const BLOGS_FILE = path.join(__dirname, 'blogs-data.json');
 const BLOG_IMAGES_DIR = path.join(__dirname, 'public', 'images', 'blog');
 
@@ -101,8 +109,30 @@ function authenticateAdmin(req, res, next) {
     }
 }
 
+// ===== MongoDB Blog Storage =====
+let blogsCollection = null;
+
+async function connectMongo() {
+    if (!MongoClient || !MONGODB_URI) {
+        console.warn('MongoDB not configured, using file-based blog storage');
+        return;
+    }
+    try {
+        const client = new MongoClient(MONGODB_URI);
+        await client.connect();
+        blogsCollection = client.db('nmims').collection('blogs');
+        console.log('MongoDB connected for blog storage');
+    } catch (err) {
+        console.error('MongoDB connection failed:', err.message);
+        console.log('Falling back to file-based blog storage');
+    }
+}
+
 // ===== Blog Data Helpers =====
 async function loadBlogs() {
+    if (blogsCollection) {
+        return await blogsCollection.find({}).sort({ createdAt: 1 }).toArray();
+    }
     try {
         const data = await fs.readFile(BLOGS_FILE, 'utf8');
         return JSON.parse(data);
@@ -112,6 +142,11 @@ async function loadBlogs() {
 }
 
 async function saveBlogs(blogs) {
+    if (blogsCollection) {
+        await blogsCollection.deleteMany({});
+        if (blogs.length > 0) await blogsCollection.insertMany(blogs);
+        return;
+    }
     await fs.writeFile(BLOGS_FILE, JSON.stringify(blogs, null, 2));
 }
 
@@ -960,6 +995,10 @@ const server = app.listen(PORT, () => {
     // Initialize database after server is listening (non-blocking)
     initDatabase().catch(err => {
         console.error('Database init failed, but server is running:', err.message);
+    });
+    // Connect to MongoDB for blog storage
+    connectMongo().catch(err => {
+        console.error('MongoDB init failed, using file storage:', err.message);
     });
 }).on('error', (err) => {
     console.error('FATAL: Server failed to start!');
