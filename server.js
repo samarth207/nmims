@@ -51,8 +51,14 @@ const PORT = process.env.PORT || 3000;
 
 // ===== Blog CMS Configuration =====
 const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME ? process.env.ADMIN_USERNAME.trim().replace(/^['"]|['"]$/g, '') : undefined;
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ? process.env.ADMIN_PASSWORD.trim().replace(/^['"]|['"]$/g, '') : undefined;
+function cleanEnvVar(val) {
+    if (!val) return undefined;
+    let v = val.trim().replace(/^['"]|['"]$/g, '');
+    try { v = decodeURIComponent(v); } catch (e) { /* not encoded, use as-is */ }
+    return v;
+}
+const ADMIN_USERNAME = cleanEnvVar(process.env.ADMIN_USERNAME);
+const ADMIN_PASSWORD = cleanEnvVar(process.env.ADMIN_PASSWORD);
 console.log('[ENV CHECK] ADMIN_USERNAME:', ADMIN_USERNAME ? `"${ADMIN_USERNAME}" (len:${ADMIN_USERNAME.length})` : 'NOT SET');
 console.log('[ENV CHECK] ADMIN_PASSWORD:', ADMIN_PASSWORD ? `set (len:${ADMIN_PASSWORD.length}, first char:"${ADMIN_PASSWORD[0]}", last char:"${ADMIN_PASSWORD[ADMIN_PASSWORD.length-1]}")` : 'NOT SET');
 const BLOGS_FILE = path.join(__dirname, 'blogs-data.json');
