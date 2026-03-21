@@ -164,6 +164,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Explicit route for /blog — must be before static middleware to prevent
+// Express from redirecting /blog → /blog/ because public/blog/ is a directory
+app.get('/blog', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'blog.html'));
+});
+
 // Serve static files from public directory
 app.use(express.static(path.join(__dirname, 'public'), {
     extensions: ['html'],  // Auto-serve .html files without extension
