@@ -1000,6 +1000,80 @@ Object.entries(mbaOnlineRoutes).forEach(([routePath, filePath]) => {
     });
 });
 
+// ===== Root Page 301 Redirects (.html → clean) =====
+const rootRedirects = {
+    '/index.html':                    '/',
+    '/undergraduate.html':            '/undergraduate',
+    '/young-professionals.html':      '/young-professionals',
+    '/mid-senior-professionals.html': '/mid-senior-professionals',
+    '/all-programs.html':             '/all-programs',
+    '/blog.html':                     '/blog',
+};
+Object.entries(rootRedirects).forEach(([o, n]) => app.get(o, (req, res) => res.redirect(301, n)));
+
+// ===== MBA WX 301 Redirects + Clean URL Routes =====
+const mbaWxRedirects = {
+    '/programs/mba-wx-hub.html':               '/mba-wx',
+    '/programs/mba-wx-marketing.html':         '/mba-wx/marketing',
+    '/programs/mba-wx-finance.html':           '/mba-wx/finance',
+    '/programs/mba-wx-operations.html':        '/mba-wx/operations',
+    '/programs/mba-wx-leadership.html':        '/mba-wx/leadership',
+    '/programs/mba-wx-digital-marketing.html': '/mba-wx/digital-marketing',
+};
+Object.entries(mbaWxRedirects).forEach(([o, n]) => app.get(o, (req, res) => res.redirect(301, n)));
+
+const mbaWxRoutes = {
+    '/mba-wx':                   'programs/mba-wx-hub.html',
+    '/mba-wx/marketing':         'programs/mba-wx-marketing.html',
+    '/mba-wx/finance':           'programs/mba-wx-finance.html',
+    '/mba-wx/operations':        'programs/mba-wx-operations.html',
+    '/mba-wx/leadership':        'programs/mba-wx-leadership.html',
+    '/mba-wx/digital-marketing': 'programs/mba-wx-digital-marketing.html',
+};
+Object.entries(mbaWxRoutes).forEach(([routePath, filePath]) => {
+    app.get(routePath, (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', filePath), (err) => {
+            if (err) res.status(404).send('Page not found');
+        });
+    });
+});
+
+// ===== Bachelors 301 Redirects + Clean URL Routes =====
+const bachelorsRedirects = {
+    '/programs/bachelors-hub.html': '/bachelors',
+    '/programs/bcom.html':          '/bachelors/bcom',
+    '/programs/bba.html':           '/bachelors/bba',
+};
+Object.entries(bachelorsRedirects).forEach(([o, n]) => app.get(o, (req, res) => res.redirect(301, n)));
+
+const bachelorsRoutes = {
+    '/bachelors':      'programs/bachelors-hub.html',
+    '/bachelors/bcom': 'programs/bcom.html',
+    '/bachelors/bba':  'programs/bba.html',
+};
+Object.entries(bachelorsRoutes).forEach(([routePath, filePath]) => {
+    app.get(routePath, (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', filePath), (err) => {
+            if (err) res.status(404).send('Page not found');
+        });
+    });
+});
+
+// ===== Blog .html → clean URL redirect =====
+app.get(/^\/blog\/(.+)\.html$/, (req, res) => {
+    res.redirect(301, '/blog/' + req.params[0]);
+});
+
+// ===== Admin .html → clean URL redirects =====
+const adminRedirects = {
+    '/admin/login.html': '/admin/login',
+    '/admin/dashboard.html': '/admin/dashboard',
+    '/admin/editor.html': '/admin/editor',
+};
+Object.entries(adminRedirects).forEach(([oldUrl, newUrl]) => {
+    app.get(oldUrl, (req, res) => res.redirect(301, newUrl));
+});
+
 app.get('*', (req, res, next) => {
     // Skip API routes and files with extensions
     if (req.path.startsWith('/api/') || req.path.includes('.')) {
