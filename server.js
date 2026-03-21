@@ -968,6 +968,38 @@ async function generateBlogListingData(blogs) {
     const outputPath = path.join(__dirname, 'public', 'blog-listing.json');
     await fs.writeFile(outputPath, JSON.stringify(published, null, 2));
 }
+// ===== MBA Online URL Structure: 301 Redirects (old .html → new clean URLs) =====
+const mbaOnlineRedirects = {
+    '/programs/mba-online-hub.html': '/online-mba',
+    '/programs/mba-marketing.html':  '/online-mba/marketing',
+    '/programs/mba-financial.html':  '/online-mba/finance',
+    '/programs/mba-hr.html':         '/online-mba/human-resource-management',
+    '/programs/mba-operations.html': '/online-mba/operations-data-sciences',
+    '/programs/mba-business.html':   '/online-mba/business-management',
+};
+
+Object.entries(mbaOnlineRedirects).forEach(([oldPath, newPath]) => {
+    app.get(oldPath, (req, res) => res.redirect(301, newPath));
+});
+
+// ===== MBA Online Clean URL Routes =====
+const mbaOnlineRoutes = {
+    '/online-mba':                          'programs/mba-online-hub.html',
+    '/online-mba/marketing':                'programs/mba-marketing.html',
+    '/online-mba/finance':                  'programs/mba-financial.html',
+    '/online-mba/human-resource-management': 'programs/mba-hr.html',
+    '/online-mba/operations-data-sciences': 'programs/mba-operations.html',
+    '/online-mba/business-management':      'programs/mba-business.html',
+};
+
+Object.entries(mbaOnlineRoutes).forEach(([routePath, filePath]) => {
+    app.get(routePath, (req, res) => {
+        res.sendFile(path.join(__dirname, 'public', filePath), (err) => {
+            if (err) res.status(404).send('Page not found');
+        });
+    });
+});
+
 app.get('*', (req, res, next) => {
     // Skip API routes and files with extensions
     if (req.path.startsWith('/api/') || req.path.includes('.')) {
