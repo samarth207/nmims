@@ -164,6 +164,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Redirect /blog/ → /blog (trailing slash causes relative asset paths to break)
+app.get('/blog/', (req, res) => {
+    res.redirect(301, '/blog');
+});
+
 // Explicit route for /blog — must be before static middleware to prevent
 // Express from redirecting /blog → /blog/ because public/blog/ is a directory
 app.get('/blog', (req, res) => {
