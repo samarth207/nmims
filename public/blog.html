@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - NMIMS Online</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/hub-page.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/hub-page.css">
+    <link rel="stylesheet" href="/css/responsive.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -378,9 +378,9 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="css/popup-form.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link rel="stylesheet" href="css/brochure-popup.css">
+    <link rel="stylesheet" href="/css/popup-form.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/brochure-popup.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -389,7 +389,7 @@
             <div class="nav-wrapper">
                 <div class="nav-logo">
                     <a href="/">
-                        <img src="images/logo.png" alt="NMIMS Logo">
+                        <img src="/images/logo.png" alt="NMIMS Logo">
                     </a>
                 </div>
                 
@@ -428,7 +428,7 @@
                     <div class="find-program-wrapper">
                         <button class="btn btn-primary" id="findProgramBtn">
                             Find a Program
-                            <img src="images/icons/navarrow.svg" alt="arrow">
+                            <img src="/images/icons/navarrow.svg" alt="arrow">
                         </button>
                     </div>
                 </div>
@@ -442,25 +442,25 @@
                             
                             <div class="dropdown-options">
                                 <a href="/undergraduate" class="dropdown-option" data-category="undergraduate">
-                                    <img src="images/undergraduates.png" alt="For Undergraduates">
+                                    <img src="/images/undergraduates.png" alt="For Undergraduates">
                                     <span>For Undergraduates</span>
                                     <span class="arrow-right">➔</span>
                                 </a>
                                 
                                 <a href="/young-professionals" class="dropdown-option" data-category="young-professionals">
-                                    <img src="images/young-professionals.png" alt="For Young Professionals">
+                                    <img src="/images/young-professionals.png" alt="For Young Professionals">
                                     <span>For Young Professionals</span>
                                     <span class="arrow-right">➔</span>
                                 </a>
                                 
                                 <a href="/mid-senior-professionals" class="dropdown-option" data-category="mid-senior">
-                                    <img src="images/mid-senior.png" alt="For Mid-Senior Professionals">
+                                    <img src="/images/mid-senior.png" alt="For Mid-Senior Professionals">
                                     <span>For Mid-Senior Professionals</span>
                                     <span class="arrow-right">➔</span>
                                 </a>
                                 
                                 <a href="/all-programs" class="dropdown-option" data-category="all-programs">
-                                    <img src="images/all-programs.png" alt="All Programs">
+                                    <img src="/images/all-programs.png" alt="All Programs">
                                     <span>All Programs</span>
                                     <span class="arrow-right">➔</span>
                                 </a>
@@ -517,7 +517,7 @@
                                         <p>Duration: 2 years<br>Mode: Online</p>
                                     </div>
                                     <div class="program-icon">
-                                        <img src="images/mba-wx.png" alt="Program Icon">
+                                        <img src="/images/mba-wx.png" alt="Program Icon">
                                     </div>
                                 </a>
                                 
@@ -527,7 +527,7 @@
                                         <p>Duration: 2 years<br>Mode: Online</p>
                                     </div>
                                     <div class="program-icon">
-                                        <img src="images/mba.png" alt="Program Icon">
+                                        <img src="/images/mba.png" alt="Program Icon">
                                     </div>
                                 </a>
                                 
@@ -537,7 +537,7 @@
                                         <p>Duration: 3 years<br>Mode: Online</p>
                                     </div>
                                     <div class="program-icon">
-                                        <img src="images/bachelor.png" alt="Program Icon">
+                                        <img src="/images/bachelor.png" alt="Program Icon">
                                     </div>
                                 </a>
                             </div>
@@ -783,12 +783,12 @@
             <button class="modal-close" id="modalClose">×</button>
             <div class="modal-left">
                 <div class="modal-logo">
-                    <img src="images/formbanner/NMIMS-CDOE-bg.png" alt="NMIMS CDOE">
+                    <img src="/images/formbanner/NMIMS-CDOE-bg.png" alt="NMIMS CDOE">
                 </div>
                 <h2 class="modal-title">Get In Touch</h2>
                 <p class="modal-subtitle">Got questions about your next big step? Let's start a conversation and uncover the possibilities together!</p>
                 <div class="modal-image">
-                    <img src="images/formbanner/enquire-now.png" alt="Enquire Now">
+                    <img src="/images/formbanner/enquire-now.png" alt="Enquire Now">
                 </div>
             </div>
             <div class="modal-right">
@@ -885,7 +885,7 @@
         
         // Enquiry Modal
         const enquireButtons = document.querySelectorAll('.btn-enquire');
-        const enquiryModal = document.getElementById('enquiryModal');
+        const enquiryModal = document.getElementById('enquireModal');
         const modalClose = document.getElementById('modalClose');
         const programSelect = document.getElementById('programSelect');
         
@@ -998,7 +998,7 @@
                 const imgHtml = blog.featureImage 
                     ? `<img src="${escH(blog.featureImage)}" alt="${escH(blog.featureImageAlt || blog.title)}">`
                     : `<div style="height:100%;background:#E8E5FF;display:flex;align-items:center;justify-content:center;font-size:40px;">📝</div>`;
-                return `<a href="blog/${escH(blog.slug)}" class="blog-card">
+                return `<a href="/blog/${escH(blog.slug)}" class="blog-card">
                     <div class="blog-card-image">${imgHtml}</div>
                     <div class="blog-card-content">
                         ${cat ? `<span class="blog-card-category">${escH(cat)}</span>` : ''}
@@ -1018,8 +1018,8 @@
     })();
     </script>
 
-    <script src="js/popup-form.js"></script>
-    <script src="js/form-handler.js"></script>
-    <script src="js/brochure-popup.js"></script>
+    <script src="/js/popup-form.js"></script>
+    <script src="/js/form-handler.js"></script>
+    <script src="/js/brochure-popup.js"></script>
 </body>
 </html>
