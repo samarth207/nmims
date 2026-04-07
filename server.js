@@ -186,6 +186,13 @@ app.get('/health', (req, res) => {
     });
 });
 
+// Sitemap endpoint with proper SEO headers
+app.get('/sitemap.xml', (req, res) => {
+    res.setHeader('Content-Type', 'application/xml');
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+    res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+});
+
 // DB diagnostic endpoint (check if database is connected)
 app.get('/api/db-status', async (req, res) => {
     const db = getPool();
