@@ -101,6 +101,56 @@
     box-shadow: 0 0 0 3px rgba(108, 77, 230, 0.1);
 }
 
+/* Phone Input with Country Code */
+.brochure-form-card .phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.brochure-form-card .phone-input-wrapper .country-code {
+    padding: 10px 26px 10px 10px !important;
+    background: #f4f1ff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236C4DE6'/%3E%3C/svg%3E") no-repeat right 8px center !important;
+    background-size: 10px 6px !important;
+    color: #6C4DE6;
+    font-weight: 600;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    border: none !important;
+    border-right: 1.5px solid #ddd !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: auto !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 118px;
+    align-self: stretch;
+}
+
+.brochure-form-card .phone-input-wrapper input[type="tel"] {
+    border: none !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+    width: auto !important;
+    flex: 1;
+    min-width: 0;
+    padding: 11px 12px !important;
+}
+
+.brochure-form-card .phone-input-wrapper:focus-within {
+    border-color: #6C4DE6;
+    box-shadow: 0 0 0 3px rgba(108, 77, 230, 0.1);
+}
+
 .brochure-submit-btn {
     width: 100%;
     padding: 12px;

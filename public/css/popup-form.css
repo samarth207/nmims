@@ -219,6 +219,56 @@
     flex-shrink: 0;
 }
 
+/* Phone Input with Country Code */
+.popup-form-card .phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #6C4DE6;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.popup-form-card .phone-input-wrapper .country-code {
+    padding: 9px 24px 9px 9px !important;
+    background: #f4f1ff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236C4DE6'/%3E%3C/svg%3E") no-repeat right 7px center !important;
+    background-size: 9px 5px !important;
+    color: #6C4DE6;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    border: none !important;
+    border-right: 1px solid #6C4DE6 !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: auto !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 110px;
+    align-self: stretch;
+}
+
+.popup-form-card .phone-input-wrapper input[type="tel"] {
+    border: none !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+    width: auto !important;
+    flex: 1;
+    min-width: 0;
+    padding: 10px 10px !important;
+}
+
+.popup-form-card .phone-input-wrapper:focus-within {
+    border-color: #5a3cc4;
+    box-shadow: 0 0 0 3px rgba(108, 77, 230, 0.12);
+}
+
 .popup-submit-btn {
     width: 100%;
     padding: 12px;
