@@ -10,6 +10,9 @@ node_modules/
 # Form submissions fallback
 form-submissions.json
 
+# JWT secret key (auto-generated, must not be committed)
+.jwt-secret
+
 # Logs
 *.log
 npm-debug.log*

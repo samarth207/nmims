@@ -57,7 +57,21 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ===== Blog CMS Configuration =====
-const JWT_SECRET = process.env.JWT_SECRET || crypto.randomBytes(32).toString('hex');
+// Persist JWT_SECRET so server restarts don't invalidate existing tokens.
+// Priority: env var → saved .jwt-secret file → generate + save new one.
+const JWT_SECRET_FILE = path.join(__dirname, '.jwt-secret');
+function loadOrCreateJwtSecret() {
+    if (process.env.JWT_SECRET) return process.env.JWT_SECRET;
+    try {
+        if (fsSync.existsSync(JWT_SECRET_FILE)) {
+            return fsSync.readFileSync(JWT_SECRET_FILE, 'utf8').trim();
+        }
+    } catch (e) { /* fall through to generate */ }
+    const secret = crypto.randomBytes(48).toString('hex');
+    try { fsSync.writeFileSync(JWT_SECRET_FILE, secret, { mode: 0o600 }); } catch (e) { /* best-effort */ }
+    return secret;
+}
+const JWT_SECRET = loadOrCreateJwtSecret();
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -437,11 +451,18 @@ app.post('/api/admin/login', (req, res) => {
     }
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
         if (!jwt) return res.status(500).json({ success: false, message: 'Auth module not available' });
-        const token = jwt.sign({ username, role: 'admin' }, JWT_SECRET, { expiresIn: '24h' });
+        const token = jwt.sign({ username, role: 'admin' }, JWT_SECRET, { expiresIn: '7d' });
         res.json({ success: true, token });
     } else {
         res.status(401).json({ success: false, message: 'Invalid username or password' });
     }
+});
+
+// ----- Admin: Refresh Token -----
+app.post('/api/admin/refresh-token', authenticateAdmin, (req, res) => {
+    if (!jwt) return res.status(500).json({ success: false, message: 'Auth module not available' });
+    const token = jwt.sign({ username: req.adminUser.username, role: 'admin' }, JWT_SECRET, { expiresIn: '7d' });
+    res.json({ success: true, token });
 });
 
 // ----- Admin: Upload Image -----

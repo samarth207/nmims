@@ -105,6 +105,8 @@
             return localStorage.getItem('admin_token');
         }
 
+        function setToken(t) { localStorage.setItem('admin_token', t); }
+
         function requireAuth() {
             if (!getToken()) {
                 window.location.href = '/admin/login.html';
@@ -120,7 +122,65 @@
 
         requireAuth();
 
-        // Toast
+        // ===== PROACTIVE TOKEN REFRESH =====
+        async function refreshToken() {
+            try {
+                const res = await fetch(API_BASE + '/refresh-token', { method: 'POST', headers: authHeaders() });
+                if (res.ok) { const data = await res.json(); if (data.success && data.token) setToken(data.token); }
+            } catch (e) { /* silent */ }
+        }
+        setInterval(refreshToken, 6 * 60 * 60 * 1000);
+
+        // ===== RE-AUTH MODAL =====
+        function showReAuthModal(retryCallback) {
+            let modal = document.getElementById('reAuthModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'reAuthModal';
+                modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif';
+                modal.innerHTML = `
+                    <div style="background:#fff;border-radius:16px;padding:36px 32px;width:340px;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+                        <h3 style="margin:0 0 8px;color:#333;font-size:20px;">Session Expired</h3>
+                        <p style="margin:0 0 20px;color:#666;font-size:14px;">Your session has expired. Please sign in again to continue.</p>
+                        <input id="reAuthUser" type="text" placeholder="Username" style="width:100%;padding:10px 12px;border:1px solid #6C4DE6;border-radius:8px;margin-bottom:10px;font-size:14px;box-sizing:border-box;font-family:inherit">
+                        <input id="reAuthPass" type="password" placeholder="Password" style="width:100%;padding:10px 12px;border:1px solid #6C4DE6;border-radius:8px;margin-bottom:16px;font-size:14px;box-sizing:border-box;font-family:inherit">
+                        <p id="reAuthError" style="color:#e53e3e;font-size:13px;margin:0 0 12px;display:none;"></p>
+                        <div style="display:flex;gap:10px;">
+                            <button id="reAuthSubmit" style="flex:1;padding:11px;background:#6C4DE6;color:#fff;border:none;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;">Sign In</button>
+                            <button id="reAuthLogout" style="padding:11px 16px;background:#f1f1f1;color:#333;border:none;border-radius:8px;font-size:14px;cursor:pointer;">Logout</button>
+                        </div>
+                    </div>`;
+                document.body.appendChild(modal);
+            }
+            modal.style.display = 'flex';
+            const errEl = modal.querySelector('#reAuthError');
+            errEl.style.display = 'none';
+
+            modal.querySelector('#reAuthSubmit').onclick = async () => {
+                const username = modal.querySelector('#reAuthUser').value.trim();
+                const password = modal.querySelector('#reAuthPass').value.trim();
+                if (!username || !password) { errEl.textContent = 'Please enter credentials.'; errEl.style.display = 'block'; return; }
+                const btn = modal.querySelector('#reAuthSubmit');
+                btn.textContent = 'Signing in...'; btn.disabled = true;
+                try {
+                    const res = await fetch('/api/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username, password }) });
+                    const data = await res.json();
+                    if (data.success && data.token) {
+                        setToken(data.token);
+                        modal.style.display = 'none';
+                        if (retryCallback) retryCallback();
+                    } else {
+                        errEl.textContent = data.message || 'Invalid credentials.'; errEl.style.display = 'block';
+                        btn.textContent = 'Sign In'; btn.disabled = false;
+                    }
+                } catch (e) {
+                    errEl.textContent = 'Login failed.'; errEl.style.display = 'block';
+                    btn.textContent = 'Sign In'; btn.disabled = false;
+                }
+            };
+            modal.querySelector('#reAuthLogout').onclick = () => { localStorage.removeItem('admin_token'); window.location.href = '/admin/login.html'; };
+            modal.querySelector('#reAuthPass').onkeydown = (e) => { if (e.key === 'Enter') modal.querySelector('#reAuthSubmit').click(); };
+        }
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
@@ -135,8 +195,7 @@
             try {
                 const res = await fetch(API_BASE + '/blogs', { headers: authHeaders() });
                 if (res.status === 401 || res.status === 403) {
-                    localStorage.removeItem('admin_token');
-                    window.location.href = '/admin/login.html';
+                    showReAuthModal(loadBlogs);
                     return;
                 }
                 const data = await res.json();
