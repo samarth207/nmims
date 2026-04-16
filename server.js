@@ -434,8 +434,50 @@ app.get('/api/submissions', async (req, res) => {
         );
         res.json({ success: true, data: rows });
     } catch (err) {
-        console.error('Fetch error:', err.message);
-        res.status(500).json({ success: false, message: 'Server error.' });
+        // Fallback to file-based submissions
+        try {
+            const filePath = path.join(__dirname, 'form-submissions.json');
+            const data = await fs.readFile(filePath, 'utf8');
+            const submissions = JSON.parse(data).map((s, i) => ({ id: 'f' + i, ...s })).reverse();
+            res.json({ success: true, data: submissions, fallback: true });
+        } catch (fileErr) {
+            console.error('Fetch submissions error:', err.message);
+            res.status(500).json({ success: false, message: 'Server error.' });
+        }
+    }
+});
+
+// ===== API: Delete submission (admin) =====
+app.delete('/api/admin/submissions/:id', authenticateAdmin, async (req, res) => {
+    const id = req.params.id;
+    try {
+        // Try DB first
+        const db = getPool();
+        if (db && !String(id).startsWith('f')) {
+            const numId = parseInt(id);
+            if (!isNaN(numId)) {
+                const [result] = await db.query('DELETE FROM form_submissions WHERE id = ?', [numId]);
+                if (result.affectedRows > 0) return res.json({ success: true });
+            }
+        }
+        // Fallback: remove from JSON file by index (id = 'f' + original_index)
+        const filePath = path.join(__dirname, 'form-submissions.json');
+        const data = await fs.readFile(filePath, 'utf8');
+        let submissions = JSON.parse(data);
+        if (String(id).startsWith('f')) {
+            const idx = parseInt(id.slice(1));
+            // File is stored oldest-first; reversed indices need adjustment
+            const actualIdx = submissions.length - 1 - idx;
+            if (actualIdx >= 0 && actualIdx < submissions.length) {
+                submissions.splice(actualIdx, 1);
+                await fs.writeFile(filePath, JSON.stringify(submissions, null, 2));
+                return res.json({ success: true });
+            }
+        }
+        res.status(404).json({ success: false, message: 'Submission not found' });
+    } catch (err) {
+        console.error('Delete submission error:', err.message);
+        res.status(500).json({ success: false, message: 'Server error' });
     }
 });
 

@@ -147,6 +147,9 @@
                         <span class="ql-formats">
                             <button type="button" class="ql-table-btn" id="insertCtaBtn" title="Insert CTA Block" style="color:#6C4DE6;">&#x1f3af; CTA</button>
                         </span>
+                        <span class="ql-formats">
+                            <button type="button" class="ql-table-btn" id="insertFormBtn" title="Insert Lead Form" style="color:#16a34a;">&#x1F4CB; Form</button>
+                        </span>
                     </div>
                     <div id="editor"></div>
                 </div>
@@ -294,6 +297,43 @@
                         <input type="text" id="tagInput" placeholder="Add tag...">
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lead Form Widget Modal -->
+    <div class="modal-overlay" id="formWidgetModal">
+        <div class="modal-box" style="max-width:500px;">
+            <h3>&#x1F4CB; Insert Lead Form</h3>
+            <div class="field">
+                <label>Form Title <span style="color:var(--text-muted);font-weight:400;">(Editable)</span></label>
+                <input type="text" id="fwTitle" value="Enquire Now" placeholder="e.g. Get More Information">
+            </div>
+            <div class="field-row">
+                <div class="field">
+                    <label>Background Color</label>
+                    <input type="color" id="fwBgColor" value="#f0edff" style="width:100%;height:42px;padding:4px 8px;border:1.5px solid #e0e0e0;border-radius:8px;cursor:pointer;">
+                </div>
+                <div class="field">
+                    <label>Accent / Button Color</label>
+                    <input type="color" id="fwAccentColor" value="#6C4DE6" style="width:100%;height:42px;padding:4px 8px;border:1.5px solid #e0e0e0;border-radius:8px;cursor:pointer;">
+                </div>
+            </div>
+            <div class="field">
+                <label>Submit Button Text</label>
+                <input type="text" id="fwBtnText" value="Submit Enquiry" placeholder="e.g. Get Callback">
+            </div>
+            <div style="background:#f8f9ff;border-radius:10px;padding:14px;margin-bottom:4px;">
+                <p style="font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Fixed Fields (always included)</p>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                    <div style="background:#fff;border-radius:6px;padding:8px 10px;font-size:12px;color:#555;border:1px solid #e8e8e8;text-align:center;">&#x1F464; Name *</div>
+                    <div style="background:#fff;border-radius:6px;padding:8px 10px;font-size:12px;color:#555;border:1px solid #e8e8e8;text-align:center;">&#x1F4DE; Number *</div>
+                    <div style="background:#fff;border-radius:6px;padding:8px 10px;font-size:12px;color:#555;border:1px solid #e8e8e8;text-align:center;">&#x1F4DA; Course</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" id="fwCancel">Cancel</button>
+                <button class="btn-insert" id="fwInsert">Insert Form</button>
             </div>
         </div>
     </div>
@@ -659,6 +699,41 @@
             // Insert as a raw embed blot so Quill doesn't strip the HTML
             const range = quill.getSelection(true);
             quill.insertEmbed(range.index, 'rawhtml', ctaHtml, Quill.sources.USER);
+            quill.setSelection(range.index + 1, Quill.sources.SILENT);
+        });
+
+        // ===== LEAD FORM WIDGET =====
+        document.getElementById('insertFormBtn').addEventListener('click', () => {
+            document.getElementById('formWidgetModal').classList.add('active');
+        });
+        document.getElementById('fwCancel').addEventListener('click', () => {
+            document.getElementById('formWidgetModal').classList.remove('active');
+        });
+        document.getElementById('fwInsert').addEventListener('click', () => {
+            const title   = document.getElementById('fwTitle').value.trim() || 'Enquire Now';
+            const bg      = document.getElementById('fwBgColor').value;
+            const accent  = document.getElementById('fwAccentColor').value;
+            const btnText = document.getElementById('fwBtnText').value.trim() || 'Submit Enquiry';
+            document.getElementById('formWidgetModal').classList.remove('active');
+
+            // Self-contained inline click handler (runs in published blog context)
+            const onclickJs = `(function(b){var f=b.closest('.blf');var n=f.querySelector('[data-n]').value.trim();var p=f.querySelector('[data-p]').value.trim();if(!n||!p){f.querySelector('[data-err]').textContent='Please fill in your Name and Phone Number.';f.querySelector('[data-err]').style.display='block';return;}f.querySelector('[data-err]').style.display='none';b.disabled=true;b.textContent='Sending\u2026';fetch('/api/submit-form',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({form_type:'enquiry',enquiry_type:'blog_inline',first_name:n,phone:p,programme:f.querySelector('[data-c]').value.trim(),page_url:window.location.href})}).then(function(r){return r.json();}).then(function(){f.querySelector('[data-msg]').style.display='block';b.style.display='none';}).catch(function(){f.querySelector('[data-msg]').style.display='block';b.style.display='none';});})(this)`;
+
+            const formHtml =
+`<div class="blf" style="background:${bg};border-radius:16px;padding:32px 28px;margin:28px 0;border:2px solid ${accent}30;font-family:inherit;">
+<h3 style="color:${accent};font-size:20px;font-weight:700;margin:0 0 20px 0;">${escapeHtml(title)}</h3>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px;">
+<input data-n type="text" placeholder="Your Name *" style="flex:1;min-width:160px;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:#fff;" onfocus="this.style.borderColor='${accent}'" onblur="this.style.borderColor='#ddd'">
+<input data-p type="tel" placeholder="Phone Number *" style="flex:1;min-width:160px;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:#fff;" onfocus="this.style.borderColor='${accent}'" onblur="this.style.borderColor='#ddd'">
+<input data-c type="text" placeholder="Course Interested In" style="flex:1;min-width:160px;padding:11px 14px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;outline:none;background:#fff;" onfocus="this.style.borderColor='${accent}'" onblur="this.style.borderColor='#ddd'">
+</div>
+<p data-err style="display:none;color:#e53e3e;font-size:13px;margin:0 0 10px 0;"></p>
+<button onclick="${escapeAttr(onclickJs)}" style="background:${accent};color:#fff;border:none;border-radius:8px;padding:13px 32px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">${escapeHtml(btnText)}</button>
+<p data-msg style="display:none;color:#16a34a;font-weight:600;margin:14px 0 0 0;font-size:15px;">&#x2713; Thank you! Our team will reach you shortly.</p>
+</div>`;
+
+            const range = quill.getSelection(true);
+            quill.insertEmbed(range.index, 'rawhtml', formHtml, Quill.sources.USER);
             quill.setSelection(range.index + 1, Quill.sources.SILENT);
         });
 

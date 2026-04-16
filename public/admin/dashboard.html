@@ -17,7 +17,8 @@
         <div class="left">
             <div class="logo"><img src="/images/logo.png" alt="NMIMS"></div>
             <nav class="nav-links">
-                <a href="/admin/dashboard" class="active">Blog Posts</a>
+                <a href="#" id="tabBlogsLink" class="active">Blog Posts</a>
+                <a href="#" id="tabSubmissionsLink">Form Submissions</a>
             </nav>
         </div>
         <div class="right">
@@ -28,6 +29,9 @@
 
     <!-- Dashboard -->
     <div class="dashboard-container">
+
+        <!-- ===== BLOG POSTS TAB ===== -->
+        <div id="tab-blogs" class="tab-panel active">
         <div class="dashboard-header">
             <h1>Blog Posts</h1>
             <a href="/admin/editor" class="btn-new-blog">+ New Blog Post</a>
@@ -55,6 +59,13 @@
 
         <!-- Blog Table -->
         <div class="blog-table-card">
+            <!-- Bulk Action Toolbar -->
+            <div id="blogBulkBar" class="bulk-toolbar">
+                <span class="bulk-count" id="blogBulkCount">0 selected</span>
+                <button class="bulk-btn" id="blogExportSelected">&#x2B07; Export CSV</button>
+                <button class="bulk-btn danger" id="blogDeleteSelected">&#x1F5D1; Delete Selected</button>
+                <button class="bulk-btn bulk-deselect" id="blogDeselectAll">&#x2715; Deselect All</button>
+            </div>
             <div class="table-header">
                 <h2>All Posts</h2>
                 <div class="table-filters">
@@ -72,16 +83,18 @@
             <table class="blog-table">
                 <thead>
                     <tr>
+                        <th style="width:44px;"><input type="checkbox" id="blogSelectAll" title="Select All"></th>
                         <th>Blog Post</th>
                         <th>Category</th>
                         <th>Status</th>
                         <th>Date</th>
+                        <th>Color</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="blogTableBody">
                     <tr>
-                        <td colspan="5">
+                        <td colspan="7">
                             <div class="empty-state">
                                 <h3>No blog posts yet</h3>
                                 <p>Create your first blog post to get started.</p>
@@ -91,7 +104,92 @@
                 </tbody>
             </table>
         </div>
-    </div>
+        </div><!-- end tab-blogs -->
+
+        <!-- ===== FORM SUBMISSIONS TAB ===== -->
+        <div id="tab-submissions" class="tab-panel">
+
+            <div class="dashboard-header">
+                <h1>Form Submissions</h1>
+                <div style="display:flex;gap:10px;">
+                    <button class="btn-new-blog" style="background:#16a34a;" id="subExportAll">&#x2B07; Export All CSV</button>
+                </div>
+            </div>
+
+            <!-- Submission Stats -->
+            <div class="stats-grid">
+                <div class="stat-card"><div class="label">Total</div><div class="value purple" id="subStatTotal">—</div></div>
+                <div class="stat-card"><div class="label">Today</div><div class="value green" id="subStatToday">—</div></div>
+                <div class="stat-card"><div class="label">Enquiry</div><div class="value blue" id="subStatEnquiry">—</div></div>
+                <div class="stat-card"><div class="label">Popup</div><div class="value orange" id="subStatPopup">—</div></div>
+                <div class="stat-card"><div class="label">Blog Forms</div><div class="value" id="subStatBlog" style="color:#16a34a;">—</div></div>
+            </div>
+
+            <!-- Submissions Table Card -->
+            <div class="blog-table-card">
+                <!-- Bulk Toolbar for Submissions -->
+                <div id="subBulkBar" class="bulk-toolbar">
+                    <span class="bulk-count" id="subBulkCount">0 selected</span>
+                    <button class="bulk-btn" id="subExportSelected">&#x2B07; Export CSV</button>
+                    <button class="bulk-btn" id="subHighlightSelected">&#x1F3A8; Highlight</button>
+                    <button class="bulk-btn danger" id="subDeleteSelected">&#x1F5D1; Delete Selected</button>
+                    <button class="bulk-btn bulk-deselect" id="subDeselectAll">&#x2715; Deselect</button>
+                </div>
+
+                <!-- Color Palette Popup -->
+                <div id="colorPalettePopup" style="display:none;position:fixed;z-index:9999;background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
+                    <div style="font-size:11px;color:#999;margin-bottom:8px;font-weight:600;">Row Highlight Color</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;width:180px;">
+                        <div class="palette-swatch" data-color="" style="background:#fff;border:2px solid #ddd;width:24px;height:24px;border-radius:4px;cursor:pointer;font-size:9px;display:flex;align-items:center;justify-content:center;color:#999;" title="Clear">&#x2715;</div>
+                        <div class="palette-swatch" data-color="#fff3e0" style="background:#fff3e0;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#fce4ec" style="background:#fce4ec;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#e8f5e9" style="background:#e8f5e9;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#e3f2fd" style="background:#e3f2fd;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#f3e5f5" style="background:#f3e5f5;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#e0f2f1" style="background:#e0f2f1;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#fffde7" style="background:#fffde7;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#fbe9e7" style="background:#fbe9e7;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                        <div class="palette-swatch" data-color="#f1f8e9" style="background:#f1f8e9;width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;"></div>
+                    </div>
+                </div>
+
+                <div class="table-header">
+                    <h2>All Submissions</h2>
+                    <div class="table-filters">
+                        <select id="subFilterType">
+                            <option value="">All Types</option>
+                            <option value="enquiry">Enquiry</option>
+                            <option value="popup">Popup</option>
+                            <option value="brochure">Brochure</option>
+                            <option value="blog_inline">Blog Form</option>
+                        </select>
+                        <input type="text" id="subSearch" placeholder="Search name, phone...">
+                    </div>
+                </div>
+
+                <div style="overflow-x:auto;">
+                <table class="blog-table" id="subTable">
+                    <thead>
+                        <tr>
+                            <th style="width:44px;"><input type="checkbox" id="subSelectAll" title="Select All"></th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Course / Programme</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Color</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subTableBody">
+                        <tr><td colspan="8"><div class="empty-state"><h3>Loading...</h3></div></td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div><!-- end tab-submissions -->
+
+    </div><!-- end dashboard-container -->
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
@@ -217,59 +315,6 @@
             document.getElementById('statScheduled').textContent = allBlogs.filter(b => b.status === 'scheduled').length;
         }
 
-        // Render table
-        function renderTable() {
-            const tbody = document.getElementById('blogTableBody');
-            const statusFilter = document.getElementById('filterStatus').value;
-            const search = document.getElementById('searchInput').value.toLowerCase();
-
-            let filtered = allBlogs;
-            if (statusFilter) filtered = filtered.filter(b => b.status === statusFilter);
-            if (search) filtered = filtered.filter(b => 
-                (b.title || '').toLowerCase().includes(search) || 
-                (b.slug || '').toLowerCase().includes(search)
-            );
-
-            // Sort by updatedAt descending
-            filtered.sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt));
-
-            if (filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><h3>No posts found</h3><p>Try adjusting your filters.</p></div></td></tr>';
-                return;
-            }
-
-            tbody.innerHTML = filtered.map(blog => {
-                const date = blog.publishDate || (blog.createdAt ? blog.createdAt.split('T')[0] : '—');
-                const categories = (blog.categories || []).join(', ') || '—';
-                const thumb = blog.featureImage ? blog.featureImage : '';
-                const thumbHtml = thumb 
-                    ? `<img src="${escapeHtml(thumb)}" alt="" class="blog-thumb">` 
-                    : '<div class="blog-thumb" style="background:#eee;display:flex;align-items:center;justify-content:center;font-size:18px;">📝</div>';
-
-                return `<tr>
-                    <td>
-                        <div class="blog-title-cell">
-                            ${thumbHtml}
-                            <div class="blog-title-text">
-                                <h4>${escapeHtml(blog.title || 'Untitled')}</h4>
-                                <span>/blog/${escapeHtml(blog.slug || '')}</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td>${escapeHtml(categories)}</td>
-                    <td><span class="status-badge ${blog.status || 'draft'}">${escapeHtml(blog.status || 'draft')}</span></td>
-                    <td>${escapeHtml(date)}</td>
-                    <td>
-                        <div class="action-btns">
-                            <button class="action-btn" onclick="editBlog('${blog.id}')" title="Edit">✏️</button>
-                            ${blog.status === 'published' ? `<button class="action-btn" onclick="viewBlog('${escapeHtml(blog.slug)}')" title="View">👁️</button>` : ''}
-                            <button class="action-btn delete" onclick="deleteBlog('${blog.id}')" title="Delete">🗑️</button>
-                        </div>
-                    </td>
-                </tr>`;
-            }).join('');
-        }
-
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text || '';
@@ -310,6 +355,404 @@
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('admin_token');
             window.location.href = '/admin/login.html';
+        });
+
+        // ===== TAB SWITCHING =====
+        document.getElementById('tabBlogsLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('tab-blogs').classList.add('active');
+            document.getElementById('tab-submissions').classList.remove('active');
+            document.getElementById('tabBlogsLink').classList.add('active');
+            document.getElementById('tabSubmissionsLink').classList.remove('active');
+        });
+        document.getElementById('tabSubmissionsLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('tab-submissions').classList.add('active');
+            document.getElementById('tab-blogs').classList.remove('active');
+            document.getElementById('tabSubmissionsLink').classList.add('active');
+            document.getElementById('tabBlogsLink').classList.remove('active');
+            if (!allSubmissions) loadSubmissions();
+        });
+
+        // ===== BLOG TABLE BULK SELECT =====
+        let selectedBlogIds = new Set();
+
+        function renderTable() {
+            const tbody = document.getElementById('blogTableBody');
+            const statusFilter = document.getElementById('filterStatus').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            let filtered = allBlogs;
+            if (statusFilter) filtered = filtered.filter(b => b.status === statusFilter);
+            if (search) filtered = filtered.filter(b =>
+                (b.title || '').toLowerCase().includes(search) ||
+                (b.slug || '').toLowerCase().includes(search)
+            );
+            filtered.sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt));
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7"><div class="empty-state"><h3>No posts found</h3><p>Try adjusting your filters.</p></div></td></tr>';
+                return;
+            }
+
+            const ROW_COLORS = JSON.parse(localStorage.getItem('blog_row_colors') || '{}');
+
+            tbody.innerHTML = filtered.map(blog => {
+                const date = blog.publishDate || (blog.createdAt ? blog.createdAt.split('T')[0] : '—');
+                const categories = (blog.categories || []).join(', ') || '—';
+                const thumb = blog.featureImage || '';
+                const thumbHtml = thumb
+                    ? `<img src="${escapeHtml(thumb)}" alt="" class="blog-thumb">`
+                    : '<div class="blog-thumb" style="background:#eee;display:flex;align-items:center;justify-content:center;font-size:18px;">📝</div>';
+                const checked = selectedBlogIds.has(blog.id) ? 'checked' : '';
+                const rowBg = ROW_COLORS[blog.id] ? `background:${ROW_COLORS[blog.id]} !important;` : '';
+                const dotBg = ROW_COLORS[blog.id] ? ROW_COLORS[blog.id] : '#fff';
+                return `<tr class="${selectedBlogIds.has(blog.id) ? 'row-selected' : ''}" style="${rowBg}" data-id="${blog.id}">
+                    <td><input type="checkbox" class="blog-row-cb" data-id="${blog.id}" ${checked}></td>
+                    <td>
+                        <div class="blog-title-cell">
+                            ${thumbHtml}
+                            <div class="blog-title-text">
+                                <h4>${escapeHtml(blog.title || 'Untitled')}</h4>
+                                <span>/blog/${escapeHtml(blog.slug || '')}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${escapeHtml(categories)}</td>
+                    <td><span class="status-badge ${blog.status || 'draft'}">${escapeHtml(blog.status || 'draft')}</span></td>
+                    <td>${escapeHtml(date)}</td>
+                    <td><span class="row-color-dot" style="background:${dotBg};border:2px solid #ccc;display:inline-block;width:18px;height:18px;border-radius:50%;cursor:pointer;" data-blogid="${blog.id}" title="Set row color"></span></td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="action-btn" onclick="editBlog('${blog.id}')" title="Edit">✏️</button>
+                            ${blog.status === 'published' ? `<button class="action-btn" onclick="viewBlog('${escapeHtml(blog.slug)}')" title="View">👁️</button>` : ''}
+                            <button class="action-btn delete" onclick="deleteBlog('${blog.id}')" title="Delete">🗑️</button>
+                        </div>
+                    </td>
+                </tr>`;
+            }).join('');
+
+            updateBlogBulkBar();
+        }
+
+        function updateBlogBulkBar() {
+            const bar = document.getElementById('blogBulkBar');
+            const count = document.getElementById('blogBulkCount');
+            if (selectedBlogIds.size > 0) {
+                bar.classList.add('visible');
+                count.textContent = selectedBlogIds.size + ' selected';
+            } else {
+                bar.classList.remove('visible');
+            }
+            const all = document.querySelectorAll('.blog-row-cb');
+            document.getElementById('blogSelectAll').checked = all.length > 0 && all.length === selectedBlogIds.size;
+        }
+
+        document.getElementById('blogTableBody').addEventListener('change', (e) => {
+            if (e.target.classList.contains('blog-row-cb')) {
+                const id = e.target.dataset.id;
+                if (e.target.checked) selectedBlogIds.add(id); else selectedBlogIds.delete(id);
+                updateBlogBulkBar();
+                const row = e.target.closest('tr');
+                if (row) row.classList.toggle('row-selected', e.target.checked);
+            }
+        });
+
+        document.getElementById('blogSelectAll').addEventListener('change', (e) => {
+            document.querySelectorAll('.blog-row-cb').forEach(cb => {
+                cb.checked = e.target.checked;
+                if (e.target.checked) selectedBlogIds.add(cb.dataset.id);
+                else selectedBlogIds.delete(cb.dataset.id);
+            });
+            document.querySelectorAll('#blogTableBody tr').forEach(row => row.classList.toggle('row-selected', e.target.checked));
+            updateBlogBulkBar();
+        });
+
+        document.getElementById('blogDeselectAll').addEventListener('click', () => {
+            selectedBlogIds.clear();
+            document.querySelectorAll('.blog-row-cb').forEach(cb => { cb.checked = false; });
+            document.querySelectorAll('#blogTableBody tr').forEach(row => row.classList.remove('row-selected'));
+            updateBlogBulkBar();
+        });
+
+        document.getElementById('blogDeleteSelected').addEventListener('click', async () => {
+            if (selectedBlogIds.size === 0) return;
+            if (!confirm(`Delete ${selectedBlogIds.size} selected blog post(s)?`)) return;
+            for (const id of [...selectedBlogIds]) {
+                await fetch(API_BASE + '/blogs/' + id, { method: 'DELETE', headers: authHeaders() }).catch(() => {});
+            }
+            selectedBlogIds.clear();
+            showToast('Selected posts deleted', 'success');
+            loadBlogs();
+        });
+
+        document.getElementById('blogExportSelected').addEventListener('click', () => {
+            const rows = allBlogs.filter(b => selectedBlogIds.has(b.id));
+            downloadCSV(['Title', 'Slug', 'Status', 'Categories', 'Date'],
+                rows.map(b => [b.title || '', b.slug || '', b.status || '', (b.categories || []).join('; '), b.publishDate || '']),
+                'blog-export.csv');
+        });
+
+        // Blog row color dots
+        document.getElementById('blogTableBody').addEventListener('click', (e) => {
+            if (!e.target.classList.contains('row-color-dot')) return;
+            openColorPalette(e.target, (color) => {
+                const blogId = e.target.dataset.blogid;
+                const colors = JSON.parse(localStorage.getItem('blog_row_colors') || '{}');
+                if (color) colors[blogId] = color; else delete colors[blogId];
+                localStorage.setItem('blog_row_colors', JSON.stringify(colors));
+                renderTable();
+            });
+        });
+
+        // ===== CSV EXPORT HELPER =====
+        function downloadCSV(headers, rows, filename) {
+            const esc = v => '"' + String(v || '').replace(/"/g, '""') + '"';
+            const csv = [headers.map(esc).join(','), ...rows.map(r => r.map(esc).join(','))].join('\r\n');
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+        // ===== FORM SUBMISSIONS =====
+        let allSubmissions = null;
+        let selectedSubIds = new Set();
+        const SUB_COLORS_KEY = 'sub_row_colors';
+
+        async function loadSubmissions() {
+            document.getElementById('subTableBody').innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>Loading submissions...</h3></div></td></tr>';
+            try {
+                const res = await fetch('/api/submissions', { headers: authHeaders() });
+                const data = await res.json();
+                if (data.success) {
+                    allSubmissions = data.data || [];
+                    updateSubStats();
+                    renderSubmissions();
+                } else {
+                    document.getElementById('subTableBody').innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>Could not load submissions</h3><p>Database may not be configured.</p></div></td></tr>';
+                }
+            } catch (err) {
+                document.getElementById('subTableBody').innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>Could not load submissions</h3><p>Check database connection.</p></div></td></tr>';
+            }
+        }
+
+        function updateSubStats() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('subStatTotal').textContent = allSubmissions.length;
+            document.getElementById('subStatToday').textContent = allSubmissions.filter(s => (s.created_at || '').startsWith(today)).length;
+            document.getElementById('subStatEnquiry').textContent = allSubmissions.filter(s => s.form_type === 'enquiry').length;
+            document.getElementById('subStatPopup').textContent = allSubmissions.filter(s => s.form_type === 'popup').length;
+            document.getElementById('subStatBlog').textContent = allSubmissions.filter(s => s.enquiry_type === 'blog_inline').length;
+        }
+
+        const TYPE_BADGE_CLASS = { enquiry: 'badge-enquiry', popup: 'badge-popup', brochure: 'badge-brochure', blog_inline: 'badge-blog' };
+        const TYPE_LABEL = { enquiry: 'Enquiry', popup: 'Popup', brochure: 'Brochure', blog_inline: 'Blog Form' };
+
+        function renderSubmissions() {
+            if (!allSubmissions) return;
+            const tbody = document.getElementById('subTableBody');
+            const typeFilter = document.getElementById('subFilterType').value;
+            const search = document.getElementById('subSearch').value.toLowerCase();
+
+            let filtered = allSubmissions;
+            if (typeFilter === 'blog_inline') {
+                filtered = filtered.filter(s => s.enquiry_type === 'blog_inline');
+            } else if (typeFilter) {
+                filtered = filtered.filter(s => s.form_type === typeFilter && s.enquiry_type !== 'blog_inline');
+            }
+            if (search) {
+                filtered = filtered.filter(s =>
+                    (s.first_name || '').toLowerCase().includes(search) ||
+                    (s.last_name || '').toLowerCase().includes(search) ||
+                    (s.phone || '').includes(search) ||
+                    (s.email || '').toLowerCase().includes(search)
+                );
+            }
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>No submissions found</h3><p>Try adjusting your filters.</p></div></td></tr>';
+                return;
+            }
+
+            const ROW_COLORS = JSON.parse(localStorage.getItem(SUB_COLORS_KEY) || '{}');
+
+            tbody.innerHTML = filtered.map(s => {
+                const sid = String(s.id || s.created_at);
+                const name = [(s.first_name || ''), (s.last_name || '')].filter(Boolean).join(' ') || '—';
+                const typeKey = s.enquiry_type === 'blog_inline' ? 'blog_inline' : (s.form_type || 'enquiry');
+                const badgeClass = TYPE_BADGE_CLASS[typeKey] || 'badge-default';
+                const typeLabel = TYPE_LABEL[typeKey] || typeKey;
+                const date = s.created_at ? new Date(s.created_at).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) : '—';
+                const checked = selectedSubIds.has(sid) ? 'checked' : '';
+                const rowBg = ROW_COLORS[sid] ? `style="background:${ROW_COLORS[sid]};"` : '';
+                const dotBg = ROW_COLORS[sid] || '#fff';
+                return `<tr class="${selectedSubIds.has(sid) ? 'row-selected' : ''}" ${rowBg} data-sid="${sid}">
+                    <td><input type="checkbox" class="sub-row-cb" data-sid="${sid}" ${checked}></td>
+                    <td><strong>${escapeHtml(name)}</strong>${s.email ? `<br><small style="color:#999;">${escapeHtml(s.email)}</small>` : ''}</td>
+                    <td>${escapeHtml(s.phone || '—')}</td>
+                    <td>${escapeHtml(s.programme || '—')}</td>
+                    <td><span class="status-badge ${badgeClass}">${escapeHtml(typeLabel)}</span></td>
+                    <td style="white-space:nowrap;">${escapeHtml(date)}</td>
+                    <td><span class="row-color-dot" style="background:${dotBg};border:2px solid #ccc;display:inline-block;width:18px;height:18px;border-radius:50%;cursor:pointer;" data-sid="${sid}" title="Set row color"></span></td>
+                    <td>
+                        <button class="action-btn delete sub-delete-btn" data-sid="${sid}" title="Delete">🗑️</button>
+                    </td>
+                </tr>`;
+            }).join('');
+            updateSubBulkBar();
+        }
+
+        function updateSubBulkBar() {
+            const bar = document.getElementById('subBulkBar');
+            const count = document.getElementById('subBulkCount');
+            if (selectedSubIds.size > 0) {
+                bar.classList.add('visible');
+                count.textContent = selectedSubIds.size + ' selected';
+            } else {
+                bar.classList.remove('visible');
+            }
+            const all = document.querySelectorAll('.sub-row-cb');
+            document.getElementById('subSelectAll').checked = all.length > 0 && all.length === selectedSubIds.size;
+        }
+
+        document.getElementById('subTableBody').addEventListener('change', (e) => {
+            if (e.target.classList.contains('sub-row-cb')) {
+                const sid = e.target.dataset.sid;
+                if (e.target.checked) selectedSubIds.add(sid); else selectedSubIds.delete(sid);
+                updateSubBulkBar();
+                const row = e.target.closest('tr');
+                if (row) row.classList.toggle('row-selected', e.target.checked);
+            }
+        });
+
+        document.getElementById('subSelectAll').addEventListener('change', (e) => {
+            document.querySelectorAll('.sub-row-cb').forEach(cb => {
+                cb.checked = e.target.checked;
+                if (e.target.checked) selectedSubIds.add(cb.dataset.sid); else selectedSubIds.delete(cb.dataset.sid);
+            });
+            document.querySelectorAll('#subTableBody tr').forEach(row => row.classList.toggle('row-selected', e.target.checked));
+            updateSubBulkBar();
+        });
+
+        document.getElementById('subDeselectAll').addEventListener('click', () => {
+            selectedSubIds.clear();
+            document.querySelectorAll('.sub-row-cb').forEach(cb => { cb.checked = false; });
+            document.querySelectorAll('#subTableBody tr').forEach(row => row.classList.remove('row-selected'));
+            updateSubBulkBar();
+        });
+
+        document.getElementById('subDeleteSelected').addEventListener('click', async () => {
+            if (selectedSubIds.size === 0) return;
+            if (!confirm(`Delete ${selectedSubIds.size} selected submission(s)?`)) return;
+            let deleted = 0;
+            for (const sid of [...selectedSubIds]) {
+                try {
+                    const res = await fetch('/api/admin/submissions/' + encodeURIComponent(sid), { method: 'DELETE', headers: authHeaders() });
+                    const data = await res.json();
+                    if (data.success) {
+                        allSubmissions = allSubmissions.filter(s => String(s.id || s.created_at) !== sid);
+                        deleted++;
+                    }
+                } catch (e) { /* ignore */ }
+            }
+            selectedSubIds.clear();
+            updateSubStats();
+            renderSubmissions();
+            showToast(deleted + ' submission(s) deleted', 'success');
+        });
+
+        // Per-row delete
+        document.getElementById('subTableBody').addEventListener('click', async (e) => {
+            if (e.target.classList.contains('sub-delete-btn')) {
+                const sid = e.target.dataset.sid;
+                if (!confirm('Delete this submission?')) return;
+                try {
+                    const res = await fetch('/api/admin/submissions/' + encodeURIComponent(sid), { method: 'DELETE', headers: authHeaders() });
+                    const data = await res.json();
+                    if (data.success) {
+                        allSubmissions = allSubmissions.filter(s => String(s.id || s.created_at) !== sid);
+                        updateSubStats();
+                        renderSubmissions();
+                        showToast('Submission deleted', 'success');
+                    } else { showToast('Delete failed', 'error'); }
+                } catch { showToast('Delete failed', 'error'); }
+            }
+        });
+
+        document.getElementById('subExportSelected').addEventListener('click', () => {
+            const rows = (allSubmissions || []).filter(s => selectedSubIds.has(String(s.id || s.created_at)));
+            exportSubmissionsCSV(rows, 'submissions-selected.csv');
+        });
+
+        document.getElementById('subExportAll').addEventListener('click', () => {
+            if (!allSubmissions) { showToast('Load submissions first', 'info'); return; }
+            exportSubmissionsCSV(allSubmissions, 'submissions-all.csv');
+        });
+
+        function exportSubmissionsCSV(rows, filename) {
+            downloadCSV(
+                ['Name', 'Email', 'Phone', 'Programme', 'Type', 'Enquiry Type', 'City', 'Date'],
+                rows.map(s => [
+                    [(s.first_name || ''), (s.last_name || '')].join(' ').trim(),
+                    s.email || '', s.phone || '', s.programme || '',
+                    s.form_type || '', s.enquiry_type || '', s.city || '',
+                    s.created_at ? new Date(s.created_at).toLocaleString() : ''
+                ]),
+                filename
+            );
+        }
+
+        // Submissions filter listeners
+        document.getElementById('subFilterType').addEventListener('change', renderSubmissions);
+        document.getElementById('subSearch').addEventListener('input', renderSubmissions);
+
+        // Bulk highlight for submissions
+        document.getElementById('subHighlightSelected').addEventListener('click', (e) => {
+            if (selectedSubIds.size === 0) return;
+            openColorPalette(e.target, (color) => {
+                const colors = JSON.parse(localStorage.getItem(SUB_COLORS_KEY) || '{}');
+                selectedSubIds.forEach(sid => { if (color) colors[sid] = color; else delete colors[sid]; });
+                localStorage.setItem(SUB_COLORS_KEY, JSON.stringify(colors));
+                renderSubmissions();
+            });
+        });
+
+        // Per-row color dot for submissions
+        document.getElementById('subTableBody').addEventListener('click', (e) => {
+            if (e.target.classList.contains('row-color-dot') && e.target.dataset.sid) {
+                openColorPalette(e.target, (color) => {
+                    const colors = JSON.parse(localStorage.getItem(SUB_COLORS_KEY) || '{}');
+                    if (color) colors[e.target.dataset.sid] = color; else delete colors[e.target.dataset.sid];
+                    localStorage.setItem(SUB_COLORS_KEY, JSON.stringify(colors));
+                    renderSubmissions();
+                });
+            }
+        });
+
+        // ===== COLOR PALETTE POPUP =====
+        let colorPaletteCallback = null;
+        function openColorPalette(anchor, callback) {
+            colorPaletteCallback = callback;
+            const popup = document.getElementById('colorPalettePopup');
+            const rect = anchor.getBoundingClientRect();
+            popup.style.top = (rect.bottom + 6 + window.scrollY) + 'px';
+            popup.style.left = (rect.left + window.scrollX) + 'px';
+            popup.style.display = 'block';
+        }
+        document.getElementById('colorPalettePopup').addEventListener('click', (e) => {
+            if (e.target.classList.contains('palette-swatch')) {
+                const color = e.target.dataset.color;
+                document.getElementById('colorPalettePopup').style.display = 'none';
+                if (colorPaletteCallback) colorPaletteCallback(color);
+                colorPaletteCallback = null;
+            }
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('palette-swatch') && !e.target.classList.contains('row-color-dot') && e.target.id !== 'subHighlightSelected') {
+                document.getElementById('colorPalettePopup').style.display = 'none';
+            }
         });
 
         // Init
