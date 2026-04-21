@@ -299,6 +299,7 @@ async function initDatabase() {
                 first_name VARCHAR(100) DEFAULT NULL,
                 last_name VARCHAR(100) DEFAULT NULL,
                 email VARCHAR(255) DEFAULT NULL,
+                country_code VARCHAR(10) DEFAULT NULL,
                 phone VARCHAR(20) DEFAULT NULL,
                 programme VARCHAR(150) DEFAULT NULL,
                 city VARCHAR(100) DEFAULT NULL,
@@ -314,6 +315,11 @@ async function initDatabase() {
                 INDEX idx_created_at (created_at)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         `);
+        // Add country_code column if it doesn't exist (for existing deployments)
+        await connection.query(`
+            ALTER TABLE form_submissions
+            ADD COLUMN IF NOT EXISTS country_code VARCHAR(10) DEFAULT NULL AFTER email;
+        `).catch(() => {}); // Silently ignore if already exists or unsupported syntax
         connection.release();
         console.log('Database connected & form_submissions table ready');
     } catch (err) {
@@ -330,6 +336,7 @@ app.post('/api/submit-form', async (req, res) => {
             first_name,
             last_name,
             email,
+            country_code,
             phone,
             programme,
             city,
@@ -353,13 +360,14 @@ app.post('/api/submit-form', async (req, res) => {
             if (!db) throw new Error('No database connection');
             const [result] = await db.query(
                 `INSERT INTO form_submissions 
-                 (form_type, first_name, last_name, email, phone, programme, city, enroll_timeline, enquiry_type, page_url, consent, ip_address, user_agent)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                 (form_type, first_name, last_name, email, country_code, phone, programme, city, enroll_timeline, enquiry_type, page_url, consent, ip_address, user_agent)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 [
                     form_type || 'enquiry',
                     first_name || null,
                     last_name || null,
                     email || null,
+                    country_code || null,
                     phone || null,
                     programme || null,
                     city || null,
@@ -384,7 +392,7 @@ app.post('/api/submit-form', async (req, res) => {
             const fs = require('fs').promises;
             const submissionData = {
                 form_type: form_type || 'enquiry',
-                first_name, last_name, email, phone, programme,
+                first_name, last_name, email, country_code, phone, programme,
                 city, enroll_timeline, enquiry_type, page_url,
                 consent: consent ? 1 : 0,
                 ip_address, user_agent,

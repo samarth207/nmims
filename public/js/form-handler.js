@@ -4,13 +4,13 @@
 
     const API_URL = '/api/submit-form';
 
-    // ===== Helper: get phone with country code =====
-    function getPhoneWithCode(form) {
+    // ===== Helper: extract phone number and country code separately =====
+    function getPhoneData(form) {
         var ccSel = form.querySelector('select.country-code');
         var telInput = form.querySelector('input[type="tel"]');
-        var cc = ccSel ? ccSel.value : '';
+        var cc = ccSel ? ccSel.value : '+91';
         var num = telInput ? telInput.value.trim() : '';
-        return num ? cc + num : '';
+        return { country_code: cc, phone: num };
     }
 
     // ===== 1. Handle Enquiry Modal Form =====
@@ -24,12 +24,14 @@
             var emailInput = form.querySelector('input[type="email"]');
             var otherSelects = form.querySelectorAll('select:not(.country-code)');
             var consent = form.querySelector('input[type="checkbox"]');
+            var phoneData = getPhoneData(form);
             const data = {
                 form_type: 'enquiry',
                 first_name: textInputs[0] ? textInputs[0].value : '',
                 last_name: textInputs[1] ? textInputs[1].value : '',
                 email: emailInput ? emailInput.value : '',
-                phone: getPhoneWithCode(form),
+                country_code: phoneData.country_code,
+                phone: phoneData.phone,
                 programme: otherSelects[0] ? otherSelects[0].value : '',
                 city: otherSelects[1] ? otherSelects[1].value : '',
                 enroll_timeline: otherSelects[2] ? otherSelects[2].value : '',
@@ -54,12 +56,14 @@
                     var emailInput = form.querySelector('input[type="email"]');
                     var otherSelects = form.querySelectorAll('select:not(.country-code)');
                     var consent = form.querySelector('input[type="checkbox"]');
+                    var phoneData = getPhoneData(form);
                     const data = {
                         form_type: 'popup',
                         first_name: textInputs[0] ? textInputs[0].value : '',
                         last_name: textInputs[1] ? textInputs[1].value : '',
                         email: emailInput ? emailInput.value : '',
-                        phone: getPhoneWithCode(form),
+                        country_code: phoneData.country_code,
+                        phone: phoneData.phone,
                         programme: otherSelects[0] ? otherSelects[0].value : '',
                         enquiry_type: otherSelects[1] ? otherSelects[1].value : '',
                         consent: consent ? consent.checked : false,

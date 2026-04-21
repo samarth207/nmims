@@ -173,6 +173,7 @@
                         <tr>
                             <th style="width:44px;"><input type="checkbox" id="subSelectAll" title="Select All"></th>
                             <th>Name</th>
+                            <th>Code</th>
                             <th>Phone</th>
                             <th>Course / Programme</th>
                             <th>Type</th>
@@ -182,7 +183,7 @@
                         </tr>
                     </thead>
                     <tbody id="subTableBody">
-                        <tr><td colspan="8"><div class="empty-state"><h3>Loading...</h3></div></td></tr>
+                        <tr><td colspan="9"><div class="empty-state"><h3>Loading...</h3></div></td></tr>
                     </tbody>
                 </table>
                 </div>
@@ -522,7 +523,7 @@
         const SUB_COLORS_KEY = 'sub_row_colors';
 
         async function loadSubmissions() {
-            document.getElementById('subTableBody').innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>Loading submissions...</h3></div></td></tr>';
+            document.getElementById('subTableBody').innerHTML = '<tr><td colspan="9"><div class="empty-state"><h3>Loading submissions...</h3></div></td></tr>';
             try {
                 const res = await fetch('/api/submissions', { headers: authHeaders() });
                 const data = await res.json();
@@ -531,10 +532,10 @@
                     updateSubStats();
                     renderSubmissions();
                 } else {
-                    document.getElementById('subTableBody').innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>Could not load submissions</h3><p>Database may not be configured.</p></div></td></tr>';
+                    document.getElementById('subTableBody').innerHTML = '<tr><td colspan="9"><div class="empty-state"><h3>Could not load submissions</h3><p>Database may not be configured.</p></div></td></tr>';
                 }
             } catch (err) {
-                document.getElementById('subTableBody').innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>Could not load submissions</h3><p>Check database connection.</p></div></td></tr>';
+                document.getElementById('subTableBody').innerHTML = '<tr><td colspan="9"><div class="empty-state"><h3>Could not load submissions</h3><p>Check database connection.</p></div></td></tr>';
             }
         }
 
@@ -572,7 +573,7 @@
             }
 
             if (filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><h3>No submissions found</h3><p>Try adjusting your filters.</p></div></td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9"><div class="empty-state"><h3>No submissions found</h3><p>Try adjusting your filters.</p></div></td></tr>';
                 return;
             }
 
@@ -591,6 +592,7 @@
                 return `<tr class="${selectedSubIds.has(sid) ? 'row-selected' : ''}" ${rowBg} data-sid="${sid}">
                     <td><input type="checkbox" class="sub-row-cb" data-sid="${sid}" ${checked}></td>
                     <td><strong>${escapeHtml(name)}</strong>${s.email ? `<br><small style="color:#999;">${escapeHtml(s.email)}</small>` : ''}</td>
+                    <td style="white-space:nowrap;"><span style="background:#f0f0f0;border-radius:4px;padding:2px 6px;font-size:12px;font-family:monospace;">${escapeHtml(s.country_code || '+91')}</span></td>
                     <td>${escapeHtml(s.phone || '—')}</td>
                     <td>${escapeHtml(s.programme || '—')}</td>
                     <td><span class="status-badge ${badgeClass}">${escapeHtml(typeLabel)}</span></td>
@@ -693,10 +695,10 @@
 
         function exportSubmissionsCSV(rows, filename) {
             downloadCSV(
-                ['Name', 'Email', 'Phone', 'Programme', 'Type', 'Enquiry Type', 'City', 'Date'],
+                ['Name', 'Email', 'Country Code', 'Phone', 'Programme', 'Type', 'Enquiry Type', 'City', 'Date'],
                 rows.map(s => [
                     [(s.first_name || ''), (s.last_name || '')].join(' ').trim(),
-                    s.email || '', s.phone || '', s.programme || '',
+                    s.email || '', s.country_code || '+91', s.phone || '', s.programme || '',
                     s.form_type || '', s.enquiry_type || '', s.city || '',
                     s.created_at ? new Date(s.created_at).toLocaleString() : ''
                 ]),
