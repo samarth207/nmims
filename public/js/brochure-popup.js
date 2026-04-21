@@ -75,6 +75,8 @@
                 var nameInput = form.querySelector('input[name="name"]');
                 var emailInput = form.querySelector('input[name="email"]');
                 var phoneInput = form.querySelector('input[name="phone"]');
+                var ccSel = form.querySelector('select.country-code');
+                var phoneWithCode = (ccSel ? ccSel.value : '') + (phoneInput ? phoneInput.value.trim() : '');
 
                 var nameParts = (nameInput.value || '').trim().split(' ');
                 var data = {
@@ -82,7 +84,7 @@
                     first_name: nameParts[0] || '',
                     last_name: nameParts.slice(1).join(' ') || '',
                     email: emailInput.value.trim(),
-                    phone: phoneInput.value.trim(),
+                    phone: phoneWithCode,
                     page_url: window.location.href,
                     consent: true
                 };

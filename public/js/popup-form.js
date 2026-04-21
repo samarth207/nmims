@@ -120,20 +120,6 @@
                 closePopup();
             }
         });
-
-        // Handle form submission
-        var form = document.getElementById('popupEnquiryForm');
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                // Show a quick thank-you state
-                var card = form.closest('.popup-form-card');
-                if (card) {
-                    card.innerHTML = '<div style="text-align:center;padding:40px 20px;"><div style="font-size:48px;margin-bottom:16px;">✅</div><h3 style="font-size:20px;color:#333;margin-bottom:8px;">Thank You!</h3><p style="font-size:14px;color:#666;">Our counsellor will contact you shortly.</p></div>';
-                }
-                setTimeout(closePopup, 2500);
-            });
-        }
     }
 
     function closePopup() {
