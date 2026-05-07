@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2154219698706637');
+    fbq('track', 'PageView');
+    fbq('track', 'Lead');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2154219698706637&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Guard: redirect to home if not reached via form submission -->
+    <script>
+    (function () {
+        if (!sessionStorage.getItem('nmims_form_submitted')) {
+            window.location.replace('/');
+        }
+    })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | NMIMS Online University</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f5ff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---- Navbar ---- */
+        .ty-navbar {
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(108,77,230,.10);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+        }
+        .ty-navbar a { display: inline-block; }
+        .ty-navbar img { height: 44px; width: auto; }
+
+        /* ---- Hero section ---- */
+        .ty-hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .ty-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(108,77,230,.15);
+            padding: 56px 48px;
+            max-width: 560px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .ty-icon {
+            width: 88px;
+            height: 88px;
+            background: linear-gradient(135deg, #6C4DE6 0%, #9b76ff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+        }
+        .ty-icon svg { width: 44px; height: 44px; fill: #fff; }
+
+        .ty-card h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .ty-card .ty-subtitle {
+            font-size: 17px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .ty-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #6C4DE6, #9b76ff);
+            border-radius: 2px;
+            margin: 0 auto 32px;
+        }
+
+        .ty-info {
+            background: #f7f5ff;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 36px;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+        }
+        .ty-info strong { color: #6C4DE6; }
+
+        .ty-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6C4DE6 0%, #9b76ff 100%);
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: transform .2s, box-shadow .2s;
+            box-shadow: 0 4px 18px rgba(108,77,230,.35);
+        }
+        .ty-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(108,77,230,.45);
+        }
+
+        /* ---- Footer ---- */
+        .ty-footer {
+            background: #1a1a2e;
+            color: #aaa;
+            text-align: center;
+            padding: 18px 20px;
+            font-size: 13px;
+        }
+        .ty-footer a { color: #9b76ff; text-decoration: none; }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 600px) {
+            .ty-card {
+                padding: 40px 24px;
+            }
+            .ty-card h1 { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="ty-navbar">
+        <a href="/">
+            <img src="/images/logo.png" alt="NMIMS Online University">
+        </a>
+    </nav>
+
+    <!-- Thank You Content -->
+    <main class="ty-hero">
+        <div class="ty-card">
+            <div class="ty-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <h1>Thank You!</h1>
+            <div class="ty-divider"></div>
+
+            <p class="ty-subtitle">
+                Your enquiry has been successfully submitted.<br>
+                Our counsellor will get in touch with you shortly.
+            </p>
+
+            <div class="ty-info">
+                <strong>What happens next?</strong><br>
+                Our admission team will review your details and contact you within <strong>24 hours</strong> to guide you through the next steps.
+            </div>
+
+            <a href="/" class="ty-btn">Back to Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="ty-footer">
+        <p>&copy; 2026 NMIMS. All Rights Reserved. &nbsp;|&nbsp; <a href="/">nmimsonlineuniversity.com</a></p>
+    </footer>
+
+    <!-- Clear the session flag after page renders, and fire Lead pixel event -->
+    <script>
+    (function () {
+        sessionStorage.removeItem('nmims_form_submitted');
+    })();
+    </script>
+
+</body>
+</html>

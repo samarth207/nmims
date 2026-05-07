@@ -108,20 +108,16 @@
 
     // Show thank you + trigger download
     function showThankYouAndDownload(overlay) {
-        var formCard = overlay.querySelector('.brochure-form-card');
-        formCard.innerHTML =
-            '<div class="brochure-thank-you">' +
-                '<div class="check-icon">✅</div>' +
-                '<h3>Thank You!</h3>' +
-                '<p>Your brochure is downloading now...</p>' +
-                '<p class="download-note">If download doesn\'t start, <a href="' + BROCHURE_PATH + '" download style="color:#6C4DE6;text-decoration:underline;">click here</a></p>' +
-            '</div>';
-
-        // Trigger PDF download
+        // Trigger PDF download immediately so navigation doesn't cancel it
         triggerDownload();
 
-        // Auto-close after 3s
-        setTimeout(closeBrochurePopup, 3500);
+        // Set session flag so thank-you page allows access
+        sessionStorage.setItem('nmims_form_submitted', 'brochure');
+
+        // Redirect to thank-you page after a short delay to let download start
+        setTimeout(function () {
+            window.location.href = '/thank-you';
+        }, 800);
     }
 
     // Download PDF
